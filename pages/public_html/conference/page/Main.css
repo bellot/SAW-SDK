@@ -9,7 +9,8 @@ div#main {
   font-size:130%;
   text-align:center;
   margin: 1.3em 0 0.5em 0;
-  color:#303030;
+  color:#000000;
+
 }
 
 #main h2 { 
@@ -17,7 +18,7 @@ div#main {
   font-size:120%;
   text-align:center;
   margin: 1.2em 0 0.5em 1.1em;
-  color:#303030;
+  color:#000000;
 }
 
 #main h3 { 
@@ -25,7 +26,7 @@ div#main {
   font-size:105%;
   text-align:left;
   margin: 1em 0 0.5em 1.1em;
-  color:#303030;
+  color:#000000;
 }
 
 #main p { 
@@ -100,4 +101,24 @@ div#main {
 #main table.frame {
   border:1px #303030 solid;
   padding:7px 7px 0 7px;
+}
+
+#main input.select_input{
+  color:#303030;
+}
+
+#main input.text_input { 
+  color:#303030;
+}
+
+#main input.button_input { 
+  font-weight:bold;
+  color:#FFFFFF;
+  background:url('../page/ButtonBackground.jpg');
+}
+
+#main input.submit_input { 
+  font-weight:bold;
+  color:#FFFFFF;
+  background:url('../page/ButtonBackground.jpg');
 }
