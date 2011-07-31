@@ -51,6 +51,8 @@ table.header {
 }
 
 td.header_img { 
+  font-family:sans-serif;
+  font-size:12px;
   width:10.7em;
   padding:0;
 }
@@ -73,6 +75,8 @@ img.header_r {
 }
 
 td.header_txt { 
+  font-family:sans-serif;
+  font-size:12px;
   padding:0;
   color:#ffffff;
   background-image:url('images/HeaderBackground.png');
@@ -106,7 +110,9 @@ h3.header {
 /* Menu table */
 
 table.menu { 
-  margin-top:0.7em;
+  font-family:sans-serif;
+  font-size:12px;
+  margin-top:0.2em;
   width:100%;
   border-collapse:collapse;
   border:none;
@@ -115,10 +121,14 @@ table.menu {
 }
 
 td.menu { 
+  font-family:sans-serif;
+  font-size:12px;
   width:9.99%;
   color:#ffffff;
   text-align:center;
   vertical-align:middle;
+  margin:0;
+  padding:0;
 }
 
 a.menu, a.menu:visited, a.menu:active, a.menu:hover {
