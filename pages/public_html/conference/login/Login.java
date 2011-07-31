@@ -1,5 +1,6 @@
-package conference.login;
+package conference.login ;
 
+import java.io.* ;
 import org.saw.compilations.* ;
 import org.saw.elements.* ;
 import org.saw.exceptions.* ;
@@ -15,7 +16,11 @@ import org.site.conference.web.* ;
 public class Login extends SessionBinz
 {
 
-    private final byte[] SSLLogin = (Transaction.HTTPS_WEB_SITE + "/conference/login/SSLLogin.class").getBytes() ;
+    private final byte[] SSLLogin 
+        = (Transaction.HTTPS_WEB_SITE
+           + '/'
+           + (this.getClass().getPackage().getName().replace('.','/'))
+           + "/SSLLogin.class").getBytes() ;
 
     public final void handle(Transaction transaction)
         throws Exception

@@ -27,10 +27,17 @@ public class SSLLoginCheck extends WebTechPage
                             new Form(null,"method='POST' action='javascript: history.go(-1);' style='margin:15px;'",
                                      new P("center",
                                            new Submit("submit_input","loginButton","Back","style='width:70px;'"))))) ;
+
+        String path = '/' + (this.getClass().getPackage().getName().replace('.','/')) ; 
+
+       
+        HTTP_LOGIN_SUCCESS  = (Transaction.HTTP_WEB_SITE  + path + "/LoginSuccess.class").getBytes() ;
+        HTTPS_LOGIN_SUCCESS = (Transaction.HTTPS_WEB_SITE + path + "/LoginSuccess.class").getBytes() ;
+
     }
 
-    private final byte[] HTTP_LOGIN_SUCCESS  = (Transaction.HTTP_WEB_SITE  + "/conference/login/LoginSuccess.class").getBytes() ;
-    private final byte[] HTTPS_LOGIN_SUCCESS = (Transaction.HTTPS_WEB_SITE + "/conference/login/LoginSuccess.class").getBytes() ;
+    private final byte[] HTTP_LOGIN_SUCCESS  ;
+    private final byte[] HTTPS_LOGIN_SUCCESS ;
 
 
     public void handle(Transaction transaction)
@@ -57,9 +64,9 @@ public class SSLLoginCheck extends WebTechPage
 
                 if (sessionVariables.isSet("isSSL")) {
                     sessionVariables.remove("isSSL") ;
-                    transaction.sendHtmlRedirection(HTTPS_LOGIN_SUCCESS) ;
+                    transaction.sendHttpRedirection(HTTPS_LOGIN_SUCCESS) ;
                 } else {
-                    transaction.sendHtmlRedirection(HTTP_LOGIN_SUCCESS) ;
+                    transaction.sendHttpRedirection(HTTP_LOGIN_SUCCESS) ;
                 }
 
                 Logs.log(Logs.USER_LIFE,  "Login.",
