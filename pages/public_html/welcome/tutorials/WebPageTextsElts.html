@@ -1,0 +1,99 @@
+<html>
+  <head>
+    <title>SAW SDK 1.0</title>
+    <!-- Changed by: Patrick Bellot, 31-Jul-2011 -->
+    <link rel='stylesheet' type='text/css' media='screen' href='../Style.css' />
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+  </head>
+  <body class='page'>
+    <iframe class='header_menu' src='Header.html'></iframe>
+
+        <h1>A few Dynamic XML Elements</h1>
+        
+        <p>
+            A Dynamic Element is a "false" XML Element that can be used in 
+            the XML description of a page,
+            see&nbsp;<a href='XECSession.html' target='_top'>A first XEC Session Binz</a>
+            tutorial. 
+            The difference is that a "true" XML Element is purely static meanwhile 
+            the output of a Dynamic Element is computed. A Dynamic Element must inherit 
+            from the abstract class   
+            <a href='javadoc/org/saw/elements/DynamicElement.html' target='_blank'>org.saw.elements.DynamicElement</a>. 
+            That means that it must implement the method:
+        </p>
+        
+<pre>
+public void writeTo(TransactionOutput transactionOutput)
+     throws Exception ;
+</pre>
+        
+        <p>
+            The argument <code>transactionOutput</code> provides all the functions
+            for sending the output with its write functions. This functions are 
+            described by the class 
+            <a href='javadoc/org/saw/transaction/TransactionOutput.html' target='_blank'>org.saw.transaction.TransactionOutput</a>. 
+            In a Dynamic XML Element, you must not use the 
+            <code>beginOutput()</code> and the <code>endOutput()</code>
+            methods because they are called elsewhere.            
+        </p>
+        
+        <p>
+            <b>Example.</b>
+            The following Dynamic XML Element outputs the page title got from the
+            <code>PageTexts</code> Entity Binz:
+        </p>
+        
+<pre>
+package org.site.conference.web;
+
+import org.saw.elements.DynamicElement;
+import org.saw.transaction.TransactionOutput;
+
+/** @author  Patrick Bellot, &copy; 2010 and later. */
+
+public class PageTitle extends DynamicElement
+{
+    public final void writeTo(TransactionOutput transactionOutput)
+            throws Exception
+    {
+        transactionOutput.write(PageTexts.entity.getPageTitle()) ;
+    }
+}
+</pre>
+        
+        <p>
+            <b>Optimization.</b>
+            There is no need to have several instance of this Dynamic XML Element.
+            One instance is enough.
+            We keep it in a static final variable named <code>element</code>.
+            To avoid creation of other instances, we introduce a private constructor.
+        </p>
+        
+<pre>
+package org.site.conference.web;
+
+import org.saw.elements.DynamicElement;
+import org.saw.transaction.TransactionOutput;
+
+/** @author  Patrick Bellot, &copy; 2010 and later. */
+
+public class PageTitle extends DynamicElement
+{
+    public static final PageTitle element = new PageTitle() ;
+    
+    public final void writeTo(TransactionOutput transactionOutput)
+            throws Exception
+    {
+        transactionOutput.write(PageTexts.entity.getPageTitle()) ;
+    }
+}
+</pre>
+        
+        <p>
+            The same method can be applied to program the other
+            Dynamic Elements that produce the header lines fom the
+            <code>PageTexts</code> Entity Binz.
+        </p>
+        
+    </body>
+</html>

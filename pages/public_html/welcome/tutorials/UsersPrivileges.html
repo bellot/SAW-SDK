@@ -1,0 +1,135 @@
+<html>
+  <head>
+    <title>SAW SDK 1.0</title>
+    <!-- Changed by: Patrick Bellot, 31-Jul-2011 -->
+    <link rel='stylesheet' type='text/css' media='screen' href='../Style.css' />
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+  </head>
+  <body class='page'>
+    <iframe class='header_menu' src='Header.html'></iframe>
+
+    <h1>Managing users right</h1>
+
+    <p>
+      Concerning users, we choose to
+      implement users dedicated classes them in the directory <code>org/site/users</code>.
+    </p>
+
+    <p>
+      <b>Users privileges.</b>
+      We remeber that in the 
+      <a href='javadoc/org/saw/users/User.html' target='_blank'>User</a>
+      object, we have a <code>int</code> field. This allows 31&nbsp;cumulative
+      rights. We assume that lower bit is the bit of the admin user.
+      To make this explicit and readable, we create a class <code>Privileges</code> in the dedicated
+      directory to handle this kind of value:
+    </p>
+
+<pre>
+package org.site.users ;
+
+public final class Privileges
+{
+    public static final int ADMIN = 1 ;
+}
+
+</pre>
+
+    <p>
+      Next, according to the Web application needs, we will add new fields in this class. For instance:
+    </p>
+
+<pre>
+package org.site.users ;
+
+public final class Privileges
+{
+    public static final int ADMIN     = (1 << 0) ;
+    public static final int WEBMASTER = (1 << 1) ;
+}
+
+</pre>
+
+    <p>
+      <b>Checking users privileges.</b>
+      Then, to check for instance if a user has admin right, we have to do a logical <i>or</i>
+      between the user <code>privileges</code>field and the value <code>Privileges.ADMIN</code>.
+      Two methods of the class 
+      <a href='javadoc/org/saw/users/User.html' target='_blank'>User</a>
+      are provided:
+    </p>
+
+    <ul>
+
+      <li>
+	<p>
+	  <code>public final boolean hasPrivileges(int privileges) ;</code>
+
+	<p>
+	  This method returns <code>true</code> or <code>false</code> depending if the
+	  user has one of the privileges given by the argument <code>privileges</code>.
+	  For instance, if one wants to check if the user <code>user</code> is either the admin or the
+	  webmaster, it must compute the boolean value:
+	</p>
+
+<pre>
+user.hasPrivileges(Privileges.ADMIN | Privileges.WEBMASTER) ;
+</pre>
+
+      </li>
+
+
+      <li>
+	<p>
+	  <code>public final void checkPrivileges(int privileges) ;</code>
+
+	<p>
+	  This method returns if the
+	  user has one of the privileges given by the argument <code>privileges</code>.
+	  Otherwise, it raises a
+	  <a href='javadoc/org/saw/exceptions/BadRequestException.html' target='_blank'>BadRequestException</a>
+	  exception. This useful in Session Binz handle method. For instance, only the admin and the
+	  web master are allowed to see the log. The  
+	  <a href='javadoc/org/saw/users/User.html' target='_blank'>User</a>
+	  class also provides a class&nbsp;(<code>static</code>) method:
+	</p>
+
+<pre>
+public final static void checkPrivileges(User user, int privileges)
+   throws BadRequestException
+{
+   if (user == null)
+      throw new BadRequestException("Logged user required") ;
+
+   user.checkPrivileges(privileges) ;
+}
+</pre>
+
+	<p>
+	  In the page allowing to see the logs
+	  <a href='/logs/Logs.java' target='_blank'>/logs/Logs.java</a>, we begin the handle method with:
+	</p>
+
+<pre>
+SessionEnvironment sessionEnvironment = transaction.getSessionEnvironment() ;
+User               user               = sessionEnvironment.getUser() ;
+
+User.checkPrivileges(user,Privileges.ADMIN | Privileges.WEBMASTER) ;
+</pre>
+
+	<p>
+	  If the user is <code>null</code> or if the user does not have the required privileges
+	  the a <a href='javadoc/org/saw/exceptions/BadRequestException.html' target='_blank'>BadRequestException</a>
+	  will be raised and caught by the Transaction object. This object will output a
+	  <i>Bad request</i> page and, of course, log the error.
+	</p>
+      </li>
+
+
+
+    </ul>
+
+
+  </body>
+</html>
+

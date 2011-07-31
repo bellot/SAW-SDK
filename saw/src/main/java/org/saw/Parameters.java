@@ -1,0 +1,88 @@
+package org.saw ;
+
+/** This class contains different site parameter.
+ *  @author  Patrick Bellot, &copy; 2008 and later.  
+ */
+
+public final class Parameters
+{
+    /** Web site. */
+    public static final String WEB_SITE = "127.0.0.1" ;
+
+    /** Site prefix in case of Apache proxy, "" otherwise. */
+    public static final String SITE_PREFIX = "" ;
+
+    /** Computer interface where the server listens. */
+    public static final String BIND_INTERFACE = "127.0.0.1" ;
+
+    /** Root redirection, i.e. when request path is "/" */
+    public static final String ROOT_REDIRECTION = "/welcome/Index.html" ;
+
+    /** Port to listen to HTTP request, 0 if no listening. */
+    public static final int HTTP_SERVER_PORT = 8080 ;
+	
+    /** Port to listen to HTTPS request, 0 if no listening. */
+    public static final int HTTPS_SERVER_PORT = 8081 ;
+
+    /** External port to listen to HTTP request when proxied, 0 if no listening. */
+    public static final int EXT_HTTP_SERVER_PORT = 8080 ;
+	
+    /** External ort to listen to HTTPS request when proxied, 0 if no listening. */
+    public static final int EXT_HTTPS_SERVER_PORT = 8081 ;
+
+    /** The global encoding of the Web application. */
+    public static final String ENCODING = "UTF-8" ;
+
+    /** Cookie name. */
+    public static final byte[] COOKIE_NAME_BYTES_ARRAY = "SAW".getBytes() ;
+
+    /** Number of transaction threads. */
+    public static final int TRANSACTIONS_COUNT = 16 ;
+
+    /** Estimated max users count (must be a power of two). */
+    public static final int MAX_USERS_COUNT = 1024 ;
+
+    /** Estimated max pages count (must be a power of two). */
+    public static final int MAX_PAGES_COUNT = 1024 ;
+
+    /** After page timeout in millis, the corresponding static content session binz may be unloded from memory. */
+    public static final long PAGE_TIMEOUT = (24 * 60 * 60 * 1000) ; // 24 hours
+
+    /** Web session timeout in millis. */
+    public static final long SESSION_TIMEOUT = (30L * 60L * 1000L) ; // 30 min.
+
+    /** Max size of POST content in bytes. */
+    public static final int HTTP_MAX_POST_SIZE = 5 * 1024 * 1024 ; // 5 GB
+
+    /** The upper limit in bytes for CSS files to be cached in memory (otherwise, it is cached on disk. */
+    public static final int CSS_UPPER_LIMIT_FOR_MEMORY_CACHING = 64 * 1024 ; // 64 KB
+
+    /** The upper limit in bytes for HTML files to be cached in memory (otherwise, it is cached on disk. */
+    public static final int HTML_UPPER_LIMIT_FOR_MEMORY_CACHING = 64 * 1024 ; // 64 KB
+
+    /** The upper limit in bytes for JavaScript files to be cached in memory (otherwise, it is cached on disk. */
+    public static final int JS_UPPER_LIMIT_FOR_MEMORY_CACHING = 64 * 1024 ; // 64 KB
+
+    /** The upper limit in bytes for data files (etc.)to be cached in memory (otherwise, it is cached on disk. */
+    public static final int DATA_UPPER_LIMIT_FOR_MEMORY_CACHING = 64 * 1024 ; // 64 KB
+
+    /** Interval in millis between two backups of the Entity Binz registered to the Backup Manager. 
+     *  @see org.saw.entities.BackupManager
+     */
+    public static final long BACKUP_INTERVAL = (2 * 60 * 60 * 1000) ; // 2 hours
+
+    /** The key store for SSL connections to be used by <code>SSLInit.init(...)</code>. 
+     *  @see org.saw.util.net.SSLInit
+     */
+    public static final String KEYSTORE = "saw_keystore" ;
+
+    /** The password for the key store to be used by <code>SSLInit.init(...)</code>. 
+     *  @see org.saw.util.net.SSLInit
+     */
+    public static final String KEYSTORE_PASSWORD  = "sawsawsaw" ;
+
+    /** This is a maximum size in bytes of the log file. When this size if reached, the log
+     *  file is archived and then emptied.
+     */
+    public static final long MAX_LOG_SIZE = 128 * 1024 * 1024 ; // 128 MB
+}

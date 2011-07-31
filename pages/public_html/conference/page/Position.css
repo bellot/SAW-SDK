@@ -1,0 +1,88 @@
+body#main { 
+  font-size:12px;
+  font-family:sans-serif;
+  background:#000000;
+}
+
+/* CONTAINER */
+
+div#container { 
+  overflow:hidden;
+  background-image:url('../page/ContainerBackground.png');
+  width:900px;
+  margin:0px auto;
+  padding:0;
+  border:none;
+}
+
+/* HEADER */
+
+iframe#header { 
+  display:block;
+  overflow:hidden;
+  background:#000000;
+  background-image:url('../page/WebTechBackground.jpg');
+  width:900px;
+  height:150px;
+  margin:0 0 1px 0 ;
+  padding:0;
+  border:none;
+}
+
+/* LOGIN / LOGOUT */
+
+iframe#loginlogout { 
+  overflow:hidden;
+  float:left;
+  width:150px;
+  height:70px;
+  margin:0;
+  padding:0;
+  border:none;
+}
+
+/* NAVIGATION */
+
+iframe#navigation { 
+  overflow:hidden;
+  float:left;
+  clear:left;
+  width:150px;
+  height:530px;
+  margin:0;
+  padding:0;
+  border:none;s
+}
+
+/* MAIN */
+
+div#main { 
+  background:transparent;
+  width:586px;
+  margin: 0 157px 0 157px;
+  padding:0;
+}
+
+/* ANNOUNCES */
+
+iframe#announces { 
+  overflow:hidden;
+  float:right;
+  width:150px;
+  height:600px;
+  margin:0;
+  padding:0;
+  border:none;   
+}
+
+/* FOOTER */
+
+iframe#footer {
+  overflow:hidden;
+  width:900px;
+  height:20px;
+  margin:0;
+  padding:0;
+  border:none;
+  background-image:url('../page/WebTechBackground.jpg');
+}

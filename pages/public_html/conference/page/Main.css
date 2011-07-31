@@ -1,0 +1,110 @@
+div#main { 
+  font-size:12px;
+  color:#404040;
+  font-family:sans-serif;
+}
+
+#main h1 { 
+  text-shadow:0.12em 0.12em 0.12em #eeeeee;
+  font-size:130%;
+  text-align:center;
+  margin: 1.3em 0 0.5em 0;
+  color:#303030;
+}
+
+#main h2 { 
+  text-shadow:0.12em 0.12em 0.12em #eeeeee;
+  font-size:120%;
+  text-align:center;
+  margin: 1.2em 0 0.5em 1.1em;
+  color:#303030;
+}
+
+#main h3 { 
+  text-shadow:0.12em 0.12em 0.12em #eeeeee;
+  font-size:105%;
+  text-align:left;
+  margin: 1em 0 0.5em 1.1em;
+  color:#303030;
+}
+
+#main p { 
+  line-height:130%;
+  margin: 0 0 0.5em 0;
+  padding:0;
+  text-align:justify;
+  color:#303030;
+}
+
+#main p.center { 
+  text-align:center;
+}
+
+#main table.center { 
+  margin-left:auto;
+  margin-right:auto;
+}
+
+#main ul,ol {
+  line-height:130%;
+  text-align:left;
+  padding:0 0 0 2.5em;
+}
+
+#main li { 
+  padding: 0em;
+  line-height:130%;
+  text-align:left;
+  color:#303030;
+}
+
+#main a { 
+  color:#22427c;
+  text-decoration:none;
+}
+
+#main a:hover { 
+  text-decoration:underline;
+}
+
+#main code, pre { 
+  font-family:monospace;
+  font-size:110%;
+  color:#202020;
+}
+
+#main code.b { 
+  font-weight:bold;
+}
+
+#main pre { 
+  padding:0 0 0.5em 2.4em;
+  margin:0;
+}
+
+#main td.left { 
+  text-align:left;
+}
+
+#main table.date { 
+  margin:0;
+  padding:0;
+}
+
+#main td.date {
+  text-align:left; 
+  padding:0.2em 0.7em 0.2em 0.2em; 
+  font-size:12px;
+  color:#404040;
+  font-family:sans-serif;
+}
+
+#main div.frame {
+  border:1px #303030 solid;
+  padding:7px 7px 0 7px;
+}
+
+#main table.frame {
+  border:1px #303030 solid;
+  padding:7px 7px 0 7px;
+}

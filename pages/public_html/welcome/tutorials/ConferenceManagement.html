@@ -1,0 +1,183 @@
+<html>
+  <head>
+    <title>SAW SDK 1.0</title>
+    <!-- Changed by: Patrick Bellot, 31-Jul-2011 -->
+    <link rel='stylesheet' type='text/css' media='screen' href='../Style.css' />
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+  </head>
+  <body class='page'>
+    <iframe class='header_menu' src='Header.html'></iframe>
+
+    <h1>A Conference Management Online Software</h1>
+
+    <p>
+      A lot of conferences use a <i>Content Management System&nbsp;(CMS)</i> to
+      implement their Web site. And they use 
+      <a href='http://www.easychair.org' target='_blank'>EasyChair</a>&nbsp;(for instance) to 
+      manage papers. And this is a good solution&nbsp;! However, 
+      such a solution requires a lot of manual work. For instance, one has to
+      establish a one-to-one correspondance between registrations and papers publications.
+      <a href='http://www.easychair.org' target='_blank'>EasyChair</a>&nbsp;(for instance)
+      does not manage registrations. And this is only one example showing that many Excel files
+      are still required to manage the conference.
+    </p>
+
+    <p>
+      What we propose here is a <u>fully integarated</u>&nbsp;<i>Conference Management Online Software</i>
+      that will be refrerred as <b>CMOS</b>. CMOS will provide all required functions:
+    </p>
+
+    <ul>
+     
+      <li>
+	<p>
+	  Users lifecycle: account creation, management, etc.
+	</p>
+      </li>
+     
+      <li>
+	<p>
+	  Committees, dates, &nbsp;etc.
+	</p>
+      </li>
+     
+      <li>
+	<p>
+	  Papers lifecycle: submissions, assignments, reviews, acceptance,&nbsp;etc.
+	</p>
+      </li>
+     
+      <li>
+	<p>
+	  Registrations and payments.
+	</p>
+      </li>
+     
+      <li>
+	<p>
+	  Statistics, reporting&nbsp;(Excel and PDF files), mailing, etc.
+	</p>
+      </li>
+
+    </ul>
+
+    <p>
+      Our goal will be reached when nearly all operations will be done online.
+    </p>
+
+
+    <p>
+      <b>Our model.</b>
+      We take as a model the wellkown <i>Web Technologies &amp; Internet Application</i>&nbsp;(<a href='http://www.webtechconf.org'
+												  targe='_blank'>Webtech</a>)
+      confernce. We redesigned the screen with a 3-clolms design:
+    </p>
+
+    <center>
+	<img
+	  style='width:500px;height:421px' 
+	  onClick='javascript: window.open("images/WebTechFormatBig.png","WebTechFormat","menubar=no, status=no, scrollbars=auto, menubar=no, width=1230, height=1062");'
+	  src='images/WebTechFormat.png'/>
+    </center>
+
+    <p>
+      <b>Page organisation.</b>
+      On this page, we see several frames:
+    </p>
+
+    <ul>
+      <li>
+	<p>
+	  The <b>Header</b> frame at the top of the page. It will be always displayed the same way.
+	</p>
+      </li>
+      <li>
+	<p>
+	  The <b>Login</b> frame on the left of the page with the two red buttons. Its content will change
+	  depending the user is logged or not.
+	</p>
+      </li>
+      <li>
+	<p>
+	  The <b>Navigation</b> frame on the left of the page under the <b>Login</b> frame. 
+          Its content will never change.
+	</p>
+      </li>
+      <li>
+	<p>
+	  The <b>Announces</b> frame on the right of the page. It will be always displayed the same way.
+	</p>
+	</p>
+      </li>
+      <li>
+	<p>
+	  The <b>Footer</b> frame at the bottom of the page. It will be always displayed the same way.
+	</p>
+	</p>
+      </li>
+      <li>
+	<p>
+	  The <b>Main</b> frame at the center of the page. Its content depends on the page the user is looking at.
+	</p>
+	</p>
+      </li>
+    </ul>
+
+    <p>
+      The Main frame is a <code>DIV</code> in XHTML meanwhile the other frames are <code>IFRAME</code>.
+      The technical reason for that is not related to SAW-SDK but to usual Web programming techniques.
+      It is that <code>IFRAME</code>s have a <code>src</code> attributes.
+      If the  <code>IFRAME</code> is loaded once with the browser on one page and the same <code>IFRAME</code>
+      appears in another page, when loading the other page, the content is already cached on the client
+      side and will not require a HTTP transaction. Following this methods, the HTML code of all pages
+      will look as follows:
+    </p>
+
+<pre>
+&lt;html&gt;
+  &lt;head&gt;
+    &lt;title&gt;WebTech 2012&lt;/title&gt;
+    &lt;link rel='stylesheet' type='text/css' media='screen' href='../styles/CSS.class'/&gt;
+    &lt;link rel="shortcut icon" type="image/png" href="../favicon.png"&gt;
+  &lt;/head&gt;
+  &lt;body class='main'&gt;
+    &lt;div id='container'&gt;
+      &lt;iframe id='header'     src='../page/Header.class'&gt;&lt;/iframe&gt;
+      &lt;iframe id='announces'  src='../page/Announces.html'&gt;&lt;/iframe&gt;
+      &lt;iframe id='login'      src='../page/LoginLogout.class'&gt;&lt;/iframe&gt;
+      &lt;iframe id='navigation' src='../page/Navigation.html'&gt;&lt;/iframe&gt;
+      &lt;div id='main'&gt;
+
+	&lt;!-- Main frame content --&gt;
+
+      &lt;/div&gt;
+      &lt;iframe id='footer' src='../page/Footer.html'&gt;&lt;/iframe&gt;
+    &lt;/div&gt;
+  &lt;/body&gt;
+&lt;/html&gt;
+</pre>
+
+    <p>
+      In this tutorial, we will not explain CSS and JavaScript techniques for positionning,
+      sizing and colouring the frames. To learn that, Google or another is your friend.
+    </p>
+
+    <p>
+      <b>Code organization.</b>
+      All the Session Binz of the application will be under
+      <code>SAW-SDK/pages/public_html/conference</code>. More precisely, they will
+      be distributed in subdirectories of this directory.
+      All the core classes&nbsp;(Entity Binz, Dynamic Elements, etc.) required by the application will be in the
+      packages <code>org.site.conference</code>.
+    </p>
+
+    <p>
+      <b>Mystery.</b>
+      Why all frame sources in the source code are prefixed by <code>../page</code>
+      is a mystery. It will be explained will be explained when we will design
+      the Web application page pattern.
+  </b>
+
+  </body>
+</html>
+

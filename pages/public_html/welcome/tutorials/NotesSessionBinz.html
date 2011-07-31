@@ -1,0 +1,83 @@
+<html>
+  <head>
+    <title>SAW SDK 1.0</title>
+    <!-- Changed by: Patrick Bellot, 31-Jul-2011 -->
+    <link rel='stylesheet' type='text/css' media='screen' href='../Style.css' />
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+  </head>
+  <body class='page'>
+    <iframe class='header_menu' src='Header.html'></iframe>
+
+    <h1>Notes on Session Binz programming</h1>
+
+    <p>
+      <b>About errors and exceptions.</b>
+      If an error occurs during the execution of a Session Binz, an exception is usually raised by Java.
+      This exception will be caught by the Transaction object and an <i>Internal error</i> message
+      will be displayed. The error will be logged in the <code>SAW-SDK/pages/SAW.log</code> file.
+      However, if the Session Binz has already began to output data, that means if it has executed
+      the <code>beginOutput()</code> method, then the  <i>Internal error</i> HTTP Response wil be sent
+      after the normal HTTP header. And the error will not be correcly displayed.
+      That's why the output of a Session Binz must begin only when we are sure that no errors will occur.
+    </p>
+
+    <p>
+      <b>Phases in he handle method:</b>
+    </p>
+
+    <ol>
+      <li>
+	<p>
+	  If necessary, the Session binz handle method looks at the session user, 
+	  inside the Session environment object, to validate it. For instance, 
+	  an already logged user may be required. Sometimes, the method may have to check 
+	  its rights in the context of the Web application.
+	  <i>
+	    We will explain how to manage users in a later tutorial.
+	  </i>
+	</p>
+      </li>
+      <li>
+	<p>
+	</p>
+	Then the method looks at the Transaction variables&nbsp;(GET and POST variables) to validate them. 
+	If they are not sound, the Session binz handle method can ask the Transaction object to issue a 
+	bad request answer&nbsp;(suspecting a fraud tentative for instance) and then terminates. This must be
+	done by throwing an ordinary exception or one of the specialized exceptions of the
+	<a href='javadoc/org/saw/exceptions/package-summary.html' target='_blank'>org.saw.exception</a>
+	package. The exception will be logged in <code>SAW-SDK/pages/SAW.log</code>. If something special such
+	as a fraud is detected, it could be a good idea to log the event using the static functions in class
+	<a href='javadoc/org/saw/util/logs/Logs.html' target='_blank'>Logs</a>.
+      </li>
+      <li>
+	<p>
+	  Now, the method does its business, preparing its response. To do that, the Session Binz
+	  has access to the Web application Entity Binz that contain the Web application data. 
+	  As all Session binz have a priori access to all Entity binz, some kind of synchronization 
+	  must be required depending on the application. In Java, the use of a non-coherent object 
+	  may raise an exception that will be caught. When the Java exception is caught, the 
+	  Transaction will output an internal error response. 
+	</p>
+      </li>
+      <li>
+	<p>
+	  Finally, themethod produces its output. First, it asks the container Transaction object to 
+	  issue the appropriate HTTP response header. Then the Session binz object writes its output 
+	  using the bytes or characters write methods provided by the Transaction object. 
+	  And it terminates its execution. As told above, the programmer should minimize the risk
+	  of error in this step.
+	</p>
+      </li>
+    </ol>
+
+    <p>
+      Of course, the four steps described above can be mixed but it is a safe programming 
+      rule to program the business method as described, especially to get a coherent response 
+      in case of error. For instance, if an error is detected after the output has begun, then
+      the error message will be mixed with the normal output. That is why all checks have to be
+      done before the output begins.
+    </p>
+
+  </body>
+</html>
+

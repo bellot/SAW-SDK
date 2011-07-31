@@ -1,0 +1,92 @@
+<html>
+  <head>
+    <title>SAW SDK 1.0</title>
+    <!-- Changed by: Patrick Bellot, 31-Jul-2011 -->
+    <link rel='stylesheet' type='text/css' media='screen' href='../Style.css' />
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+  </head>
+  <body class='page'>
+    <iframe class='header_menu' src='Header.html'></iframe>
+
+    <h1>A PHP-like Session Binz</h1>
+
+    <p>
+      A Session Binz must extends the 
+      <a href='javadoc/org/saw/sessions/SessionBinz.html' target='_new'>SessionBinz</a>
+      class. 
+      That means that it must implement the method:
+    </p>
+
+<pre>
+public void handle(Transaction transaction) throws Exception ;
+</pre>
+
+    <p>
+      The argument of the method is the Container of class 
+      <a href='javadoc/org/saw/transaction/Transaction.html' target='_blank'>Transaction</a>. 
+      This object provides many useful functions that we will discover.
+    </p>
+
+    <p>
+      We are going to write a Session Binz as a Java file <code>PHPLike.java</code> in the
+      directory <code>public_html/welcome/tutorials/test</code>. Thus, we must use the 
+      packahe directive:
+    </p>
+
+<pre>
+package welcome.tutorials.test ;
+</pre>
+
+    <p>
+      In all Session Binz class, we must import the packages of Session Binz and Transaction classes:
+    </p>
+
+<pre>
+import org.saw.sessions.* ;
+import org.saw.transaction.* ;
+</pre>
+
+    <p>
+      Then we implement the handle method. The first thing to do is to send the HTTP Response header.
+      The Transaction object proposes several methods to send different headers. The one we use is:
+    </p>
+
+<pre>
+transaction.sendHtmlNoExpireHeader() ;
+</pre>
+
+    <p>
+      for sending a header meaning that the content is <code>text/html</code> and that the page never expires. 
+    </p>
+
+    <p>
+      Then we will output page content using the Transaction <code>write</code> methods. 
+      The calls to the write methods must be preceded by a call to the <code>beginOutput()</code>
+      method and followed by a call to the <code>endOutput()</code> method of the Transaction object. 
+      The reason is that if the client accept compressed content then the Transaction must prepare 
+      the compression&nbsp;(gzip). 
+    </p>
+
+    <p>
+      <b>Example.</b>
+      The full code can be seen at 
+      <a href='test/PHPLike.java' target='_blank'>test/PHPLike.java</a>.
+      And the Session Binz can be called at
+      <a href='test/PHPLike.class' target='_blank'>test/PHPLike.class</a>.
+    </p>
+
+    <p>
+      We can see that the core of the <code>handle</code> method is a litany of <code>write</code>
+      instructions similar to what we usually do in PHP. We will see that this way of programming
+      a Session Binz is not the best way.
+    </p>
+
+    <p>
+      To compile this class, it is sufficient
+      to execute the <code>mvn&nbsp;install</code> instruction in the
+      <code>SAW-SDK</code> directory.
+    </p>
+
+  </body>
+</html>
+

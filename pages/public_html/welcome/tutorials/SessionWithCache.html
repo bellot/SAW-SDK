@@ -1,0 +1,134 @@
+<html>
+  <head>
+    <title>SAW SDK 1.0</title>
+    <!-- Changed by: Patrick Bellot, 31-Jul-2011 -->
+    <link rel='stylesheet' type='text/css' media='screen' href='../Style.css' />
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+  </head>
+  <body class='page'>
+    <iframe class='header_menu' src='Header.html'></iframe>
+
+    <h1>Cached Session Binz</h1>
+
+    <p>
+      When a Session Binz <u>does not use</u> the 
+      <a href='Glossary.html#transaction_variables'>Transaction Variables</a>&nbsp;(that 
+      is the GET and POST variables), 
+      that means that the HTTP Response does  not depends on the parameters sent with the HTTP Request. 
+      If this Session Binz <u>does not use</u> the 
+      <a href='Glossary.html#session_environment'>Session Environment</a>&nbsp;(similar 
+      to PHP session variables), 
+      that means that the HTTP Response does not depend on the client. In this case, the content output 
+      only depends on the server  internal data and two requests on this Session Binz will output the 
+      same content if the server internal data are not modified between. In fact, a cachable Session Binz should 
+      only use the methods in
+      <a href='javadoc/org/saw/sessions/TransactionOutputFile.html' target='_blank'>TransactionOutputFile</a>,
+      otherwise an exception will be raised and a <i>Internal error</i> HTTP response will be issued.
+    </p>
+
+    <p>
+      In this case, the HTTP response content may be cached in memory or in disk file.
+    </p>
+
+    <ul>
+      <li>
+	<p>
+	  If the Session Binz inherits from
+	  <a href='javadoc/org/saw/sessions/SessionBinzWithMemoryCache.html' target='_blank'>SessionBinzWithMemoryCache</a>,
+	  then its output will be cached in memory.
+	</p>
+      </li>
+      <li>
+	<p>
+	  If the Session Binz inherits from
+	  <a href='javadoc/org/saw/sessions/SessionBinzWithFileCache.html' target='_blank'>SessionBinzWithFileCache</a>,
+	  then its output will be cached in a disk file.
+	</p>
+      </li>
+    </ul>
+
+    <p>
+      Of course, caching in memory is more efficient than caching on disk file.
+    </p>
+
+    <p>
+      To implement the Session Binz, the Web application developer must implement the method:
+    </p>
+
+<pre>
+public abstract void writeContent(TransactionOutput transactionOutput)
+      throws Exception ;
+</pre>
+
+    <p>
+      The object of type 
+      <a href='javadoc/org/saw/transaction/TransactionOutput.html' target='_blank'>TransactionOutput</a> has
+      the same output functions as the usual Transaction object so that the programming of the <code>writeContent</code> method
+      is similar to the programming of the <code>handle</code> method of ordinary Session Binz.
+    </p>
+
+    <p>
+      <b>Examples.</b>
+      Here follows two examples:
+    </p>
+
+    <ul>
+      <li>
+	<p>
+	  <a href='test/CachedPHPLike.java' target='_blank'>test/CachedPHPLike.java</a> is the 
+	  rewriting of the PHP-like Session Binz as a memory cached Session Binz.
+	  The result can be seen at
+	  <a href='test/CachedPHPLike.class' target='_blank'>test/CachedPHPLike.class</a>.
+	</p>
+      </li>
+      <li>
+	<p>
+	  <a href='test/CachedXEC.java' target='_blank'>test/CachedXEC.java</a> is the 
+	  rewriting of the PHP-like Session Binz as a memory cached Session Binz.
+	  The result can be seen at 
+	  <a href='test/CachedXEC.class' target='_blank'>test/CachedXEC.class</a>.
+	</p>
+      </li>
+    </ul>
+
+    <p>
+      <b>Main differences.</b>
+      We can see the main differences between ordinary Session Binz and cached Session Binz:
+    </p>
+
+    <ul>
+      <li>
+	<p>
+	  The constructor of the cached Session Binz must declare to throw an Exception.
+	  If there is no constructor, the programmer must introduce an empty constructor
+	  as in
+	  <a href='test/CachedPHPLike.java' target='_blank'>test/CachedPHPLike.java</a>.
+	</p>
+      </li>
+      <li>
+	<p>
+	  There is no call to send a HTTP header as in
+	  <a href='test/PHPLike.java' target='_blank'>test/PHPLike.java</a>.
+	</p>
+      </li>
+      <li>
+	<p>
+	  There is no call to the <code>beginOutput()</code> and <code>endOutput()</code> methods as in
+	  <a href='test/PHPLike.java' target='_blank'>test/PHPLike.java</a>.
+	</p>
+      </li>
+    </ul>
+
+    <p>
+      <b>Notes on caches.</b>
+      Caching is allowed because the Session Binz does not use the Transaction variables or the
+      Session Environment. The cache is build once for all at the load of the Session Binz.
+      However, it may happen that the output of the Session Binz depends on other data.
+      For instance, a page displaying the list of the site users depends on the Entity Binz
+      containing this list. When the list of users is modified, the cache must be renewed.
+      We will see how to implement this later using the <i>Observer-Observable</i> design pattern.
+    </p>
+
+  </body>
+</html>
+

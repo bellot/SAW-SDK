@@ -1,0 +1,290 @@
+<html>
+  <head>
+    <title>SAW SDK 1.0</title>
+    <!-- Changed by: Patrick Bellot, 31-Jul-2011 -->
+    <link rel='stylesheet' type='text/css' media='screen' href='../Style.css' />
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+  </head>
+  <body class='page'>
+    <iframe class='header_menu' src='Header.html'></iframe>
+
+    <h1>SAW SDK Setup</h1>
+
+    <p>
+      This section explains how to setup SAW SDK on your computer.
+    </p>
+
+    <h2>Operating system</h2>
+
+    <p>
+      SAW-SDK has been developped under UNIX systems. 
+      It has been tested under Linux, SunOS, Solaris, FreeBSD and MacOSX. 
+      It seems to work under Windows systems.
+      The development of a Web application can be done on any today reasonnable 
+      computer running one of these OS. 
+      The resulting Web application can be run on the same kind of computer. 
+    </p>
+
+    <h2>Java</h2>
+
+    <p>
+      SAW-SDK assumes Java 1.6. 
+    </p>
+
+    <h2>Maven</h2>
+
+    <p>
+      SAW-SDK requires the installation of Maven, currently&nbsp;v2 and available at
+      <a href='http://maven.apache.org' target='_blank'>http://maven.apache.org</a>.
+      Please, do follow the installation instruction of the Apache Maven project.
+      The SAW developper does not need to understand Maven but it must be able to
+      execute Maven compilation commands given in this document.
+    </p>
+
+    <h2>The source code</h2>
+
+    <p>
+      SAW SDK source code is avalaible as a ZIP or a tar.gz at
+      <a href='http://github.com/bellot/SAW-SDK' target='_blank'>http://github.com/bellot/SAW-SDK</a>.
+      Please, do expand the archive anywhere on your disk. You will get
+      a <code>SAW-SDK</code> directory.
+    </p>
+
+
+
+
+
+
+    <h2>Compile and test</h2>
+
+    <p>
+      Go to the <code>SAW-SDK</code> directory and run the Maven commands:
+    </p>
+
+<pre>
+mvn clean
+mvn install
+mvn javadoc:javadoc
+</pre>
+
+    <p>
+      Then go to the <code>SAW-SDK/pages</code> directory and run the Maven command:
+    </p>
+
+<pre>
+mvn exec:java -Dexec.mainClass='org.saw.server.Main'
+</pre>
+
+
+    <p>
+      Please, note that the first run of this command will download a lot
+      of Maven tools in your local Maven repository and it will donwload
+      all Java libraries required by SAW SDK. 
+      This may take several minutes&nbsp;!
+    </p>
+
+    <p>
+      Finally, open your favorite browser with the page determined by your settings, probably:
+    </p>
+
+<pre>
+http://127.0.0.1:8080
+</pre>
+
+    <h2>Configuring your server</h2>
+
+    <p>
+      The main configuration file is the file:
+    </p>
+
+<pre>
+saw/src/main/java/org/saw/Parameters.java
+</pre>
+
+    <p>
+      The following static attributes of the class
+      <code>Parameters</code> must be set in order 
+      to setup the network parameters:
+    </p>
+
+    <ul>
+
+      <li>
+	<p>
+	  <code>String WEB_SITE</code> must contain the IP of the sever. 
+	  It can be the IP of the computer where the SAW application is runned. 
+	  If the SAW application is proxied by an Apache server, it is the IP of the Apache server.
+	</p>
+      </lI>
+
+      <li>
+	<p>
+	  <code>String SITE_PREFIX</code> must contain <code>""</code> 
+	  unless the SAW application is reverse proxied by an Apache server. 
+	  In this case, there is a prefix that redirects to the SAW application.
+	</p>
+      </lI>
+
+      <li>
+	<p>
+	  <code>String BIND_INTERFACE</code> must contain the IP of the computer 
+	  interface where the Web application will listen to. 
+	  It can be <code>"127.0.0.1"</code> for local testing or the IP adress 
+	  of the LAN card for distant testing.
+	</p>
+      </lI>
+
+      <li>
+	<p>
+	  <code>int HTTP_SERVER_PORT</code> must contain the port number where the 
+	  server will listen for ordinary HTTP connection. 
+	  Unless you are root, choose a free port such as <code>8080</code>. If
+	  <code>HTTP_SERVER_PORT</code> is set to z&eacute;ro, the server will not handle
+	  HTTP connexions.
+	</p>
+      </lI>
+
+      <li>
+	<p>
+	  <code>int HTTPS_SERVER_PORT</code> must contain the port number 
+	  where the server will listen for SSL connection&nbsp;(HTTPS). Unless you are root, 
+	  choose a free port different from the previous such as <code>8081</code>. If
+	  <code>HTTPS_SERVER_PORT</code> is set to z&eacute;ro, the server will not handle
+	  HTTPS connexions.
+	</p>
+      </lI>
+
+    </ul>
+
+    <p>
+      Several configuration cases are described below.
+    </p>
+
+    <ul>
+
+      <li>
+	<p>
+	  <b>Personal usage and testing.</b>
+	  The SAW application is running on a simple computer for test purposes 
+	  and this computer alone will access the SAW application. Then :
+	</p>
+
+<pre>
+WEB_SITE       = "127.0.0.1"
+SITE_PREFIX    = ""
+BIND_INTERFACE = "127.0.0.1"
+</pre>
+
+	<p>
+          If you are root on this host you can choose <code>HTTP_SERVER_PORT=80</code>
+	  and <code>HTTPS_SERVER_PORT=443</code> so that the SAW application can be 
+	  accessed as <code>http://127.0.0.1</code> and <code>https://127.0.0.1</code>. 
+	  Otherwise, you should use free ports, for instance: <code>HTTP_SERVER_PORT=8080</code>
+	  and <code>HTTPS_SERVER_PORT=8181</code>. And the SAW application will be 
+	  accessed as <code>http://127.0.0.1:8080</code> and <code>https://127.0.0.1:8181</code>.	
+	</p>
+      </li>
+
+      <li>
+	<p>
+	  <b>Direct access to the Internet.</b>
+	  The SAW application is running on the host <code>rivf.enst.fr</code> and this host 
+	  has access to the Internet. No proxy is needed. Then :
+	</p>
+
+<pre>
+WEB_SITE       = "rivf.enst.fr"
+SITE_PREFIX    = ""
+BIND_INTERFACE = "rivf.enst.fr"
+</pre>
+
+	<p>
+          Of course, <code>rivf.enst.fr</code> can be replaced by the numerical IP of
+	  the computer.
+	  If you are root on this host you can choose <code>HTTP_SERVER_PORT=80</code> and 
+	  <code>HTTPS_SERVER_PORT=443</code> so that the SAW application can be accessed 
+	  as <code>http://rivf.enst.fr</code> and <code>https://rivf.enst.fr</code>. 
+	  Otherwise, you should use free ports, for instance: <code>HTTP_SERVER_PORT=8080</code>
+	  and <code>HTTPS_SERVER_PORT=8181</code>. And the SAW application will be 
+	  accessed as <code>http://rivf.enst.fr:8080</code> and <code>https://rivf.enst.fr:8181</code>.
+	</p>
+      </li>
+
+      <li>
+	<p>
+	  <b>Reverse proxying by Apache.</b>
+	  The SAW application is running on the host <code>rivf.enst.fr</code> and is proxied by 
+	  the Apache server <code>www.infres.enst.fr</code> with prefix <code>/saw</code>. 
+	  That means that <code>http://www.infres.enst.fr/rivf</code> refers to the SAW application. 
+	  In this case:
+	</p>
+
+<pre>
+WEB_SITE       = "www.infres.enst.fr"
+SITE_PREFIX    = "/saw"
+BIND_INTERFACE = "rivf.enst.fr"
+</pre>
+
+	<p>
+          Of course, <code>rivf.enst.fr</code> can be replaced by the numerical IP of
+	  the computer.
+	  In this case, <code>HTTPS_SERVER_PORT</code> can be set to <code>0</code>
+	  because HTTPS is handled by the Apache server. 
+	  <code>HTTP_SERVER_PORT</code> can be set to any port that will be 
+	  used in the configuration of the Apache server.
+	</p>
+      </li>
+
+      <li>
+	<p>
+	  <b>Virtual Hosting by Apache.</b>
+	  The SAW application is running on the host <code>rivf.enst.fr</code>
+	  and is proxied by the Apache server <code>www.infres.enst.fr</code> with a 
+	  virtual host <code>www.rivf.org</code>. That means that 
+	  <code>http://www.rivf.org</code> refers to the SAW application. 
+	  In this case:
+	</p>
+
+<pre>
+WEB_SITE = "www.rivf.org"
+SITE_PREFIX = ""
+BIND_INTERFACE = "rivf.enst.fr"
+</pre>
+
+	<p>
+          Of course, <code>rivf.enst.fr</code> can be replaced by the numerical IP of
+	  the computer.
+          In this case, <code>HTTPS_SERVER_PORT</code> can be set to <code>0</code>
+	  because HTTPS is handled by the Apache server. 
+	  <code>HTTP_SERVER_PORT</code> can be set to any port that will be used in 
+	  the configuration of the Apache server.
+	</p>
+      </li>
+
+    </ul>
+
+    <p>
+      By default, the first <b>Personal usage and testing</b> is installed
+      in the distribution.
+    </p>
+
+
+
+
+
+    <h2>Compile again</h2>
+
+    <p>
+      After configuring your server, go to the <code>SAW-SDK</code> directory and run the Maven command:
+    </p>
+
+<pre>
+mvn clean
+mvn install
+mvn javadoc:javadoc
+</pre>
+
+
+  </body>
+</html>
+

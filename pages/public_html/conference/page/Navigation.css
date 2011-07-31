@@ -1,0 +1,35 @@
+body#navigation {
+  margin:0;
+  padding:0 10px 0 10px;
+  border:none;
+}
+
+#navigation table { 
+  margin:0;
+  padding:0 ;
+}
+
+#navigation td { 
+  width:130px;
+  height:28px;
+  text-align:center;
+  vertical-align:middle;
+  margin:3px 0 0 0 ;
+  padding:0;
+  background:#000000;
+}
+
+#navigation a { 
+  text-shadow:0.12em 0.12em 0.12em #707070;
+  font-size:12px;
+  font-family:sans-serif;
+  font-weight:bold;
+  color:#FFFFFF;
+  margin:0;
+  padding:0;
+  text-decoration:none;
+}
+
+#navigation a:hover { 
+  color:#FFFF00;
+}

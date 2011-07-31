@@ -1,0 +1,92 @@
+<html>
+  <head>
+    <title>SAW SDK 1.0</title>
+    <!-- Changed by: Patrick Bellot, 31-Jul-2011 -->
+    <link rel='stylesheet' type='text/css' media='screen' href='../Style.css' />
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+  </head>
+  <body class='page'>
+    <iframe class='header_menu' src='Header.html'></iframe>
+    <h1>Overview of SAW SDK</h1>
+    <p>
+      SAW SDK allows Java developpers to easily program very efficient Web applications. 
+      A SAW Web application is entirely written in Java behaves as a Web server dedicated 
+      to a single Web application. 
+      To provide the best programming environment, SAW  reproduces its own version of the triplet 
+      <b>Container&nbsp;- Session Beans&nbsp;- Entity Beans</b> of 
+      <a href='http://download.oracle.com/javaee/6/tutorial/doc/gexaf.html' target='_blank'>Java&nbsp;EE&nbsp;6</a>.
+    </p>
+    <p>
+      Session Beans, called <b>Session Binz</b>, are in charge of answering the 
+      HTTP(S) requests. In order to operate, they rely on Container objects 
+      called <b>Transaction Binz</b>. 
+      When a request reaches the Web application, a Transaction Binz is in charge 
+      of the request. It opens the communication channels&nbsp;(sockets), handles
+      the HTTP or HTTPS protocol, decodes the HTTP header fields, extracts the 
+      GET and POST variables, retrieves the client session data if any and, finally, 
+      selects a Session Binz to answer the request according to the request path. 
+      The client session data are named <b>Session Environment</b>. 
+      When the Session Binz operates to answer the request, it has access to 
+      the Transaction Binz. 
+      Thus, it can access the user session data, information on the user client
+      and GET and POST variables.
+      The normal bevior of a Session Binz can be described as follows:
+    </p>
+    <ul>
+      <li>
+	It checks the user rights using the data contained in the Session Environment 
+	provided by the Transaction Binz.
+	The Session Environment contains the client id and the client ip. 
+	It also contains session variables in the sense of PHP. 
+	The Session Environment is fully customizable by the programmer.
+      </lI>
+      <li>
+	Using the Session Environment, the GET and POST variables and the Web 
+	application data, the Session Binz builds a Model&nbsp;(in the sense 
+	of the Model&nbsp;- View&nbsp;- Controller design pattern) of the 
+	request response. 
+	This is the implementation of the <b>Business Logic</b>. 
+	The Web application data are provided by Entity Binz described later 
+	meanwhile other data are provided by the Transaction Binz.
+      </li>
+      <li>
+	From the Model, the Session Binz output a XHMTL view that will be sent 
+	and displayed by the cleint agent, usually a Web browser. 
+	The Transaction Binz provides various HTTP Response headers. 
+	It also provides output functions. 
+	If the client agent supports compressed answers, the Transaction Binz 
+	transparently handles it.
+      </li>
+    </ul>
+    <center>
+      <img style='width:30em; margin:0.7em;' src='images/Architecture.png'/>
+    </center>
+    <p>
+      SAW has been thought to ease the programemr's work. 
+      The programmer has to focus on the Business Logic only. 
+      All technical aspects are handled by the Transaction Binz. 
+      In order to avoid the uncheckable litany of print function call of PHP 
+      programs, SAW proposes the use of <b>XML Elements Compilation (XEC)</b>. 
+      XEC allows a Session Binz to represent its output as a XML DOM-like tree 
+      that can be compiled into very efficient output functions. 
+      Another strenght of SAW is that almost evrything is cached in memory or in disk files. 
+      Entity Binz are in memory when used. And Session Binz caches their output in memory too. 
+    </p>
+    <p>
+      Entity Binz are global objects that contain the Web application data. 
+      In Web Application Servers, Entity Beans are application data. 
+      An Entity class matches a table in a relational database and each instance 
+      is a row in that table. 
+      The mapping of entities objects to the relational database tables is 
+      done via hibernation mechanisms such as JPA (Java Persistence API) or another. 
+      SAW takes advantage that it is dedicated to a single Web application and that, 
+      most of the cases, data can be kept in memory. 
+      Thus, Entity Beans are memory objects loaded at the start of the server and saved on disk at the shutdown of the server. 
+      They can contains any type of serializable Java data.
+      SAW provides generic functions to manage Entity Binz so that the programmer 
+      does not have to worry about the etchnical details. 
+      Of course, the programmer is allowed to use databases when facing huge amount of data.
+    </p>
+  </body>
+</html>
+

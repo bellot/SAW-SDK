@@ -1,0 +1,152 @@
+<html>
+  <head>
+    <title>SAW SDK 1.0</title>
+    <!-- Changed by: Patrick Bellot, 31-Jul-2011 -->
+    <link rel='stylesheet' type='text/css' media='screen' href='../Style.css' />
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+  </head>
+  <body class='page'>
+    <iframe class='header_menu' src='Header.html'></iframe>
+
+    <h1>A first Entity Binz</h1>
+
+    <p>
+        This first Entity Binz is dedicated to the Web text appearing on the page.
+        It will contain the page title and the three first line of the header.
+        The fourth line of the header, containing the conference dates and place,
+        will be computed from other Entity Binz containing conference data.
+        Let us name this Entity Binz <code>PageTexts</code> in the package
+        <code>org.site.conference.web</code>.
+    </p>
+
+    <p>
+        <b>Updatable friends.</b>
+        This Entity Binz will be used to produce page title and the Header frame.
+        If the Entity Binz is modified, any cached page containing the Header
+        frame must refresh its cache. To automatize that, with use the concept of
+        <i>Updatable Friend</i>&nbsp;which is no more than an implementation
+        of the
+        <a href="http://en.wikipedia.org/wiki/Observer_pattern" target="_blank">Observer-Observable</a>
+        pattern.
+        To implement this pattern, our <code>PageTexts</code>&nbsp;Entity Binz inherits
+        <a href="javadoc/org/saw/entities/EntityBinzWithUpdatableFriends.html" target="_blank">EntityBinzWithUpdatableFriends</a>
+        which is an extension of the basic
+        <a href="javadoc/org/saw/entities/EntityBinz.html" target="_blank">EntityBinz</a>.
+        Any object requiring to be updated when the <i>Updatable Friend</i>&nbsp;is
+        modified must register to this Entity Binz using its inherited method:
+    </p>
+    
+<pre>
+public final void addUpdatableFriend(UpdatableFriend updatableFriend) ;
+</pre>
+        
+    <p>
+        <a href="javadoc/org/saw/util/updatable/UpdatableFriend.html" target="_blank">UpdatableFriend</a>
+        is an interface declaring the method:
+    </p>
+    
+<pre>
+public final void requiresUpdate() ;
+</pre>
+        
+    <p>
+        It is the responsability of the Entity Binz to call this method for each
+        registered updatable friend when it is modified. This is done in the
+        <i>setters</i> by calling the inherited method:
+    </p>
+    
+<pre>
+public final void notifyUpdatableFriends() ;
+</pre>
+    
+    <p>
+        in the <i>setters</i> of the Entity Binz.
+    </p>
+    
+    <p>
+        <b>Setter.</b>
+        We will provide a page to modify the content of this Entity Binz.
+        This page will propose to modify the four fields of the Entity Binz at once.
+        That is why we provide only one setter to modify the four fields at once.
+    </p>
+    
+    <p>
+        <b>The unique entity.</b>
+        There will be only one instance of the Entity Binz accessible as
+        the final static attribute <code>entity</code> of the class. This
+        attribute is initialized in the <code>static</code> initializer
+        by calling the <code>wakeup</code> inherited static method. Then,
+        the entity registers itself to the <i>Backup Manager</i> to be saved
+        at the server shutdown.
+    </p>
+    
+    <p>
+        <b>Code:</b>
+    </p>
+    
+<pre>
+package org.site.conference.web;
+
+import java.io.Serializable;
+import org.saw.entities.BackupManager;
+import org.saw.entities.EntityBinzWithUpdatableFriends;
+
+/** @author  Patrick Bellot, &copy; 2010 and later. */
+
+public class PageTexts extends EntityBinzWithUpdatableFriends
+        implements Serializable
+{
+    public static final long serialVersionUID = 20110730L ;
+
+    /** The unique entity of this class. */
+
+    public static final PageTexts entity  ;
+
+    static {
+	entity = (PageTexts)wakeUp(PageTexts.class) ;
+        BackupManager.registerEntity(entity) ;
+    }
+
+    /* Internal data. */
+
+    private String pageTitle   ;
+    private String headerLine1 ;
+    private String headerLine2 ;
+    private String headerLine3 ;
+
+    /** Setter. */
+
+    public final void set(String pageTitle,
+                          String headerLine1,
+                          String headerLine2,
+                          String headerLine3) {
+        this.pageTitle   = pageTitle ;
+        this.headerLine1 = headerLine1 ;
+        this.headerLine2 = headerLine2 ;
+        this.headerLine3 = headerLine3 ;
+
+        notifyUpdatableFriends() ;
+    }
+
+    public String getPageTitle() {
+        return pageTitle;
+    }
+
+    public String getHeaderLine1() {
+        return headerLine1;
+    }
+
+    public String getHeaderLine2() {
+        return headerLine2;
+    }
+
+    public String getHeaderLine3() {
+        return headerLine3;
+    }
+
+}
+</pre>
+
+  </body>
+</html>
+

@@ -1,0 +1,28 @@
+body#header { 
+  padding:0 0 0 50px ;
+
+}
+
+#header table { 
+  margin:0;
+  padding:0;
+  border:none;
+}
+
+#header tr { 
+  margin:0;
+  padding:0;
+}
+
+#header td { 
+  text-shadow:0.12em 0.12em 0.12em #505050;
+  font-size:12px;
+  font-family:sans-serif;
+  color:#FFFFBB;
+  height:150px;
+  vertical-align:middle;
+  margin:0;
+  padding:0;
+  border:none;
+}
+

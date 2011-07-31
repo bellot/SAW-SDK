@@ -1,0 +1,285 @@
+<html>
+  <head>
+    <title>SAW SDK 1.0</title>
+    <!-- Changed by: Patrick Bellot, 31-Jul-2011 -->
+    <link rel='stylesheet' type='text/css' media='screen' href='../Style.css' />
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+  </head>
+  <body class='page'>
+    <iframe class='header_menu' src='Header.html'></iframe>
+
+    <h1>SAW Utilites</h1>
+
+    <p>
+      This section is about:
+    </p>
+
+    <ol>
+      <li>
+	The utilities, programs that are part of the distribution.
+      </li>
+      <li>
+	Some of the packages distributed with SAW that can be useful for a Web application developers.
+      </li>
+    </ol>
+
+
+
+
+    <h2>Utilities</h2>
+
+    <p>
+      The following utilities are distributed with SAW.
+      They are programs that maybe useful for the Web application developers or maintainers.
+    </p>
+
+    <ul>
+
+      <li>
+	<p>
+	  <b>List backups [ <code>mvn exec:java -P listbackups</code> in directory <code>SAW-SDK/pages</code> ]</b>
+	  <br>
+	  When the server is running, it loads the Entity Binz from the <code>xorkspace</code>
+	  directory. At the shutdown of the server, the Entity Binz are saved in the same
+	  directory. However,one must be afraid of a bug or a power failure that would
+	  the save process or let the workspace corrupted. That's why the server, at regular
+	  interval of time, save the ENtity Binz in the workspace and copy the <code>workspace</code>
+	  directory in the <code>backup</code> and the name is prefixed by the current time
+	  in millis. The <i>List&nbsp;backups</i> utility simply list the backups with
+	  the time being written in clear, the name of the backup and the time the backup
+	  lasts from now. Backups are listed from the olderto the younger. Example of output:
+	</p>
+<pre>
+July 16, 2011 - Sat. 03:57:54     1310781474852.workspace                  1 dy  8 hr          7 sec 810 ms       [0]
+July 16, 2011 - Sat. 07:57:55     1310795875775.workspace                  1 dy  4 hr          6 sec 887 ms       [1]
+July 16, 2011 - Sat. 11:57:56     1310810276650.workspace                  1 dy                6 sec  12 ms       [2]
+July 16, 2011 - Sat. 15:57:57     1310824677509.workspace                       20 hr          5 sec 153 ms       [3]
+July 16, 2011 - Sat. 19:57:58     1310839078326.workspace                       16 hr          4 sec 336 ms       [4]
+July 16, 2011 - Sat. 23:57:59     1310853479573.workspace                       12 hr          3 sec  89 ms       [5]
+July 17, 2011 - Sun. 03:58:00     1310867880449.workspace                        8 hr          2 sec 213 ms       [6]
+July 17, 2011 - Sun. 07:58:01     1310882281860.workspace                        4 hr                802 ms       [7]
+July 17, 2011 - Sun. 11:58:02     1310896682662.workspace                                                         [8]
+</pre>
+	<p>
+	  This may be useful to restore a backup as explained in the 
+	  <a href='RestoreBackup.html' target='_top'>Restroring a backup of the workspace</a> tutorial section.
+	</p>
+      </li>
+
+
+
+      <li>
+	<p>
+	  <b>Encrypt a password <code>[ mvn exec:java -P encryptpassword</code> in directory <code>SAW-SDK/pages ]</code></b>
+	  <br>
+	  A Web application may have users with logins and passwords. Logins and passwords are 
+	  stored in the 
+	  <a href='javadoc/org/saw/users/User.html' target='_blank'>org.saw.users.User</a>
+	  data structure.
+	  We strongly suggest that the stored password must be encrypted. At the bootstrap
+	  phase, some kind of root user must be created with its password. Thus, we need the
+	  encryption of its password to initialize its data as explained in
+	  <a href='InitAdminUser.html' target='_top'>Initializing the admin suer</a> tutorial section.
+	  The simple program <i>Encrypt a password</i> allows you to enter a password and get the encrypted form.
+	</p>
+      </li>
+
+    </ul>
+
+    <h2>Useful packages</h2>
+
+    <p>
+      This section describes classes and packages that could be used by the Web application developer.
+    </p>
+
+    <ul>
+
+      <li>
+	Package <code>org.saw.util.beautifiers</code>:
+	<ul>
+	  <li>
+	    <a href='javadoc/org/saw/util/beautifiers/JavaBeautifier.html' target='_blank'>JavaBeautifier.java</a>:
+	    converting Java file into HTML file in default Eclipse style.
+	  </li>
+	</ul>
+      </li>
+      
+      <li>
+	Package <code>org.saw.util.bytes</code>:
+	<ul>
+	  <li>
+	    <a href='javadoc/org/saw/util/bytes/BytesArray.html' target='_blank'>BytesArray.java</a>:
+	    C-like functions&nbsp;(<i>strchr</i>, <i>strstr</i>, etc.) working on byte arrays.
+	  </li>
+	  <li>
+	    <a href='javadoc/org/saw/util/bytes/FileBytes.html' target='_blank'>FileBytes.java</a>:
+	    reading a file in a byte array.
+	  </li>
+	  <li>
+	    <a href='javadoc/org/saw/util/bytes/GzipBytes.html' target='_blank'>GzipBytes.java</a>:
+	    to gzip a byte array.
+	  </li>
+	</ul>
+      </li>
+      
+      <li>
+	Package <code>org.saw.util.checks</code>:
+	<ul>
+	  <li>
+	    <a href='javadoc/org/saw/util/checks/JMAAADateCheck.html' target='_blank'>JMAAADateCheck.java</a>:
+	    checks if a string is a date in format <i>J/M/AAAA</i>.
+	  </li>
+	  <li>
+	    <a href='javadoc/org/saw/util/checks/PowerOfTwoCheck.html' target='_blank'>PowerOfTwoCheck.java</a>:
+	    checks if an <code>int</code> is a power of 2.
+	  </li>
+	</ul>
+      </li>
+      
+      <li>
+	Package <code>org.saw.util.compacters</code>:
+	<ul>
+	  <li>
+	    <a href='javadoc/org/saw/util/compacters/CssCompacter.html' target='_blank'>CssCompacter.java</a>:
+	    to compact a CSS file.
+	  </li>
+	  <li>
+	    <a href='javadoc/org/saw/util/compacters/HtmlCompacter.html' target='_blank'>HtmlCompacter.java</a>:
+	    to compact a HTML file.
+	  </li>
+	  <li>
+	    <a href='javadoc/org/saw/util/compacters/JsCompacter.html' target='_blank'>JsCompacter.java</a>:
+	    to compact a JavaScript file.
+	  </li>
+	</ul>
+      </li>
+      
+      <li>
+	Package <code>org.saw.util.dates</code>:
+	<ul>
+	  <li>
+	    <a href='javadoc/org/saw/util/dates/DatesUtils.html' target='_blank'>DatesUtils.java</a>:
+	    a few functions on dates.
+	  </li>
+	</ul>
+      </li>
+      
+      <li>
+	Package <code>org.saw.util.encoding</code>:
+	<ul>
+	  <li>
+	    <a href='javadoc/org/saw/util/encoding/Base64Coder.html' target='_blank'>Base64Coder.java</a>:
+	    a base64 encoder.
+	  </li>
+	  <li>
+	    <a href='javadoc/org/saw/util/encoding/PasswordEncrypt.html' target='_blank'>PasswordEncrypt.java</a>:
+	    password encryption algorithm&nbsp;(MD5&nbsp;+&nbsp;base64).
+	  </li>
+	</ul>
+      </li>
+      
+      <li>
+	Package <code>org.saw.util.files</code>:
+	<ul>
+	  <li>
+	    <a href='javadoc/org/saw/util/files/DirCopy.html' target='_blank'>DirCopy.java</a>:
+	    to copy a directory.
+	  </li>
+	  <li>
+	    <a href='javadoc/org/saw/util/files/DirRm.html' target='_blank'>DirRm.java</a>:
+	    to remove a directory.
+	  </li>
+	  <li>
+	    <a href='javadoc/org/saw/util/files/FileCopy.html' target='_blank'>FileCopy.java</a>:
+	    to copy a file.
+	  </li>
+	  <li>
+	    <a href='javadoc/org/saw/util/files/FileToString.html' target='_blank'>FileToString.java</a>:
+	    to read a text file in a string.
+	  </li>
+	  <li>
+	    <a href='javadoc/org/saw/util/files/FilesConcat.html' target='_blank'>FilesConcat.java</a>:
+	    to concatenate several files in one.
+	  </li>
+	  <li>
+	    <a href='javadoc/org/saw/util/files/GZipFile.html' target='_blank'>GZipFile.java</a>:
+	    to zip a file.
+	  </li>
+	  <li>
+	    <a href='javadoc/org/saw/util/files/StringToFile.html' target='_blank'>StringToFile.java</a>:
+	    to write a string in a file.
+	  </li>
+	</ul>
+      </li>
+      
+       <li>
+	Package <code>org.saw.util.logs</code>:
+	<ul>
+	  <li>
+	    <a href='javadoc/org/saw/util/logs/Logs.html' target='_blank'>Logs.java</a>:
+	    the logging functions of SAW.
+	  </li>
+	</ul>
+      </li>
+      
+       <li>
+	Package <code>org.saw.util.logs</code>:
+	<ul>
+	  <li>
+	    <a href='javadoc/org/saw/util/logs/Logs.html' target='_blank'>Logs.java</a>:
+	    the logging functions of SAW.
+	  </li>
+	</ul>
+      </li>
+      
+       <li>
+	Package <code>org.saw.util.random</code>:
+	<ul>
+	  <li>
+	    <a href='javadoc/org/saw/util/random/RandomExt.html' target='_blank'>RandomExt.java</a>:
+	    to generate a random numerical if between <code>100.000</code> and <code>999.999</code>.
+	  </li>
+	</ul>
+      </li>
+      
+       <li>
+	Package <code>org.saw.util.structures</code>:
+	<ul>
+	  <li>
+	    <a href='javadoc/org/saw/util/structures/IntArray.html' target='_blank'>IntArray.java</a>:
+	    extensible array of <code>int</code>, similar to <code>ArrayList</code>.
+	  </li>
+	  <li>
+	    <a href='javadoc/org/saw/util/structures/IntObjHashTable.html' target='_blank'>IntObjHashTable.java</a>:
+	    hast table where keys are <code>int</code> and value are objets, inner table size is fixed.
+	  </li>
+	  <li>
+	    <a href='javadoc/org/saw/util/structures/ObjArray.html' target='_blank'>ObjArray.java</a>:
+	    extensible array of objects, similar to <code>ArrayList</code>.
+	  </li>
+	  <li>
+	    <a href='javadoc/org/saw/util/structures/ObjObjHashTable.html' target='_blank'>ObjObjHashTable.java</a>:
+	    hast table where keys and value are objets, inner table size is fixed.
+	  </li>
+	</ul>
+      </li>
+      
+        <li>
+	Package <code>org.saw.util.updatable</code>:
+	<ul>
+	  <li>
+	    <a href='javadoc/org/saw/util/random/UpdatableFriends.html' target='_blank'>UpdatableFriends.java</a>:
+	    SAW version of the <i>Observer</i> in the <i>Observer-Observable</i> design pattern.
+	  </li>
+	</ul>
+      </li>
+      
+    
+
+
+
+    </ul>
+
+  </body>
+</html>
+

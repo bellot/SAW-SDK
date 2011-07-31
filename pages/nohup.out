@@ -1,0 +1,24 @@
+[INFO] Scanning for projects...
+[INFO]                                                                         
+[INFO] ------------------------------------------------------------------------
+[INFO] Building SAW-SDK-Pages 1.0
+[INFO] ------------------------------------------------------------------------
+[INFO] 
+[INFO] >>> exec-maven-plugin:1.2:java (default-cli) @ SAW-SDK-Pages >>>
+[INFO] 
+[INFO] <<< exec-maven-plugin:1.2:java (default-cli) @ SAW-SDK-Pages <<<
+[INFO] 
+[INFO] --- exec-maven-plugin:1.2:java (default-cli) @ SAW-SDK-Pages ---
+[INFO] Scanning for projects...
+[INFO]                                                                         
+[INFO] ------------------------------------------------------------------------
+[INFO] Building SAW-SDK-Pages 1.0
+[INFO] ------------------------------------------------------------------------
+[INFO] 
+[INFO] >>> exec-maven-plugin:1.2:java (default-cli) @ SAW-SDK-Pages >>>
+[INFO] 
+[INFO] <<< exec-maven-plugin:1.2:java (default-cli) @ SAW-SDK-Pages <<<
+[INFO] 
+[INFO] --- exec-maven-plugin:1.2:java (default-cli) @ SAW-SDK-Pages ---
+Hello
+Hello

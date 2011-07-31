@@ -1,0 +1,45 @@
+<html>
+  <head>
+    <title>SAW SDK 1.0</title>
+    <!-- Changed by: Patrick Bellot, 31-Jul-2011 -->
+    <link rel='stylesheet' type='text/css' media='screen' href='../Style.css' />
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+  </head>
+  <body class='page'>
+    <iframe class='header_menu' src='Header.html'></iframe>
+
+    <h1>The Users Catalog</h1>
+
+    <p>
+      The Users Catalog is the data structure containing the information on the
+      users of the Web application. As explained in
+      <a href='User.html' target='_top'>The User data structure</a>,
+      the user information is an object of the class
+      <a href='javadoc/org/saw/users/User.html' target='_blank'>User</a>
+      containg the user id, the login name, the encripted password and the 
+      privileges field of the user.
+    </p>
+
+    <p>
+      The Users Catalog is an object of class
+      <a href='javadoc/org/saw/users/UsersCatalog.html' target='_blank'>UsersCatalog</a>.
+      It is an Entity Binz: there exist a unique instance of it which is loaded from
+      its workspace file the first time it is accessed and saved back to its
+      workspace file when the server shut down. It is ket in memory during this interval.
+      The Users Catalog can be accessed as a static variable of the class 
+      <a href='javadoc/org/saw/users/UsersCatalog.html' target='_blank'>UsersCatalog</a>:
+    </p>
+
+<pre>
+UsersCatalog.entity
+</pre>
+
+    <p>
+      By looking at the class  <a href='javadoc/org/saw/users/UsersCatalog.html' target='_blank'>UsersCatalog</a>,
+      we can see that this class allows to create a user, to retrieve a user using its user id or
+      its login name, etc.
+    </p>
+
+  </body>
+</html>
+

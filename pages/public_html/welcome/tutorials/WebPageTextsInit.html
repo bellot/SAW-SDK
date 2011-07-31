@@ -1,0 +1,102 @@
+<html>
+  <head>
+    <title>SAW SDK 1.0</title>
+    <!-- Changed by: Patrick Bellot, 31-Jul-2011 -->
+    <link rel='stylesheet' type='text/css' media='screen' href='../Style.css' />
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+  </head>
+  <body class='page'>
+    <iframe class='header_menu' src='Header.html'></iframe>
+
+    <h1>Initializing the Entity Binz</h1>
+
+    <p>
+        To initialize the <code>WebPageTexts</code> Entity Binz that
+        we have designed in
+        <a href='WebPageTexts.html' target='_top'>The Web page texts</a>,
+        we will use the bootstrap process.
+        First, we program a class <code>WebPageTextsBootStrap</code> with
+        a static method that will do the job:
+    </p>
+    
+<pre>
+package org.site.conference.web;
+
+/** @author  Patrick Bellot, &copy; 2010 and later. */
+
+public class PageTextsBootStrap 
+{
+    public final static void booStrap()
+    {
+        PageTexts pageTexts = PageTexts.entity ;
+        
+        pageTexts.set("WebTech 2012",
+                      "2nd Annual International Conference on",
+                      "Web Technologies & Internet Applications (WebTech 2012)",
+                      "Special Track: Social Computing and Behavioral Modeling (SocialComp 2012)") ;
+    }
+}
+</pre>
+    
+    <p>
+        And we call this method from the class
+        <a href='javadoc/org/site/bootstrap/Bootstrap.html' target='_blank'>org.site.bootstrap.Bootstrap</a>:
+    </p>
+    
+<pre>
+...
+
+import org.site.conference.web.PageTextsBootStrap;
+
+...
+
+    public final static void bootStrap()
+        throws Exception
+    {
+        initRootUser() ;
+        
+        <b>PageTextsBootStrap.bootStrap() ;</b>
+    }
+
+...
+</pre>
+    
+    <p>
+        Then, be sure that the server is not running and in <code>SAW-SDK/pages</code>, run the Maven command:
+    </p>
+    
+<pre>
+maven exec:java -P bootstrap
+</pre>
+
+    <p>
+        <b>Warning.</b>
+        If you have already created the admin&nbsp;(root) user as explained in
+        <a href='InitAdminUser.html' target='_top'>Initializing the admin user</a>
+        tutorial, an error will occur if you try to crete it once again.
+        Two solutions:
+    </p>
+    
+    <ol>
+        <li>
+            <p>
+                Comment the instruction <code>initRootUser() ;</code> in the code above.
+            </p>
+        </li>
+        <li>
+            <p>
+                Erase the file <code>SAW-SDK/workspace/org/saw/users/UsersCatalog/binz</code>.
+            </p>
+        </li>
+    </ol>
+    
+    <p>
+        <b>Note.</b>
+        We decided to put the bootstrap code in separate static classes so that
+        these classes are not loaded when running the server. They are only loaded
+        when the bootstrap process is run.
+    </p>
+    
+  </body>
+</html>
+

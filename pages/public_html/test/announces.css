@@ -1,0 +1,22 @@
+body#announces {
+  font-size:12px;
+  font-family:sans-serif;
+  color:#404040;
+  margin:0;
+  padding:10px;
+}
+
+#announces img { 
+  margin:0 0 3px 0;
+}
+
+#announces h1 { 
+  font-size:120%;
+  text-align:center;
+  margin:9px 0 3px 0;
+}
+
+#announces p { 
+  text-align:center;
+  margin:3px 0 3px 0;
+}

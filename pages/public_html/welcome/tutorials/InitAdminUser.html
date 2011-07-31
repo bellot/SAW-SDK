@@ -1,0 +1,82 @@
+<html>
+  <head>
+    <title>SAW SDK 1.0</title>
+    <!-- Changed by: Patrick Bellot, 31-Jul-2011 -->
+    <link rel='stylesheet' type='text/css' media='screen' href='../Style.css' />
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+  </head>
+  <body class='page'>
+    <iframe class='header_menu' src='Header.html'></iframe>
+
+    <h1>Initializing the admin user</h1>
+
+    <p>
+      The admin user is the one who will get all the rights on the Web application.
+      We decide that the login names of the users will be their email addresses.
+      For our example, we choose the admin user to be
+      <code>bellot@telecom-paristech.fr</code>. To create this user, we also
+      need his <u>encrypted</u> password bacause password are not stored in clear on the
+      server. To compute the encrypted version of his password, see
+      <a href='Usage.htm' target='_top'>Usage</a>, it is needed tu run the command:
+    </p>
+
+<pre>
+mvn exec:java -P encryptpassword
+</pre>
+
+    <p>
+      in <code>SAW-SDK/pages</code> directory. Enter the clear password and you will
+      get the encrypted password. For instance, if you enter the clear password
+      "<code>selpbsdm</code>", you get the encrypted password "<code>4Uorubt3NVVAeOw/pNL/OQ==</code>".
+    </p>
+
+    <p>
+      <b>The bootstrap process.</b>
+      As explained in the
+      <a href='BootstrapProcess.html' target='_top'>The bootstrap process</a>,
+      the inistialization of the 
+      <a href='javadoc/org/saw/users/UsersCatalog.html' target='_blank'>UsersCatalog</a>
+      Entity Binz must be done in the <code>bootStrap()</code> method
+      of the 
+      <a href='javadoc/org/site/bootstrap/Bootstrap.html' target='_blank'>org.site.bootstrap.Bootstrap</a>
+      class. For instance:
+    </p>
+
+<pre>
+UsersCatalog usersCatalog = UsersCatalog.entity ;
+
+User user = usersCatalog.createUser("bellot@telecom-paristech.fr","4Uorubt3NVVAeOw/pNL/OQ==") ;
+
+user.setPrivileges(Privileges.ADMIN) ;
+</pre>
+
+    <p>
+      <b>Execution.</b>
+    </p>
+
+    <ol>
+      <li>
+	<p>
+	  Shut down the server if it is running.
+	</p>
+      </li>
+      <li>
+	<p>
+	  Erase <code>SAW-SDK/pages/workspace/org/saw/users/UsersCatalog/binz</code>.
+	</p>
+      </li>
+      <li>
+	<p>
+	  Run <code>mvn exec:jaca -P bootstrap</code> in <code>SAW-SDK/pages</code>.
+	</p>
+      </li>
+    </ol>
+
+    <p>
+      <b>Warning.</b>
+      This code is part of the distribution. You may like to use another password.
+    </p>
+
+  </body>
+</html>
+

@@ -1,0 +1,85 @@
+<html>
+  <head>
+    <title>SAW SDK 1.0</title>
+    <!-- Changed by: Patrick Bellot, 31-Jul-2011 -->
+    <link rel='stylesheet' type='text/css' media='screen' href='../Style.css' />
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+  </head>
+  <body class='page'>
+    <iframe class='header_menu' src='Header.html'></iframe>
+
+    <h1>The Session environment</h1>
+
+    <p>
+      When a client connect to a SAW server, a session identifier&nbsp;(<b>sessionId</b>) is allocated.
+      The sessionId uniquely identifies the session. This sessionId is tranferred from the server to the 
+      client and <i>vice versa</i> using cookies. The sessionId identifies a Session object
+      environment accessible to the Session Binz. From one client request to another, the same Session
+      environment is provided to the Session Binz. It is similar to PHP session variables.
+    </p>
+
+    <p>
+      <b>The Session environment object.</b>
+      The Session environment of class 
+      <a href='javadoc/org/saw/transaction/SessionEnvironment.html' target='_blank'>SessionEnvironment</a>
+      contains:
+    </p>
+
+    <ul>
+      <li>
+	<p>
+	  the session identifier&nbsp;;
+	</p>
+      </li>
+      <li>
+	<p>
+	  the IP address of the client as a string&nbsp;
+	</p>
+      </li>
+      <li>
+	<p>
+	  the <a href='javadoc/org/saw/users/User.html' target='_blank'>User</a> object
+	  if the user is logged, it is the responsability of the <i>login</i> and
+	  <i>logout</i> Session Binz to maintain this field&nbsp;
+	</p>
+      </li>
+      <li>
+	<p>
+	  a 
+	  <a href='javadoc/org/saw/transaction/SessionVariables.html' target='_blank'>SessionVariables</a>
+	  object that is accessible to the Session Binz to store values.
+	</p>
+      </li>
+    </ul>
+
+    <p>
+      <b>The Session variables object.</b>
+      The Session variable object is simply a hash table where keys are <code>String</code> and
+      values are any kind of object. The methods for accessing the values are those of the class
+      <a href='javadoc/org/saw/util/structures/ObjObjHashTable.html' target='_blank'>ObjObjHashTable</a>.
+    </p>
+
+    <p>
+      <b>How to access the Session environment ?</b>
+      The Session environment can be obtained from the 
+      <a href='javadoc/org/saw/transaction/Transaction.html' target='_blank'>Transaction</a>
+      object using the method:
+    </p>
+
+<pre>
+public final SessionEnvironment getSessionEnvironment() ;
+</pre>
+
+    <p>
+      The Session variables can be obtained from the
+      <a href='javadoc/org/saw/transaction/SessionEnvironment.html' target='_blank'>SessionEnvironment</a>
+      object using the method:
+    </p>
+
+<pre>
+public final SessionVariables getSessionVariables() ;
+</pre>
+
+  </body>
+</html>
+

@@ -1,0 +1,86 @@
+<html>
+  <head>
+    <title>SAW SDK 1.0</title>
+    <!-- Changed by: Patrick Bellot, 31-Jul-2011 -->
+    <link rel='stylesheet' type='text/css' media='screen' href='../Style.css' />
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+  </head>
+  <body class='page'>
+    <iframe class='header_menu' src='Header.html'></iframe>
+
+    <h1>Using Transaction variables</h1>
+
+    <p>
+      We name Transaction variables the GET and POST variables associated to a HTTP Request. 
+      They are held in an object of the class 
+      <a href='javadoc/org/saw/transaction/TransactionVariables.html' target='_blank'>TransactionVariables</a>. 
+      These variables have a <code>String</code> name and a <code>String</code> value. 
+    </p>
+
+    <p>
+      In the <code>handle</code> method of a Session Binz, the programmer can access the Transacion variables object:
+    </p>
+
+<pre>
+TransactionVariables transactionVariables = transaction.getTransactionVariables() ;
+</pre>
+
+    <p>
+      By looking at <a href='javadoc/org/saw/transaction/TransactionVariables.html' target='_blank'>TransactionVariables</a>
+      JavaDoc, we see that the programmer has several <i>get</i> methods. The main one is:
+    </p>
+
+<pre>
+String get(String name) ;
+</pre>
+
+    <p>
+      which returns the <code>String</code> value of the variable with name <code>name</code> or
+      <code>null</code> if the variable is not set.
+      In the case where the developper 
+      is sure that the <code>String</code> value is a boolean, an integer, etc., the class 
+      TransactionVariables provides method to directly extract these values. Please consult the JavaDoc
+      of the class <a href='javadoc/org/saw/transaction/TransactionVariables.html' target='_blank'>TransactionVariables</a>
+      for a list of variables access functions.
+    </p>
+
+    <p>
+      If, in a Session Binz, you are interested in one Transactio variable only, then you can 
+      ask for the value of the variable by using the method:
+    </p>
+
+<pre>
+public final String getTransactionVariable(String name) ;
+</pre>
+
+    <p>
+      of the class <a href='javadoc/org/saw/transaction/Transaction.html' target='_blank'>Transaction</a>
+      without importing the whole Transaction variables object.
+    </p>
+
+    <p>
+      Note that the class <a href='javadoc/org/saw/transaction/TransactionVariables.html' target='_blank'>TransactionVariables</a>
+      also provides <i>put</i> functions allowing to set or modify Transaction variables. This can be useful especially
+      when using XML Element Compilation. See 
+      <a href='XECTransactionVariables.html' target='_top'>XEC and Transaction variables</a>.
+    </p>
+
+    <p>
+      <b>Example.</b>
+      The class <a href='test/PHPTV.java' target='_blank'>test/PHPTV.java</a> is an example of
+      using Transaction variables. The result can be seen by providing a GET variable <code>person</code> at
+      <a href='test/PHPTV.class?person=bellot' target='_blank'>test/PHPTV.class?person=bellot</a>.
+    </p>
+
+    <p>
+      <b>Example.</b>
+      Because we use only one Transaction variable in 
+      <a href='test/PHPTV.java' target='_blank'>test/PHPTV.java</a>,
+      The resulting Java code is <a href='test/PHPTV2.java' target='_blank'>test/PHPTV2.java</a>
+      and the result can be seen by providing a GET variable <code>person</code> at
+      <a href='test/PHPTV2.class?person=bellot' target='_blank'>test/PHPTV2.class?person=bellot</a>.
+    </p>
+
+  </body>
+</html>
+

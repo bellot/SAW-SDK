@@ -1,0 +1,477 @@
+<html>
+  <head>
+    <title>SAW SDK 1.0</title>
+    <!-- Changed by: Patrick Bellot, 31-Jul-2011 -->
+    <link rel='stylesheet' type='text/css' media='screen' href='../Style.css' />
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+  </head>
+  <body class='page'>
+    <iframe class='header_menu' src='Header.html'></iframe>
+
+    <h1>Usage</h1>
+
+    <p>
+      This section describes several points:
+    </p>
+
+    <ol>
+      <li>
+	<p>
+	  What are the main Maven line commands that the developper must use.
+	</p>
+      </li>
+      <li>
+	<p>
+	  How to add an external dependencies.
+	</p>
+      </li>
+      <li>
+	<p>
+	  The code structure.
+	</p>
+      </li>
+      <li>
+	<p>
+	  Working with Eclipse.
+	</p>
+      </li>
+      <li>
+	<p>
+	  Working NetBeans.
+	</p>
+      </li>
+    </ol>
+
+    <h2>The main Maven line commands</h2>
+
+    <p>
+      The <code>SAW-SDK</code> directory is the main Maven projects. And it contains
+      several sub-projects&nbsp;(several modules in Maven terminology)&nbsp:
+    </p>
+
+    <ul>
+      <li>
+	<code>SAW-SDK-Saw</code> in directory <code>saw</code>: the core of the server.
+      </li>
+      <li>
+	<code>SAW-SDK-Site</code> in directory <code>site</code>: the Web application extension classes.
+      </li>
+      <li>
+	<code>SAW-SDK-Pages</code> in directory <code>pages</code>: the Web application itself.
+      </li>
+      <li>
+	<code>SAW-SDK-Utilities</code> in directory <code>utilities</code>: useful programs.
+      </li>
+      <li>
+	<code>SAW-SDK-plugins</code> in directory <code>plugins</code>: Maven plugins&nbsp;(purely technical).
+      </li>
+    </ul>
+
+    <p>
+      In each of these projects, you can run the Maven commands
+      <code>mvn&nbsp;clean</code> and <code>mvn&nbsp;install</code>.
+      Running these command in the top <code>SAW-SDK</code> directory
+      will do it in all the subproject.
+    </p>
+
+    <p>
+      <b>Attention ! Executing programs must be done from the <code>SAW-SDK-Pages</code> module project
+      in directory <code>pages</code>.</b>
+    </p>
+
+    <p>
+      There exist several execution Maven profiles:
+    </p>
+
+    <ul>
+      <li>
+	<code>server</code>: for running the server.
+      </li>
+      <li>
+	<code>bootstrap</code>: for running the bootstrap process.
+      </li>
+      <li>
+	<code>listbackups</code>: for listing the workspace backups in a readable way.
+      </li>
+      <li>
+	<code>encryptpassword</code>: for computing the encryption of a password.
+      </li>
+    </ul>
+
+    <p>
+      The command to run one of these profile is:
+    </p>
+
+<pre>
+mvn exec:java -P &lt;<i>profile name</i>&gt;
+</pre>
+
+    <b>Important&nbsp;!</b>
+      Note that each timethe projects <code>SAW-SDK/saw</code> and <code>SAW-SDK/site</code>
+      are modfied, the server has to be restarted. However, when <code>SAW-SDK/pages</code>
+      is modified, it just need to be recompiled without restarting the server.
+    </p>
+	
+
+
+    <h2>External dependencies</h2>
+
+    <p>
+      External dependencies are declared in the main project 
+      <code>SAW-SDK/pom.xml</code> and are inherited by the
+      sub-projects. A <code>pom.xml</code> is a XML file
+      describing a project for Maven. POM stands for Project
+      Object Model. If a dependency is declared in the
+      <code>pom.xml</code> file, it will be downloaded in
+      your local Maven repository at compilation time if
+      not already downloaded.
+    </p>
+
+    <p>
+      Let us look at two cases:
+    </p>
+
+    <ol>
+
+      <li>
+
+	<p>
+	  Let us assume that your Web application requires the
+	  <code>javax.mail</code> library. The first thing is to search
+	  Internet for <code>"Maven javax.mail"</code>. 
+	  If you are lucky, you will find the page 
+	  <a href='http://mvnrepository.com/artifact/javax.mail/mail/1.4' target='_blank'>here</a>.
+	  This page gives you the following XML element:
+	</p>
+
+<pre>
+&lt;dependency&gt;
+    &lt;groupId&gt;javax.mail&lt;/groupId&gt;
+    &lt;artifactId&gt;mail&lt;/artifactId&gt;
+    &lt;version&gt;1.4&lt;/version&gt;
+&lt;/dependency&gt;
+</pre>
+
+        <p>
+	  that has to be inserted in <code>SAW-SDK/pom.xml</code> inside the
+	  <code>dependencies</code> element. This file already contains
+	  several such dependency declaration.
+	</p>
+
+      </li>
+      <li>
+
+	<p>
+	  Let us assume that your Web application requires a library <code>mymagiclibrary.jar</code>
+	  that is not available in a Maven repository&nbsp;(we say that it is not a Maven artifact).
+	  The first thing to do is to install it in your local repository. You have to choose a
+	  <code>groupId</code>, for instance <code>me.magic</code> meaning that the jar will be stored
+	  in a directory <code>me/magic</code> in your local repository. You have to choose a
+	  <code>artifactId</code>, for instance <code>mymagic</code>, this is some kind of
+	  identifier. An you have to choose a <code>version</code> number, for instance <code>1.7</code>
+	  if the current version of the libarry is 1.7. And then you enter the Maven command:
+	</p>
+
+<pre>
+mvn install:install-file \
+  -Dfile=mymagiclibrary.jar \
+  -DgroupId=me.magic \
+  -DartifactId=mymagic \
+  -Dversion=1.7 \
+  -Dpackaging=jar \
+  -DgeneratePom=true
+</pre>
+
+        <p>
+          This command will store the jar library in your local repository, usually the
+	  directory <code>.m2</code> in your home directory. Then, you will add the following
+	  dependency declaration in <code>SAW-SDK/pom.xml</code>:
+	</p>
+
+<pre>
+&lt;dependency&gt;
+    &lt;groupId&gt;me.magic&lt;/groupId&gt;
+    &lt;artifactId&gt;mymagic&lt;/artifactId&gt;
+    &lt;version&gt;1.7&lt;/version&gt;
+&lt;/dependency&gt;
+</pre>
+
+      </lI>
+    </ol>
+
+
+    <h2>Code structure</h2>
+
+    <p>
+      Not everything is mentionned in this section.
+      Please note that the <code class='b'>target</code> directories that you may encounter 
+      here and there are not listed beacuse they
+      are created and used by Maven. They are deleted by using the <code>mvn clean</code>
+      Maven command. 
+    </p>
+
+    <ul>
+      <li><code class='b'>SAW-SDK</code>&nbsp;: 
+	this is the root project containing several subprojects.
+	<ul>
+	  <li>
+	    <code class='b'>saw</code>&nbsp;:
+	    a Maven project, this is the core of the server with all base class for developping a Web application.
+	    <ul>
+	      <li>
+		<code class='b'>src/main/java/org/saw</code>&nbsp;: 
+		the source code directory.
+		<ul>
+		  <li>
+		    <code class='b'>Parameters.java</code>&nbsp;: 
+		    the file used to parametrize all aspects of the server.
+		  </li>
+		  <li>
+		    <code class='b'>compilations</code>&nbsp;: 
+		    relative to XML Elements compilation.
+		  </li>
+		  <li>
+		    <code class='b'>dynamic</code>&nbsp;: 
+		    a few dynamic XML elements provided by SAW.
+		    May be extended by the developper.
+		  </li>
+		  <li>
+		    <code class='b'>elements</code>&nbsp;: 
+		    most of HTML elements provided by SAW.
+		    May be extended by the developper.
+		  </li>
+		  <li>
+		    <code class='b'>entities</code>&nbsp;: 
+		    base classes for Entity Binz plus the Backup Manager.
+		  </li>
+		  <li>
+		    <code class='b'>exceptions</code>&nbsp;: 
+		    exceptions used internally by the SAW server.
+		  </li>
+		  <li>
+		    <code class='b'>server</code>&nbsp;: 
+		    the server it self and the main <code>class</code> of the server.
+		  </li>
+		  <li>
+		    <code class='b'>sessions</code>&nbsp;: 
+		    base classes for the Session Binz.
+		  </li>
+		  <li>
+		    <code class='b'>transaction</code>&nbsp;: 
+		    the Transaction object similar to the JEE Container.
+		    It handles all transactions.
+		  </li>
+		  <li>
+		    <code class='b'>users</code>&nbsp;: 
+		    the core definition of a user. It contains the minimal information
+		    for handling users in a Web application.
+		  </li>
+		  <li>
+		    <code class='b'>utils</code>&nbsp;:
+		    many util classes ordered in packages.
+		    They can be used by the Web application developer if needed as described
+		    in the <a href='Utils.html' target='top'>Utils</a> section.
+		  </li>
+		</ul>
+	    </ul>
+          </li>
+	  <li>
+	    <code class='b'>site</code>&nbsp;:
+	    a Maven project, this is Web application specific classes such as Entity Binz and XML elements.
+	    <ul>
+	      <li>
+		<code class='b'>src/main/java/org/site</code>&nbsp;:
+		the source code directory.
+		<ul>
+		  <li>
+		    <code class='b'>conference</code>&nbsp;:Conference Management Web application specific entities.
+		  </li>
+		</ul>
+	    </ul>
+	  </li>
+	  <li>
+	    <code class='b'>pages</code>&nbsp;:
+	    a Maven project, this is Web application containg the Session Binz and static files.
+	    All Maven commands to run something must be executed in this directory.
+	    <ul>
+	      <li>
+		<code class='b'>backups</code>&nbsp;:
+		this is where the SAW server stores backups of the Entity Binz. Backups are done at
+		regular interval of times because of a possible power failure.
+	      </li>
+	      <li>
+		<code class='b'>cache</code>&nbsp;:
+		this directory is used by the SAW server for its caching mechanisms. 
+		Its content may be erased between two runs of the server.
+	      </li>
+	      <li>
+		<code class='b'>workspace</code>&nbsp;:
+		this directory contains the serialized Entity Binz. The first time an Entity Binz is
+		accessed in the server, it loaded from here. When the server normally shutdowns, the
+		loaded Entity Binz are saved here.
+	      </li>
+	      <li>
+		<code class='b'>public_html</code>&nbsp;:
+		this directory is the root directory of the Web application, that is all the pages, either static
+		pages or Session Binz.
+		<ul>
+		  <li>
+		    <code class='b'>favicon.ico</code>&nbsp;:
+		    contains the default SAW favicon. 
+		    Can be replaced or erased.
+		  </li>
+		  <li>
+		    <code class='b'>saw_keystore</code>&nbsp;:
+		    contains a default key store for SSL transaction.
+		    If you use SSL,
+		    it is recommended that you generate your own keystore following the instructions
+		    <a href='http://download.oracle.com/javaee/1.4/tutorial/doc/Security6.html' target='_blank'>here</a>.
+		    Then, you will have to change the <code>KEYSTORE</code>
+		    and <code>KEYSTORE_PASSWORD</code> values in
+		    <code>SAW-SDK/saw/src/main/java/org/saw/Parameters.java</code>.
+		  </li>
+		  <li>
+		    <code class='b'>welcome</code>&nbsp;:
+		    contains the Welcome Page as programmed by default in the distribution.
+		    Can be accessed by <code>/welcome/Home.html</code>.
+		    <ul>
+		      <li>
+			<code class='b'>images</code>&nbsp;:
+			images used in the Welcome section.
+		      </li>
+		      <li>
+			<code class='b'>tutorials</code>&nbsp;:
+			contains a copy of this online tutorial.
+			Can be accessed by <code>/tutorials/Home.html</code>.
+			<ul>
+			  <li>
+			    <code class='b'>javadoc</code>&nbsp;:
+			    the JavaDoc of SAW core.
+			  </li>
+			</ul>
+		      </li>
+		    </ul>
+		  </li>
+		  <li>
+		    <code class='b'>conference</code>&nbsp;:
+		    Web Conference application.
+		  </li>
+		  <li>
+		    <code class='b'>test</code>&nbsp;:
+		    dedicated to tests.
+		  </li>
+		</ul>
+	      </li>
+	    </ul>
+	  </li>
+	  <li>
+	    <code class='b'>utilities</code>&nbsp;:
+	    a Maven project, it contains some utility programs described and used in the tutorials.
+	    They must be run from <code>SAW-SDK/pages</code> directory using one of the Maven execution profiles.
+	  </li>
+	  <li>
+	    <code class='b'>plugins</code>&nbsp;:
+	    plugins to be used by Maven.
+	    Unless you want to program Maven, you don't have 
+	    to care about that.
+	  </li>
+	</ul>
+    </uL>
+
+
+    <h2>Working with NetBeans</h2>
+
+    <p>
+      NetBeans 6.9.1 knows how to work with Maven projects. Thus, it is sufficient to
+      open the <code>SAW-SDK</code> project.
+    </p>
+
+    <p>
+      <b>Attention&nbsp;!</b> If you delete a project from NetBeans, NetBeans
+      deletes the <code>pom.xml</code> file. Thus, be careful&nbsp;!
+    </p>
+
+    <p>
+      Once the project is opened, expand the Modules folder and you will find the
+      five modules of <code>SAW-SDK</code>. By double clicking on the modules,
+      you open them as projects.
+    </p>
+
+    <p>
+      By right-clicking on <code>SAW-SDK</code> project, you have access to
+      <i>Cleand and build</i>, this run the <code>mvn&nbsp;clean&nbsp;install</code>
+      of Maven. This must be done at least once at the beginning.
+    </p>
+
+    <p>
+      If you modify code in a module project, you may choose either to recompile
+      everything as explained just above. Or you may choose to recompile this
+      project only using the <i>Cleand and build</i> popup menu.
+    </p>
+
+    <p>
+      All executions must be done from the <code>SAW-SDK-Pages</code> module project.
+      There exists several Maven execution profile as listed in the Maven command line section above.
+    </p>
+
+    <p>
+      To run one of the items listed above, select the appropriate Maven profile
+      in <code>SAW-SDK-Pages</code> project,
+      then right-click on the project and select <i>Test</i> in the popup menu.
+    </p>
+
+    <p>
+      <b>Attention&nbsp;!</b> When you kill programs from NetBeans, it may
+      happen that they continue to be alive so that you have to kill the program yourself.
+    </p>
+
+
+
+
+    <h2>Working with Eclipse</h2>
+
+
+    <p>
+      Eclipse requires the installation of a Maven plugin. Google or another
+      is your friend.
+    </p>
+
+    <p>
+      To incorporate <code>SAW-SDK</code> in Eclipse, choose <i>Import</i>
+      in the <i>File</i> menu. Select <i>Existing Maven Projects</i>.
+      Then choose the <code>SAW-SDK</code> directory. This will import
+      the main project and its modules.
+    </p>
+
+    <p>
+      To compile the whole project, right-click on the <code>SAW-SDK</code>,
+      use <i>Run&nbsp;As</i>, then <i>Maven install</i>. As for NetBeans, you
+      can do that on any fo the module projects.
+    </p>
+
+    <p>
+      All execution must be done from the <code>SAW-SDK-Pages</code> project in
+      one of the execution profiles as listed in the Maven command line section above.
+    </p>
+
+    <p>
+      To select a profile, right-click on the  <code>SAW-SDK-Pages</code> project
+      and select <i>Properties</i>. In the popup windows, select <i>Maven</i>.
+      Then enter the profile name, e.g.&nbsp;<code>server</code>, click <i>Apply</i>
+      and then close the propertiues window. 
+    </p>
+
+    <p>
+      To run the execution, right-click on the <code>SAW-SDK</code>,
+      use <i>Run&nbsp;As</i>, then <i>Maven test</i>. As for NetBeans, you
+      can do that on any fo the module projects.
+    </p>
+
+    <p>
+      Please note that Eclipse adds some configuration files. That's normal.
+    </p>
+    
+  </body>
+
+</html>
+

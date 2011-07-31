@@ -1,0 +1,67 @@
+<html>
+  <head>
+    <title>SAW SDK 1.0</title>
+    <!-- Changed by: Patrick Bellot, 31-Jul-2011 -->
+    <link rel='stylesheet' type='text/css' media='screen' href='../Style.css' />
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+  </head>
+  <body class='page'>
+    <iframe class='header_menu' src='Header.html'></iframe>
+
+    <h1>The bootstrap process</h1>
+
+    <p>
+      This is a general description of the bootstrap process.
+      Examples will be given during the tutorials.
+    </p>
+
+    <p>
+      The bootstrap process allows to initialize or reinitialize the Entity Binz. Thus, we can
+      use it to initialize the 
+      <a href='javadoc/org/saw/users/UsersCatalog.html' target='_blank'>UsersCatalog</a>
+      described in 
+      <a href='UsersCatalog.html' target='_top'>The Users Catalog</a> tutorials.
+      The code to be executed during the bootstrap process must be written in the
+      class 
+      <a href='javadoc/org/site/bootstrap/Bootstrap.html' target='_blank'>org.site.bootstrap.Bootstrap</a>
+      in the method:
+    </p>
+
+<pre>
+public static final void bootStrap()
+    throws Exception ;
+</pre>
+
+    <p>
+      This code can be run in <code>SAW-SDK/pages</code> with the Maven command:
+    </p>
+
+<pre>
+mvn exec:java -P bootstrap
+</pre>
+
+    <p>
+      <b>Warning.</b>
+      As the <code>bootStrap()</code> method usually create or modify the Entity Binz, the
+      server must not be running during a bootstrap run. Otherwise, at the shut down of the server,
+      current server Entity Binz will overwrite the Entity Binz.
+    </p>
+
+    <p>
+      <b>About Entity Binz.</b>
+      Entity Binz are save in the <code>workspace</code> directory under 
+      <code>SAW-SDK/pages</code>. For instance, the 
+      <a href='javadoc/org/saw/users/UsersCatalog.html' target='_blank'>UsersCatalog</a>
+      Entity Binz which class is 
+      <a href='javadoc/org/saw/users/UsersCatalog.html' target='_blank'>org.saw.users.UsersCatalog</a>
+      is saved in <code>org/saw/users/UsersCatalog</code> under the name <code>binz</code>.
+      When running the boostrap process, existing Entity Binz are loaded in memory with
+      their current states. Thus, if the programmer wants to create a totally new 
+      <a href='javadoc/org/saw/users/UsersCatalog.html' target='_blank'>UsersCatalog</a>,
+      then he/she must erase the saved binz in 
+      <code>org/saw/users/UsersCatalog</code>.
+    </p>
+
+  </body>
+</html>
+

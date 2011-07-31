@@ -1,0 +1,89 @@
+<html>
+  <head>
+    <title>SAW SDK 1.0</title>
+    <!-- Changed by: Patrick Bellot, 31-Jul-2011 -->
+    <link rel='stylesheet' type='text/css' media='screen' href='../Style.css' />
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+  </head>
+  <body class='page'>
+    <iframe class='header_menu' src='Header.html'></iframe>
+
+    <h1>A first XEC Session Binz</h1>
+
+    <p>
+      XML Elements is a set of classes for representing XML data in memory. 
+      The main package for these classes is 
+      <a href='javadoc/org/saw/elements/package-summary.html' target='_blank'>elements</a>. 
+      The base class of all XML Elements classes is 
+      <a href='javadoc/org/saw/elements/XMLElement.html' target='_blank'>XMLElement</a>. 
+      This class is extended in many ways to provide various XHTML elements. 
+      The idea is that a page can be specified as a XML element to avoid the uncheckable 
+      litanies of PHP-like <code>write(...)</code> instructions
+      as in <a href='PHPLikeSession.html' target='_top'>A first PHP-like Session Binz</a>. 
+      Moreover, XML Elements can and must be compiled. That's why we talk of 
+      <b>XML Elements Compilation&nbsp;(XEC)</b>. 
+      XEC produces a Compilation object fo class 
+      <a href='javadoc/org/saw/compilations/Compilation.html' target='_blank'>Compilation</a>. 
+      This object contains an array of bytes ready to be output to the client agent. 
+      Using XEC is most efficient and most secure way of programming a page.
+    </p>
+
+    <p>
+      In order to use XEC, the programmer has to import the four packages:
+    </p>
+
+<pre>
+import org.saw.elements.* ;
+import org.saw.compilations.* ;
+import org.saw.sessions.* ;
+import org.saw.transaction.* ;
+</pre>
+
+    <p>
+      Then he must create an XML Element for the page content. For instance:
+    </p>
+
+<pre>
+Html page = new Html(new Head(new Title("Test3")),
+                     new Body(new H1("Hello World"))) ;
+</pre>
+
+    <p>
+      Then, the XML Element must be compiled:
+    </p>
+
+<pre>
+Compilation compilation = page.compile() ;
+</pre>
+
+    <p>
+      The Compilation object produces its output using the Transation object:
+    </p>
+
+<pre>
+compilation.writeTo(transaction) ;
+</pre>
+
+    <p>
+      <b>Example.</b>
+      The full code can be seen at
+      <a href='test/XEC.java' target='_blank'>test/XEC.java</a>.
+      And the Session Binz can be called at
+      <a href='test/XEC.class' target='_blank'>test/XEC.class</a>.
+    </p>
+
+    <p>
+      Note that the Html element will output the two XML header lines that we have 
+      explicitely written in
+      <a href='PHPLikeSession.html' target='_top'>A first PHP-like Session Binz</a>. 
+    </p>
+
+    <p>
+      To compile this class, it is sufficient
+      to execute the <code>mvn&nbsp;install</code> instruction in the
+      <code>SAW-SDK</code> directory.
+    </p>
+
+  </body>
+</html>
+

@@ -1,0 +1,69 @@
+<html>
+  <head>
+    <title>SAW SDK 1.0</title>
+    <!-- Changed by: Patrick Bellot, 31-Jul-2011 -->
+    <link rel='stylesheet' type='text/css' media='screen' href='../Style.css' />
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+  </head>
+  <body class='page'>
+    <iframe class='header_menu' src='Header.html'></iframe>
+
+    <h1>XEC and Transaction variables</h1>
+
+    <p>
+      In 
+      <a href='UsingTransactionVariables.html' target='_top'>Using the Transaction variables</a>,
+      we have seen that we can access the Transaction variables. We can use these variables to 
+      check the input values of a Session Binz or to output them in the HTTP Response content.
+    </p>
+
+    <p>
+      We can incorporate the value of a Transaction variable in a XML Element by using the Dynamic Element of class 
+      <a href='javadoc/org/saw/dunamic/TransactionVariable.html' target='_blank'>TransactionVariable</a>. 
+      This type of element can be included in the XML description of a page. The difference with ordinary 
+      XML elements is that its output is dynamically computed at the time of output. This dynamic element
+      has a constructor:
+    </p>
+
+<pre>
+public void TransactionVariable(String variableName) ;
+</pre>
+
+    <p>
+      taking the name of a Transaction variable as argument. When it is executed, it produces as output
+      the value of the varible.
+    </p>
+
+    <p>
+      <b>Example.</b>
+      The class <a href='test/XECTV.java' target='_blank'>test/PHPTV.java</a> is an example of
+      using the
+      <a href='javadoc/org/saw/dunamic/TransactionVariable.html' target='_blank'>TransactionVariable</a>
+      dynamic element.
+      The result can be seen by providing a GET variables at
+      <a href='test/XECTV.class?person=bellot' target='_blank'>test/XECTV.class?person=bellot</a>.
+    </p>
+
+    <p>
+      As we have told before the 
+      <a href='javadoc/org/saw/transaction/TransactionVariables.html' target='_blank'>TransactionVariables</a>
+      object has <i>put</i> methods. We can use these methods to artificially create or modify 
+      Transaction variables.
+    </p>
+
+    <p>
+      <b>Example.</b>
+      The class <a href='test/XECTV2.java' target='_blank'>test/PHPTV2.java</a> use one of the
+      <i>put</i> methods of
+      <a href='javadoc/org/saw/transaction/TransactionVariables.html' target='_blank'>TransactionVariables</a>
+      to artifcially set a Transaction variable named <code>"place"</code>.
+      A
+      <a href='javadoc/org/saw/dunamic/TransactionVariable.html' target='_blank'>TransactionVariable</a>
+      dynamic element with variable name <code>"place"</code> is used in the XEC description of the page.
+      The result can be seen by providing a GET variables at
+      <a href='test/XECTV2.class?person=bellot' target='_blank'>test/XECTV2.class?person=bellot</a>.
+    </p>
+
+  </body>
+</html>
+

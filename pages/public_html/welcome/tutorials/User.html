@@ -1,0 +1,100 @@
+<html>
+  <head>
+    <title>SAW SDK 1.0</title>
+    <!-- Changed by: Patrick Bellot, 31-Jul-2011 -->
+    <link rel='stylesheet' type='text/css' media='screen' href='../Style.css' />
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+  </head>
+  <body class='page'>
+    <iframe class='header_menu' src='Header.html'></iframe>
+
+    <h1>The User data structure</h1>
+
+    <p> 
+      In a Web application, there usually exists users who can log in and use application services
+      according to user's right. The class
+      <a href='javadoc/org/saw/users/User.html' target='_blank'>User</a> 
+      defines the minimum information about a Web application user. All the 
+      <a href='javadoc/org/saw/users/User.html' target='_blank'>User</a> 
+      objects are stored in an Entity Binz of class
+      <a href='javadoc/org/saw/users/UsersCatalog.html' target='_blank'>UsersCatalog</a>.
+      See next tutorial:
+      <a href='UsersCatalog.html' target='_top'>Users Catalog</a>.
+    </p>
+
+    <p>
+      <b>User's information.</b>
+      These minimum user's information are:
+    </p>
+
+    <ul>
+      <li>
+	<p>
+	  The <b>user id</b>, a unique numerical identifier for the user of type <code>int</code>.
+	  It is automatically allocated by the function:
+	</p>
+<pre>
+public final synchronized int createUser(String loginName, String encrypted password) ;
+        throws LoginNameInUseException, NoFreeUserIdException ;
+</pre>
+	<p>
+	  of the class 
+	  <a href='javadoc/org/saw/users/UsersCatalog.html' target='_blank'>UsersCatalog</a>
+	  with the static object <code>UsersCatalog.entity</code>.
+	</p>
+      </li>
+      <li>
+	<p>
+	  The <b>login name</b> of type <code>String</code>. It uniquely identify the user at
+	  login time. We recommand using the user e-mail address as a password.
+	</p>
+      </li>
+      <li>
+	<p>
+	  The <b>encrypted password</b> which is the user password encrypted 
+	  with the function <code>encrypt</code>of the class
+	  <a href='javadoc/org/saw/util/encoding/PasswordEncrypt.html' target='_blank'>PasswordEncrypt.java</a>.
+	</p>
+      </li>
+      <li>
+	<p>
+	  The <b>privileges</b> field of type <code>int</code>. This field can be easily used by
+	  the Web application to store 31 cumulative user's rights.
+	</p>
+      </li>
+    </ul>
+
+    <p>
+      <b>Modification of information.</b>
+      Only <b>user id</b> is final and cannot be modified. The other fields can be modified
+      with the setters of class
+      <a href='javadoc/org/saw/users/User.html' target='_blank'>User</a>
+      except the <b>login name</b> that must be modified
+      using the function:
+    </p>
+
+<pre>
+public final synchronized void setLoginName(User user, String loginName)
+        throws LoginNameInUseException ;
+</pre>
+
+    <p>
+      of the class 
+      <a href='javadoc/org/saw/users/UsersCatalog.html' target='_blank'>UsersCatalog</a>
+      with the static object <code>UsersCatalog.entity</code>&nbsp; because 
+      the <b>login name</b> must remain unique amongst users).
+    </p>
+
+    <p>
+      <b>Additional information.</b>
+      The user's information are the minimum for handling users login and rights.
+      However, the Web application may require additional information such as first name, last name,
+      address and so on. Instead of modifying the 
+      <a href='javadoc/org/saw/users/User.html' target='_blank'>User</a>
+      data structure, we strongly recommend to implement a complementary data structure
+      as explained in a later tutorial.
+    </p>
+
+  </body>
+</html>
+

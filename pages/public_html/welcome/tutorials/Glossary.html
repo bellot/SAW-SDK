@@ -1,0 +1,47 @@
+<html>
+  <head>
+    <title>SAW SDK 1.0</title>
+    <!-- Changed by: Patrick Bellot, 31-Jul-2011 -->
+    <link rel='stylesheet' type='text/css' media='screen' href='../Style.css' />
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+  </head>
+  <body class='page'>
+    <iframe class='header_menu' src='Header.html'></iframe>
+
+    <h1>Glossary</h1>
+
+    <p>
+      <b>Session environment.</b><a name='session_environment'></a>
+      When a user agent connects to the server, the server attributes a <b>Session identifier</b>
+      to it. This is a randomly generated integer value that is associated to the user agent using 
+      a cookie. This Session identifier uniquely determines a data structure called a Session 
+      environment. The Session environment is maintained on the server and available to the 
+      Session Binz answering a HTTP Request from this client. It is a statefull&nbsp;(remanent) 
+      object delivered by the Transaction Container. The type of the Session environment is
+      <a href='javadoc/org/saw/transaction/SessionEnvironment.html' target='_blank'>SessionEnvironment</a>. 
+      Initially it contains the Session identifier, the IP address of the client, a reference to a user of type 
+      <a href='javadoc/org/saw/users/User.html' target='_blank'>User</a>. 
+      if it has been set by the Web application after a login for instance. It also contains a 
+      <a href='javadoc/org/saw/transaction/SessionVariables.html' target='_blank'>SessionVariables</a>. 
+      object. This object contains variables that have a <code>String</code> name and which values are any Java 
+      Object. The Session environment can be extended by the programmer by adding fields in the class SessionEnvironment.
+    </p>
+
+    <p>
+      <b>Session identifier.</b><a name='session_identifier'></a>
+      See <a href='#Session_environment' target='_top'>Session environment</a>.
+    </p>
+
+    <p>
+      <b>Transaction variables.</b><a name='transaction_variables'></a>
+      We name Transaction variables the GET and POST variables associated to a HTTP Request. 
+      They are held in an object of the class 
+      <a href='javadoc/org/saw/transaction/TransactionVariables.html' target='_blank'>TransactionVariables</a>. 
+      These variables have a <code>String</code> name and a <code>String</code> value. In the case where the developper 
+      is sure that the <code>String</code> value is a boolean, an integer, etc., the class 
+      TransactionVariables provides method to extract these values. Please consult the JavaDoc
+      of the class <a href='javadoc/org/saw/transaction/TransactionVariables.html' target='_blank'>TransactionVariables</a>
+      for a list of access functions.
+  </body>
+</html>
+

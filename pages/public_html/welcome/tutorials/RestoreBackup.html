@@ -1,0 +1,83 @@
+<html>
+  <head>
+    <title>SAW SDK 1.0</title>
+    <!-- Changed by: Patrick Bellot, 31-Jul-2011 -->
+    <link rel='stylesheet' type='text/css' media='screen' href='../Style.css' />
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+  </head>
+  <body class='page'>
+    <iframe class='header_menu' src='Header.html'></iframe>
+
+    <h1>Restoring a backup of the workspace</h1>
+
+    <p>
+      Entity Binz are saved in the workspace directory when the server stops. 
+      EntityBinz are  also backuped at regular interval in the backup directory
+      because an unexpected  power shutdown may always occur.
+      The time interval between two backup is defined in millis by the constant 
+      <code>BACKUP_INTERVAL</code> of the class 
+      <a href='javadoc/org/saw/Parameters.html' target='_blank'>Parameters</a>. 
+      By default, it is set to 2 hours.
+    </p>
+
+    <p>
+      <b>Backup process.</b>
+      To build a backup, SAW just saves all Entity Binz in the <code>workspace</code> directory 
+      and make a copy of this copy this directory as <code>backup/N.workspace</code> 
+      where <code>N</code> is the current time in millis as provided by Java. 
+      Thus, the more recent backup is the one with the higher <code>N</code>. 
+      SAW keeps at most 1024 backups but not consecutive backups. When the number of backups 
+      exceeds 1024, some randomly chosen backups are deleted. This allows to keep the last 
+      128 backups and a mix of older backups.
+    </p>
+
+    <p>
+      <b>Listing backups.</b>
+      The utility ListBackups produces a list of the backups with readable dates. To execute it,
+      go to <code>SAW-SDK</code> directory and execute the following Maven command:
+    </p>
+
+<pre>
+mvn exec:java -Plistbackups
+</pre>
+
+    <p>
+      <b>Restoring a backup.</b>
+      One may want to restore a backup of the Entity Binz. 
+      The first main reason for doing that may be a bad crash or a bug of the server leaving 
+      the current workspace in a corrupted state. Another possible can be to restore the state 
+      of the server as it was in the past.
+    </p>
+
+    <p>
+      <b>N.B.</b>
+      Before restoring a backup, save the current <code>workspace</code> directory as <code>workspace.save</code>.
+    </p>
+
+    <p>
+      Then replace the <code>workspace</code> directory with the <code>backup/N.workspace</code> you have chosen.
+      Restart the server and check if it works.
+    </p>
+
+    <p>
+      <b>Partial restoration. </b>
+      If you think that only a few Entuty Binz are corrupted, you may also choose to restore only a 
+      few Entity Binz in the current workspace by replacing their data files in the subdirectories 
+      of workspace with the data files from the chosen backup. For instance, the 
+      data file of Entity Binz <code>org.site.entities.MyEntity</code> is:
+      </p>
+
+<pre>
+workspace/org/site/entities/MyEntity/binz
+</pre>
+
+    <p>
+      You may take this file from a backup and copy it in the workspace. Take care, 
+      depending on your application, the different Entity Binz may be related one to another. 
+      This, if you do a partial recovery, be sure to use a coherent set of Entity Binz to
+      restore.
+    </p>
+
+  </body>
+</html>
+

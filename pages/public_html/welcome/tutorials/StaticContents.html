@@ -1,0 +1,188 @@
+<html>
+  <head>
+    <title>SAW SDK 1.0</title>
+    <!-- Changed by: Patrick Bellot, 31-Jul-2011 -->
+    <link rel='stylesheet' type='text/css' media='screen' href='../Style.css' />
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <style type='text/css'>
+      table.mimetypes { border-collapse:collapse; }
+      td.mimetypes    { border:1px solid #303030; text-align:left; padding:0.2em 0.7em 0.2em 0.2em; }
+    </style>
+  </head>
+  <body class='page'>
+    <iframe class='header_menu' src='Header.html'></iframe>
+
+    <h1>How static contents are handled</h1>
+
+    <p>
+      Static contents, contained in files, can be delivered by the server. When a static content is delivered, 
+      a dedicated Session Binz is transparently created by the server. The programmer does not have to take 
+      care of that. He just have to copy the static content file somewhere under the <code>pages/public_html</code> directory.
+    </p>
+
+    <p>
+      <B>Mime types.</B>
+      Various static contents are recognized by the server. They are recognized by the file suffix:  
+    </P>
+
+    <center>
+      <table class='mimetypes'>
+	<tr>
+	  <td class='mimetypes'><b>Suffix</b></td>
+	  <td class='mimetypes'><b>Mime type</b></td>
+	  <td class='mimetypes'><b>Description</b></td>
+	</tr>
+	<tr>
+	  <td class='mimetypes'><code>.html .HTML</code></td>
+	  <td class='mimetypes'><code>text/html</code></td>
+	  <td class='mimetypes'>XHTML file</td>
+	</tr>
+	<tr>
+	  <td class='mimetypes'><code>.css .CSS</code></td>
+	  <td class='mimetypes'><code>text/css</code></td>
+	  <td class='mimetypes'>CSS file</td>
+	</tr>
+	<tr>
+	  <td class='mimetypes'><code>.js .JS</code></td>
+	  <td class='mimetypes'><code>text/javascript</code></td>
+	  <td class='mimetypes'>JavaScript files</td>
+	</tr>
+	<tr>
+	  <td class='mimetypes'><code>.ico</code></td>
+	  <td class='mimetypes'><code>image/x-icon</code></td>
+	  <td class='mimetypes'>MS icon</td>
+	</tr>
+	<tr>
+	  <td class='mimetypes'><code>.gif</code></td>
+	  <td class='mimetypes'><code>image/gif</code></td>
+	  <td class='mimetypes'>GIF image</td>
+	</tr>
+	<tr>
+	  <td class='mimetypes'><code>.jpg .jpeg</code></td>
+	  <td class='mimetypes'><code>image/jpeg</code></td>
+	  <td class='mimetypes'>JPEG image</td>
+	</tr>
+	<tr>
+	  <td class='mimetypes'><code>.png</code></td>
+	  <td class='mimetypes'><code>image/png</code></td>
+	  <td class='mimetypes'>PNG image</td>
+	</tr>
+	<tr>
+	  <td class='mimetypes'><code>.pdf</code></td>
+	  <td class='mimetypes'><code>application/pdf</code></td>
+	  <td class='mimetypes'>PDF document</td>
+	</tr>
+	<tr>
+	  <td class='mimetypes'><code>.zip</code></td>
+	  <td class='mimetypes'><code>application/zip</code></td>
+	  <td class='mimetypes'>Compressed file</td>
+	</tr>
+	<tr>
+	  <td class='mimetypes'><code>.doc</code>, <code>.dot</code>, <code>.docx</code></td>
+	  <td class='mimetypes'><code>application/msword</code></td>
+	  <td class='mimetypes'>Word document</td>
+	</tr>
+	<tr>
+	  <td class='mimetypes'><code>.xls</code>, <code>.xlsx</code></td>
+	  <td class='mimetypes'><code>application/excel</code></td>
+	  <td class='mimetypes'>Excel document</td>
+	</tr>
+	<tr>
+	  <td class='mimetypes'><code>.java</code></td>
+	  <td class='mimetypes'><code>text/java</code></td>
+	  <td class='mimetypes'>Java program (see below)</td>
+	</tr>
+      </table>
+    </center>
+
+    <P>
+      <b>Compression.</b> 
+      The dedicated Session Binz handles two versions of the static content. 
+      The first version is the plain content of the file. 
+      The second version is a zipped version of it to be used when the client agent claims to accept zipped content.
+    </p>
+
+    <p>
+      <b>Caching.</b>
+      Static contents, plain and zipped, are cached either in memory or in disk files depending on their sizes. 
+      The sizes thresholds to decide if the contents are cached in memory or disk files are statically defined 
+      as constants in 
+      <a href='javadoc/org/saw/Parameters.html' target='_blank'>Parameters</a>:
+    </p>
+
+    <ul>
+      <li>
+	<p>
+	  <code>HTML_UPPER_LIMIT_FOR_MEMORY_CACHING</code> for HTML files.
+	</p>
+      </li>
+      <li>
+	<p>
+	  <code>CSS_UPPER_LIMIT_FOR_MEMORY_CACHING</code> for CSS files.
+	</p>
+      </li>
+      <li>
+	<p>
+	  <code>JS_UPPER_LIMIT_FOR_MEMORY_CACHING</code> for JavaScript files.
+	</p>
+      </li>
+      <li>
+	<p>
+	  <code>DATA_UPPER_LIMIT_FOR_MEMORY_CACHING</code> for other files.
+	</p>
+      </li>
+    </ul>
+      
+    <p>
+      <b>Compaction.</b>
+      In the case of structured languages&nbsp;(HTML, CSS, JavaScript), plain content is compacted 
+      before being cached and zipped. Compaction means removing comments, useless spaces, useless end of line, etc. 
+      Compaction algorithms may fail to produce a correct version of the source content. If this occurs 
+      for a given file, a server <i>Internal error</i> occurs. This may mean that something is
+      not sound within the file. See the logs for an error cehck. If he is unhappy with compression
+      of a static file, the developper must use the capitalized suffix&nbsp;(.HTML, .CSS, .JS) to disable compaction. 
+      Files with capitalized suffixs are not compacted
+    </p>
+
+    <p>
+      <b>Save as... links.</b>
+      When a link is activated, the browser sends the corresponding HTTP request and try to display
+      the HTTP response in its windows. If you want to force the opening of a <i>Save as...</i>
+      popup window by the browser, you can add the GET variable
+      <code>?download_as=&lt;file name&gt;</code> to the link where <code>&lt;file name&gt;</code>
+      is any file name. The effect will be that if you activate this link, the browser will propose
+      you to save the HTTP response content under the name <code>&lt;file name&gt;</code>.
+      Downlaoded files are not cached in memory nor compacted in the case of structured languages.
+    </p>
+
+    <p>
+      <b>Example.</b> If you activate the link
+      <a href='StaticContents.html?download_as=StaticContents.html'>StaticContents.html?download_as=StaticContents.html</a>,
+      then you will download the source HTML of this page.
+    </p>
+
+    <p>
+      <b>Displaying the content of a XHTML file.</b>
+      The  <code>download_as</code> GET variable can be used to display the content of a HTML file 
+      in the browser by choosing the value <code>?download_as=display</code>.
+    </p>
+
+    <p>
+      <b>Example.</b> If you activate the link
+      <a href='StaticContents.html?download_as=display'>StaticContents.html?download_as=display</a>,
+      then you will see the content of the source HTML of this page in your browser.
+    </p>
+
+    <p>
+      <b>Java programs.</b>
+      If a Java program file is located under the <code>public_html</code> directory, it
+      can be delivered as a static content. SAW delivers it after a translation in HTML
+      involving formatting and colouring in default Eclipse style. 
+      Don't forget that Java programs under <code>public_html</code> 
+      directory are also compiled, that means that they must be be Session Binz. We have
+      introduced this feature mainly for tutorials.
+    </p>
+
+  </body>
+</html>
+

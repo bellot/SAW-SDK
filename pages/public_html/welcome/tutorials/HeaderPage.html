@@ -1,0 +1,92 @@
+<html>
+  <head>
+    <title>SAW SDK 1.0</title>
+    <!-- Changed by: Patrick Bellot, 31-Jul-2011 -->
+    <link rel='stylesheet' type='text/css' media='screen' href='../Style.css' />
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+  </head>
+  <body class='page'>
+    <iframe class='header_menu' src='Header.html'></iframe>
+
+        <h1>The Header page</h1>
+        
+        <p>
+            The Header page Session Binz must output the following:
+        </p>
+
+<pre>
+&lt;html&gt;
+    &lt;head&gt;
+        &lt;title&gt; <i>Page Title</i> &lt;/title&gt;
+        &lt;link rel='stylesheet' type='text/css' media='screen' href='../styles/CSS.class'&gt;&lt;/link&gt;
+        &lt;meta http-equiv="Content-Type" content="text/html; charset=UTF-8"&gt;
+    &lt;/head&gt;
+    &lt;body id='header'&gt;
+        &lt;table&gt;
+            &lt;tr&gt;
+                &lt;td&gt;
+                    &lt;h2&gt; <i>Header Line 1</i> &lt;/h2&gt;
+                    &lt;h1&gt; <i>Header Line 2</i> &lt;/h1&gt;
+                    &lt;h2&gt; <i>Header Line 3</i> &lt;/h2&gt;
+                &lt;/td&gt;
+            &lt;/tr&gt;
+        &lt;/table&gt;
+    &lt;/body&gt;
+&lt;/html&gt;
+</pre>
+        
+        <p>
+            <b>Cache and cache renewal.</b>
+            This Session Binz does not use the Session variables or the Session  environment.
+            Thus, it can be cached. We choose to cache it in memory because all clients will
+            get it. Moreover, its cache must be renewed if the <code>PageTexts</code> Entity
+            Binz is renewed. Thus, the <code>HeaderPage</code> Session Binz inherits the
+            <a href='javadoc/org/saw/sessions/SessionBinzWithUpdatableMemoryCache.html' target='_blank'>SessionBinzWithUpdatableMemoryCache</a>
+            class. An object of this class is an <i>Updatable Friend</i>. In its constructor,
+            it must call:
+        </p> 
+        
+<pre>
+PageTexts.entity.addUpdatableFriend(this) ;
+</pre>
+     
+        <p>
+            Each time the <code>PageTexts</code> Entity Binz is modified, it will call
+            the method <code>requiresUpdate()</code> inherited frrom
+            <a href='javadoc/org/saw/sessions/SessionBinzWithUpdatableMemoryCache.html' target='_blank'>SessionBinzWithUpdatableMemoryCache</a>.
+            This method will renew the cache.
+        </p>
+        
+        <p>
+            <b>Producing the page.</b>
+            To produce the page, we will use a XML Element incorporating the Dynamic XML elements
+            we have developed from the <code>PageTexts</code> Entity Binz:
+        </p>
+        
+<pre>
+new Html(new Head(new Title(PageTitle.element),
+                  ew StyleSheetLink("../styles/CSS.class")),
+         new Body(null,"id='header'",
+                  new Table(new Tr(new Td(new H2(HeaderLine1.element),
+                                          new H1(HeaderLine2.element),
+                                          new H2(HeaderLine3.element))))))
+</pre>
+        
+        <p>
+            Note that the <code>Head</code> element already incldues the META declaration with the charset set to UTF-8.
+        </p>
+        
+        <p>
+            <b>Code.</b>
+            The code of the resulting Session Bizn can be seen at
+            <a href='../../conference/page/Header.java' target="_blank">Header.java</a>.
+            The code is much complete than described avove because we have
+            to use the dates Entity Binz and the conference Entity Binz to produce
+            the fourth line of the header.
+            And the result can be seen at 
+            <a href='../../conference/page/Header.class' target="_blank">Header.class</a>.
+        </p>
+        
+   </body>
+</html>
+
