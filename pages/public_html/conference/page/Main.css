@@ -31,7 +31,6 @@ div#main {
 #main p { 
   line-height:130%;
   margin: 0 0 0.5em 0;
-  padding:0;
   text-align:justify;
   color:#303030;
 }
@@ -79,16 +78,10 @@ div#main {
 
 #main pre { 
   padding:0 0 0.5em 2.4em;
-  margin:0;
 }
 
 #main td.left { 
   text-align:left;
-}
-
-#main table.date { 
-  margin:0;
-  padding:0;
 }
 
 #main td.date {

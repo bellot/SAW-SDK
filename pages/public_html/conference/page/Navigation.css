@@ -1,12 +1,10 @@
 body#navigation {
-  margin:0;
   padding:0 10px 0 10px;
-  border:none;
+  background:transparent;
 }
 
 #navigation table { 
-  margin:0;
-  padding:0 ;
+  width:130px;
 }
 
 #navigation td { 
@@ -15,7 +13,6 @@ body#navigation {
   text-align:center;
   vertical-align:middle;
   margin:3px 0 0 0 ;
-  padding:0;
   background:#000000;
 }
 
@@ -25,8 +22,6 @@ body#navigation {
   font-family:sans-serif;
   font-weight:bold;
   color:#FFFFFF;
-  margin:0;
-  padding:0;
   text-decoration:none;
 }
 
