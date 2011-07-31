@@ -32,6 +32,8 @@ public final class Logs
     static public final byte[] SERVER_ACCESS     = "#LOGB\n4\n".getBytes() ;
     /** Log category. */
     static public final byte[] SECURITY_WARNING  = "#LOGB\n5\n".getBytes() ;
+    /** Log category. */
+    static public final byte[] USER_LIFE         = "#LOGB\n6\n".getBytes() ;
 
 
     /** Parameters tags, value can be one-line string. */

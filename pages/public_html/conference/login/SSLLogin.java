@@ -6,6 +6,7 @@ import org.saw.elements.* ;
 import org.saw.exceptions.* ;
 import org.saw.sessions.* ;
 import org.saw.transaction.* ;
+import org.saw.util.logs.* ;
 
 import org.site.conference.pages.* ;
 import org.site.conference.web.* ;
@@ -36,7 +37,8 @@ public class SSLLogin extends WebTechPageWithUpdatableMemoryCache
 
         if (sessionEnvironment.getUser() != null) {
 
-            // Log try to log while logged
+            Logs.log(Logs.SECURITY_WARNING,"User tries to log while logged.",
+                     Logs.USERID_TAG,      Integer.toString(sessionEnvironment.getUser().userId)) ;
 
             sessionEnvironment.setUser(null) ;
         }
