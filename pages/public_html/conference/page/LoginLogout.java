@@ -16,8 +16,6 @@ public class LoginLogout extends SessionBinz
     private final byte[] loginNoGzipArray ;
     private final byte[] logoutNoGzipArray ;
 
-    // document.getElementById(FrameID).contentDocument.location.reload(true);
-
     public LoginLogout()
         throws Exception
     {
@@ -32,7 +30,7 @@ public class LoginLogout extends SessionBinz
               +     "<table>"
               +       "<tr>"
               +         "<td>"
-              +           "<a>Login</a>"
+              +           "<a href='../login/Login.class' target='_top'>Login</a>"
               +         "</td>"
               +       "</tr>"
               +       "<tr>"
@@ -57,12 +55,12 @@ public class LoginLogout extends SessionBinz
               +     "<table>"
               +       "<tr>"
               +         "<td>"
-              +           "<a>Logout</a>"
+              +           "<a href='../login/Logout.class' target='_top'>Logout</a>"
               +         "</td>"
               +       "</tr>"
               +       "<tr>"
               +         "<td>"
-              +           "<a>Console</a>"
+              +           "<a><a href='../admin/Console.class' target='_top'>Console</a>"
               +         "</td>"
               +       "</tr>"
               +     "</table>"

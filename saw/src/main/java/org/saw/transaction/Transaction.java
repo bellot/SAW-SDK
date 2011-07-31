@@ -814,24 +814,42 @@ public final class Transaction extends TransactionOutput
 
 
 
+    /** Redirect to another Session Binz by requestPath. */
+
+    private final void reditrectToSessionBinz(String requestPath)
+        throws Exception
+    {
+        SessionBinz sessionBinz = SessionBinzFinder.getSessionBinz(requestPath) ;
+
+        if (sessionBinz == null) {
+
+            replyNotFound() ;
+
+            Logs.log(Logs.SERVER_WARNING,"Page not found",
+                     Logs.IP_TAG,   ip,
+                     Logs.SESSIONID_TAG, Integer.toString(sessionId),
+                     Logs.REQUESTPATH_TAG, requestPath) ;
+            
+            return ;
+        }
+
+        sessionBinz.handle(this) ;
+    }
+
+
+
+
+
 
     /** Used by sendHtmlRedirection. */
  
     private static byte[] htmlRedirect_1
-	= ("<html><body><script type='text/javascript'>document.location=\"").getBytes() ;
+	= "<html><head><meta http-equiv='refresh' content='0; URL=".getBytes() ;
 
     /** Used by sendHtmlRedirection. */
 
     private static byte[] htmlRedirect_2 
-	= ("\";</script>"
-	   + "<noscript>"
-	   +   "<p style='margin:2em;color:#ce0000;font-size:120%;text-align:center;'>"
-	   +     "You must have Javascript enabled in your browser."
-	   +     "<br>"
-	   +     "Please, enable Javascript and reload the page."
-	   +   "</p>"
-	   + "</noscript>"
-	   + "</body></html>").getBytes() ;
+	= "'></head><body></body></html>".getBytes() ;
     
     /** Redirection using HTML and JavaScript. */
 
@@ -845,6 +863,7 @@ public final class Transaction extends TransactionOutput
 	httpOutput.write(url) ;
 	httpOutput.write(htmlRedirect_2) ;
     }
+
 
 
 
@@ -867,10 +886,7 @@ public final class Transaction extends TransactionOutput
     /** Used by sendHttpRedirection. */
     private static final byte[] http_redirection_3 = 
 	(";PATH=/\n\n"
-	 + "<html>"
-	 + "<body>"
-	 + "</body>"
-	 + "</html>").getBytes() ;
+	 + "<html><body></body></html>").getBytes() ;
 
     /** HTTP redirection. */
 
@@ -883,6 +899,7 @@ public final class Transaction extends TransactionOutput
 	httpOutput.write(Integer.toString(sessionId).getBytes()) ;
 	httpOutput.write(http_redirection_3) ;
     }
+
 
 
 
