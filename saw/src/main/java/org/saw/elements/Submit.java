@@ -5,6 +5,15 @@ package org.saw.elements ;
 public class Submit extends Input
 {
 
+    public Submit(String className, String name, String value, String attr)
+    {
+	super(className,
+	      "type='submit' "
+	      + "name='" + name + "' "
+	      + "value='" + value  +"' "
+	      + attr) ;
+    }  
+
     public Submit(String className, String name, String value)
     {
 	super(className,

@@ -16,4 +16,12 @@ public class Button extends Input
 	      + attr) ;
     }  
 
+    public Button(String className, String name, String value)
+    {
+	super(className,
+	      "type='button' "
+	      + "name='" + name + "' "
+	      + "value='" + value  +"'") ;
+    }  
+
 }
