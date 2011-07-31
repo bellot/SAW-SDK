@@ -872,7 +872,7 @@ public final class Transaction extends TransactionOutput
     /** Used by sendHttpRedirection(). */
 
     private static final byte[] http_redirection_1 =
-	("HTTP/1.1 307 Temporary Redirect\n"
+	("HTTP/1.1 303 See Other\n"
 	 + "Location: ").getBytes() ;
 
     /** Used by sendHttpRedirection(). */
