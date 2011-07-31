@@ -21,12 +21,12 @@ public abstract class WebTechPage extends SessionBinz
                                 new FaviconLink("text/png","../page/favicon.png")), 
                        new Body(null,"id='main'",
                                 new Div(null, "id='container'",
-                                        new Iframe(null, "id='header'      src='../page/Header.class'"),
-                                        new Iframe(null, "id='announces'   src='../page/Announces.html'"),
-                                        new Iframe(null, "id='loginlogout' src='../page/LoginLogout.class'"),
-                                        new Iframe(null, "id='navigation'  src='../page/Navigation.html'"),
+                                        new Iframe(null, "id='header'      allowtransparency='true' src='../page/Header.class'"),
+                                        new Iframe(null, "id='announces'   allowtransparency='true' src='../page/Announces.html'"),
+                                        new Iframe(null, "id='loginlogout' allowtransparency='true' src='../page/LoginLogout.class'"),
+                                        new Iframe(null, "id='navigation'  allowtransparency='true' src='../page/Navigation.html'"),
                                         new Div   (null, "id='main'",      mainElement),
-                                        new Iframe(null, "id='footer'      src='../page/Footer.html'")))).compile() ;
+                                        new Iframe(null, "id='footer'      allowtransparency='true' src='../page/Footer.html'")))).compile() ;
     }
 
     public void handle(Transaction transaction)

@@ -1,12 +1,10 @@
 body#loginlogout {
-  margin:0;
   padding:10px 10px 0 10px;
-  border:none;
+  background:transparent;
 }
 
 #loginlogout table { 
-  margin:0;
-  padding:0 ;
+  width:130px;
 }
 
 #loginlogout td { 
@@ -15,7 +13,6 @@ body#loginlogout {
   text-align:center;
   vertical-align:middle;
   margin:3px 0 0 0 ;
-  padding:0;
   background:#990000;
 }
 
@@ -25,8 +22,6 @@ body#loginlogout {
   font-family:sans-serif;
   font-weight:bold;
   color:#FFFFFF;
-  margin:0;
-  padding:0;
   text-decoration:none;
 }
 

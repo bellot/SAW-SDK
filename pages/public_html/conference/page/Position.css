@@ -11,8 +11,6 @@ div#container {
   background-image:url('../page/ContainerBackground.png');
   width:900px;
   margin:0px auto;
-  padding:0;
-  border:none;
 }
 
 /* HEADER */
@@ -25,8 +23,6 @@ iframe#header {
   width:900px;
   height:150px;
   margin:0 0 1px 0 ;
-  padding:0;
-  border:none;
 }
 
 /* LOGIN / LOGOUT */
@@ -36,9 +32,7 @@ iframe#loginlogout {
   float:left;
   width:150px;
   height:80px;
-  margin:0;
-  padding:0;
-  border:none;
+  background:transparent;
 }
 
 /* NAVIGATION */
@@ -49,18 +43,14 @@ iframe#navigation {
   clear:left;
   width:150px;
   height:520px;
-  margin:0;
-  padding:0;
-  border:none;s
+  background:transparent;
 }
 
 /* MAIN */
 
 div#main { 
-  background:transparent;
-  width:586px;
-  margin: 0 157px 0 157px;
-  padding:0;
+  width:583px;
+  margin:0 0 0 157px;
 }
 
 /* ANNOUNCES */
@@ -70,9 +60,7 @@ iframe#announces {
   float:right;
   width:150px;
   height:600px;
-  margin:0;
-  padding:0;
-  border:none;   
+  background:transparent;
 }
 
 /* FOOTER */
@@ -81,8 +69,5 @@ iframe#footer {
   overflow:hidden;
   width:900px;
   height:20px;
-  margin:0;
-  padding:0;
-  border:none;
-  background-image:url('../page/WebTechBackground.jpg');
+  background:url('../page/WebTechBackground.jpg');
 }
