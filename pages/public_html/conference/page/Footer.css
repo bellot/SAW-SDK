@@ -1,27 +1,17 @@
 body#footer {
-  margin:0;
-  padding:0;
+  background-image:url('../page/WebTechBackground.jpg');
 }
 
 #footer table { 
   margin:0 7px 0 7px;
-  padding:0;
   width:886px;
   border:none;
   border-collapse:collapse;
 }
 
-#footer tr { 
-  margin:0;
-  padding:0;
-}
-
 #footer td { 
   height:20px;
   vertical-align:middle;
-  margin:0;
-  padding:0;
-  border:none;
 }
 
 #footer a { 
@@ -30,8 +20,6 @@ body#footer {
   font-weight:bold;
   color:#FFFFBB;
   text-decoration:none;
-  margin:0;
-  padding:0;
 }
 
 #footer a:hover { 

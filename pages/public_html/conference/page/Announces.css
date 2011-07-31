@@ -2,8 +2,8 @@ body#announces {
   font-size:12px;
   font-family:sans-serif;
   color:#404040;
-  margin:0;
   padding:10px;
+  background:transparent;
 }
 
 #announces img { 
