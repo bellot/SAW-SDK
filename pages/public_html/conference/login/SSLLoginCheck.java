@@ -8,6 +8,7 @@ import org.saw.sessions.* ;
 import org.saw.transaction.* ;
 import org.saw.users.* ;
 import org.saw.util.encoding.* ;
+import org.saw.util.logs.* ;
 
 import org.site.conference.pages.* ;
 import org.site.conference.web.* ;
@@ -61,19 +62,22 @@ public class SSLLoginCheck extends WebTechPage
                     transaction.sendHtmlRedirection(HTTP_LOGIN_SUCCESS) ;
                 }
 
-                // Log good login
+                Logs.log(Logs.USER_LIFE,  "Login.",
+                         Logs.USERID_TAG,  Integer.toString(user.userId)) ;
 
                 return ;
 
             } else {
 
-                // Log wrong password
+                Logs.log(Logs.SECURITY_WARNING,"Wrong password.",
+                         Logs.USERID_TAG,      Integer.toString(user.userId)) ;
 
             }
 
         } else {
 
-            // Log wrong user
+            Logs.log(Logs.SECURITY_WARNING,"Wrong login name.",
+                     Logs.EMAIL_TAG,       loginName) ;
 
         }
 

@@ -5,6 +5,8 @@ import org.saw.elements.* ;
 import org.saw.exceptions.* ;
 import org.saw.sessions.* ;
 import org.saw.transaction.* ;
+import org.saw.util.logs.* ;
+
 import org.site.conference.conf.* ;
 import org.site.conference.web.* ;
 
@@ -22,7 +24,8 @@ public class Login extends SessionBinz
 
         if (sessionEnvironment.getUser() != null) {
 
-            // Log try to log while logged
+            Logs.log(Logs.SECURITY_WARNING,"User tries to login  while logged.",
+                     Logs.USERID_TAG,      Integer.toString(sessionEnvironment.getUser().userId)) ;
 
             sessionEnvironment.setUser(null) ;
         }

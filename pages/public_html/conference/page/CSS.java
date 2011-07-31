@@ -13,7 +13,6 @@ public final class CSS extends CssMultiMemorySessionBinz
               "public_html/conference/page/Header.css",
               "public_html/conference/page/Announces.css",
               "public_html/conference/page/Main.css",
-              "public_html/conference/page/LoginLogout.css",
               "public_html/conference/page/Navigation.css",
               "public_html/conference/page/Footer.css") ;
     }
