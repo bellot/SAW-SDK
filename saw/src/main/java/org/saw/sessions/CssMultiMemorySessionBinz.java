@@ -44,7 +44,7 @@ public class CssMultiMemorySessionBinz extends SessionBinz
 
 	(new File(pathName)).mkdirs() ;
 
-        pathName += File.separatorChar ;
+        pathName = pathName + File.separatorChar ;
 
 	cssFileName  = pathName + "cache.css" ;
 	cpctFileName = pathName + "cache.cpct" ;
