@@ -31,24 +31,29 @@ public class JsMultiFileSessionBinz extends SessionBinz
 	this.requestPaths = requestPaths ;
 	this.count        = requestPaths.length ;
 
-	String pathName = 
-	    "cache" 
-	    + File.separatorChar + "public_js"
-	    + File.separatorChar + (getClass().getName().replace('.',File.separatorChar)) ;
+        String basePath
+            = "public_html"
+            + File.separatorChar
+            + (this.getClass().getPackage().getName().replace('.',File.separatorChar))
+            + File.separatorChar ;
+
+        String pathName = "cache" + File.separatorChar + basePath ;
 
 	(new File(pathName)).mkdirs() ;
 
-	jsFileName = pathName + File.separatorChar + "cache.js" ;
-	downFileName = pathName + File.separatorChar + "cache.down" ;
-	cpctFileName = pathName + File.separatorChar + "cache.cpct" ;
-	gzipFileName = pathName + File.separatorChar + "cache.gzip" ;
+        pathName += File.separatorChar ;
+
+	jsFileName   = pathName + "cache.js" ;
+	downFileName = pathName + "cache.down" ;
+	cpctFileName = pathName + "cache.cpct" ;
+	gzipFileName = pathName + "cache.gzip" ;
 
 	this.files         = new File[count] ;
 	this.cpctFilePaths = new String[count] ;
 
 	for (int i = 0 ; i < count ; i++) {
 
-	    this.requestPaths[i]  = this.requestPaths[i].replace('/',File.separatorChar) ;
+	    this.requestPaths[i]  = basePath + (this.requestPaths[i].replace('/',File.separatorChar)) ;
 
 	    this.files[i]         = new File(this.requestPaths[i]) ;
 
