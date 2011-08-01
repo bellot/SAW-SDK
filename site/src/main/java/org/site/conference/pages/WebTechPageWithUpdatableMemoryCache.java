@@ -18,15 +18,17 @@ public abstract class WebTechPageWithUpdatableMemoryCache extends SessionBinzWit
         compilation
             = new Html(new Head(new Title(PageTitle.element),
                                 new StyleSheetLink("../page/CSS.class"),
-                                new FaviconLink("text/png","../page/favicon.png")), 
-                       new Body(null,"id='main'",
+                                new FaviconLink("text/png","../page/favicon.png"),
+                                new JavaScript("../page/JS.class")), 
+                       new Body(null,"id='main' onLoad='javscript:hideMask();'",
                                 new Div(null, "id='container'",
                                         new Iframe(null, "id='header'      src='../page/Header.class'"),
                                         new Iframe(null, "id='announces'   src='../page/Announces.html'"),
                                         new Iframe(null, "id='loginlogout' src='../page/LoginLogout.class'"),
                                         new Iframe(null, "id='navigation'  src='../page/Navigation.html'"),
                                         new Div   (null, "id='main'",      mainElement),
-                                        new Iframe(null, "id='footer'      src='../page/Footer.html'")))).compile() ;
+                                        new Iframe(null, "id='footer'      src='../page/Footer.html'")),
+                                new Div   (null, "id='mask' allowtransparency='true'", new Img("src='../page/wait.gif'")))).compile() ;
 
         PageTexts .entity.addUpdatableFriend(this) ; // Because of title
     }
