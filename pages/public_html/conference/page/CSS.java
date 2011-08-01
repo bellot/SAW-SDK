@@ -8,12 +8,12 @@ public final class CSS extends CssMultiMemorySessionBinz
         throws Exception
     {
         super(true,
-              "public_html/conference/page/Reset.css",
-              "public_html/conference/page/Position.css",
-              "public_html/conference/page/Header.css",
-              "public_html/conference/page/Announces.css",
-              "public_html/conference/page/Main.css",
-              "public_html/conference/page/Navigation.css",
-              "public_html/conference/page/Footer.css") ;
+              "Reset.css",
+              "Position.css",
+              "Header.css",
+              "Announces.css",
+              "Main.css",
+              "Navigation.css",
+              "Footer.css") ;
     }
 }
