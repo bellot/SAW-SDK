@@ -25,6 +25,7 @@ public class LoginLogout extends SessionBinz
               +     "<title>WebTech 2012</title>"
               +     "<link rel='stylesheet' type='text/css' media='screen' href='../page/LoginLogout.css' />"
               +     "<meta http-equiv='Content-Type' content='text/html; charset=UTF-8'>"
+              +     "<script type='text/javascript' src='../page/JS.class'></script>"
               +   "</head>"
               +   "<body id='loginlogout'>"
               +     "<table>"
