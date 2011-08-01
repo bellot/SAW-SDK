@@ -1016,14 +1016,6 @@ public final class Transaction extends TransactionOutput
 	 + "Expires: Thu, 31 Dec 2037 23:59:59 GMT\n"
 	 + "Content-Encoding: gzip\n\n").getBytes() ;
 
-    /** Send a request header for Html with immediate expiration and no cookie. */
-
-    public final void sendHtmlNoExpireNoCookieHeader()
-	throws Exception
-    {
-	httpOutput.write((gzipOk) ? html_no_expire_no_cookie_ok_gzip : html_no_expire_no_cookie_no_gzip) ;
-    }
-
     /** Send a request header for Html with immediate expiration and no cookie and gzip content. */
 
     public final void sendHtmlNoExpireNoCookieHeaderOkGzip()
@@ -1038,6 +1030,14 @@ public final class Transaction extends TransactionOutput
 	throws Exception
     {
 	httpOutput.write(html_no_expire_no_cookie_no_gzip) ;
+    }
+
+    /** Send a request header for Html with immediate expiration and no cookie. */
+
+    public final void sendHtmlNoExpireNoCookieHeader()
+	throws Exception
+    {
+	httpOutput.write((gzipOk) ? html_no_expire_no_cookie_ok_gzip : html_no_expire_no_cookie_no_gzip) ;
     }
 
 
@@ -1101,7 +1101,7 @@ public final class Transaction extends TransactionOutput
     /** Used by sendJsNoExpireNoCookieHeader. */
 
     private static final byte[] js_no_expire_no_cookie_no_gzip = 
-	("HTTP/1.1 200 OK\n"
+	("HTTP/1.1 200 OK\n"sendJsNoExpireNoCookieHeader
 	 + "Content-Type: text/js\n"
 	 + "Expires: Thu, 31 Dec 2037 23:59:59 GMT\n\n").getBytes() ;
 
