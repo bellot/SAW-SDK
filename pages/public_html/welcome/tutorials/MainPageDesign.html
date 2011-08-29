@@ -1,0 +1,183 @@
+<html>
+  <head>
+    <title>SAW SDK 1.0</title>
+    <!-- Changed by: Patrick Bellot, 31-Jul-2011 -->
+    <link rel='stylesheet' type='text/css' media='screen' href='../Style.css' />
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+  </head>
+  <body class='page'>
+    <iframe class='header_menu' src='Header.html'></iframe>
+
+    <h1>Main Page Design</h1>
+
+    <p>
+        Although HTML&nbsp;5 is partly implemented in most of browsers, we choose a
+	classical HTML&nbsp4 design. There exist many techniques to design efficient
+	Web pages. Our is based on the use of CSS, <code>IFRAME</code> and 
+	<code>DIV</code>. According to the tutorial 
+	<a href='ConferenceManagement.html' target='_top'>A Conference Management Online Software</a>
+	section, the application pages will all have the following structure:
+    </p>
+
+
+<pre>
+&lt;html&gt;
+  &lt;head&gt;
+    &lt;title&gt;WebTech 2012&lt;/title&gt;
+    &lt;link rel='stylesheet' type='text/css' media='screen' href='../styles/CSS.class'/&gt;
+    &lt;link rel="shortcut icon" type="image/png" href="../favicon.png"&gt;
+  &lt;/head&gt;
+  &lt;body class='main'&gt;
+    &lt;div id='container'&gt;
+      &lt;iframe id='header'      allowtransparency='true' src='../page/Header.class'&gt;&lt;/iframe&gt;
+      &lt;iframe id='announces'   allowtransparency='true' src='../page/Announces.html'&gt;&lt;/iframe&gt;
+      &lt;iframe id='loginlogout' allowtransparency='true' src='../page/LoginLogout.class'&gt;&lt;/iframe&gt;
+      &lt;iframe id='navigation'  allowtransparency='true' src='../page/Navigation.html'&gt;&lt;/iframe&gt;
+      &lt;div id='main'&gt;
+
+	&lt;!-- Main frame content --&gt;
+
+      &lt;/div&gt;
+      &lt;iframe id='footer'      allowtransparency='true' src='../page/Footer.html'&gt;&lt;/iframe&gt;
+    &lt;/div&gt;
+  &lt;/body&gt;
+&lt;/html&gt;
+</pre>
+
+    <p>
+      <b>Note.</b>
+      We may remark that the content of all iframes are constant except the content of the
+      <code>loginlogout</code> iframe which content depends on the client login state. The content of
+      these "constant" iframes will be delivered with a far expire date. Thus, when loading a new
+      page, only the contents of the <code>loginlogout</code> iframe and the <code>main</code> div
+      will be new. This strongly reduces the traffic between the client and the server.
+
+    <p>
+      <b>An abstract base class.</b>
+        The <code>main</code> div will be filled with the page content. 
+	All the iframes will surround the <code>main</code> div using
+	appropriate CSS. With this design, we remark that 
+	<u>when switching from one page to another, only the content of the
+	<code>main</code> div is modified</u>
+	All the surrounding HTML code remains unchanged. Thus, we can decide
+	that all pages will inherit an abstract SessionBinz named <code>WebTechPage</code>.
+	The constructor of <code>WebTechPage</code> will take the <code>main</code> div
+	content as an argument. That gives the following code:
+    </p>
+
+<pre>
+package org.site.conference.pages ;
+
+import org.saw.compilations.* ;
+import org.saw.elements.* ;
+import org.saw.sessions.* ;
+import org.saw.transaction.* ;
+import org.site.conference.web.* ;
+
+public <b>abstract</b> class WebTechPage extends SessionBinz
+{
+    private final Compilation compilation ;
+
+    public WebTechPage(<b>ElementInterface mainDivElement</b>) 
+        throws Exception
+    {
+        compilation
+            = new Html(new Head(new Title(PageTitle.element),
+                                new StyleSheetLink("../page/CSS.class"),
+                                new FaviconLink("text/png","../page/favicon.png")), 
+                       new Body(null,"id='main'",
+                                new Div(null, "id='container'",
+                                        new Iframe(null, "id='header'      allowtransparency='true' src='../page/Header.class'"),
+                                        new Iframe(null, "id='announces'   allowtransparency='true' src='../page/Announces.html'"),
+                                        new Iframe(null, "id='loginlogout' allowtransparency='true' src='../page/LoginLogout.class'"),
+                                        new Iframe(null, "id='navigation'  allowtransparency='true' src='../page/Navigation.html'"),
+                                        new Div   (null, "id='main'",      <b>mainDivElement</b>),
+                                        new Iframe(null, "id='footer'      allowtransparency='true' src='../page/Footer.html'")))).compile() ;
+    }
+
+    public void handle(Transaction transaction)
+	throws Exception
+    {
+	transaction.sendHtmlExpireHeader() ;
+        transaction.beginOutput() ;
+        compilation.writeTo(transaction) ;
+        transaction.endOutput() ;
+    }
+
+}
+</pre>
+
+    <p>
+      <b>Declaring a page.</b>
+      Thus, all pages will be derived from the abstract base class <code>WebTechPage</code>.
+      Here is a page where teh <code>main</code> div contains only a "Hello&nbsp;world&nbsp;!"
+      text inside a <code>H1</code> tag:
+    </p>
+
+<pre>
+package conference.page;
+
+import org.saw.compilations.* ;
+import org.saw.elements.* ;
+import org.saw.sessions.* ;
+import org.saw.transaction.* ;
+
+import org.site.conference.pages.* ;
+import org.site.conference.web.* ;
+
+public class TestPage extends WebTechPage
+{
+    public TestPage()
+        throws Exception
+    {
+        super(new H1("Hello world !")) ;
+    }
+}
+</pre>
+
+    <p>
+      The code can be seen
+      <a href='/conference/page/TestPage.java' target='_blank'>here</a>
+      and the resulting page can be seen 
+      <a href='/conference/page/TestPage.class' target='_blank'>here</a>.
+    </p>
+
+    <p>
+      <b>Enhancing the abstract base class.</b>
+      As can be seen in the code above,
+      all pages use the global CSS <code>../page/CSS.class</code> which is
+      a collection of several CSS as explained in
+      <a href='CSSCollector.html' target='top'>CSS Collections</a>.
+      However, some pages may require a very specific CSS that we do
+      not want to include in the global CSS. That's why we introduce
+      a second constructor in our abstract base class:
+    </p>
+
+<pre>
+    public WebTechPage(<b>String cssFile</b>, <b>ElementInterface mainDivElement</b>) 
+        throws Exception
+    {
+        compilation
+            = new Html(new Head(new Title(PageTitle.element),
+                                new StyleSheetLink("../page/CSS.class"),
+                                <b>new StyleSheetLink(cssFile),</b>
+                                new FaviconLink("text/png","../page/favicon.png")), 
+                       new Body(null,"id='main'",
+                                new Div(null, "id='container'",
+                                        new Iframe(null, "id='header'      allowtransparency='true' src='../page/Header.class'"),
+                                        new Iframe(null, "id='announces'   allowtransparency='true' src='../page/Announces.html'"),
+                                        new Iframe(null, "id='loginlogout' allowtransparency='true' src='../page/LoginLogout.class'"),
+                                        new Iframe(null, "id='navigation'  allowtransparency='true' src='../page/Navigation.html'"),
+                                        new Div   (null, "id='main'",      <b>mainDivElement</b>),
+                                        new Iframe(null, "id='footer'      allowtransparency='true' src='../page/Footer.html'")))).compile() ;
+    }
+</pre>
+
+  <p>
+    This constructor also takes as argument the name of a CSS file and produces
+    a link to this file.
+  </p>
+
+  </body>
+</html>
+

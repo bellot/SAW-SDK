@@ -1101,7 +1101,7 @@ public final class Transaction extends TransactionOutput
     /** Used by sendJsNoExpireNoCookieHeader. */
 
     private static final byte[] js_no_expire_no_cookie_no_gzip = 
-	("HTTP/1.1 200 OK\n"sendJsNoExpireNoCookieHeader
+	("HTTP/1.1 200 OK\n"
 	 + "Content-Type: text/js\n"
 	 + "Expires: Thu, 31 Dec 2037 23:59:59 GMT\n\n").getBytes() ;
 
