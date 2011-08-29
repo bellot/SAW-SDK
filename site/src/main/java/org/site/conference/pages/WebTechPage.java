@@ -12,7 +12,7 @@ public abstract class WebTechPage extends SessionBinz
 {
     private final Compilation compilation ;
 
-    public WebTechPage(ElementInterface mainElement) 
+    public WebTechPage(ElementInterface mainDivElement) 
         throws Exception
     {
         compilation
@@ -25,7 +25,25 @@ public abstract class WebTechPage extends SessionBinz
                                         new Iframe(null, "id='announces'   allowtransparency='true' src='../page/Announces.html'"),
                                         new Iframe(null, "id='loginlogout' allowtransparency='true' src='../page/LoginLogout.class'"),
                                         new Iframe(null, "id='navigation'  allowtransparency='true' src='../page/Navigation.html'"),
-                                        new Div   (null, "id='main'",      mainElement),
+                                        new Div   (null, "id='main'",      mainDivElement),
+                                        new Iframe(null, "id='footer'      allowtransparency='true' src='../page/Footer.html'")))).compile() ;
+    }
+
+    public WebTechPage(String cssFile, ElementInterface mainDivElement) 
+        throws Exception
+    {
+        compilation
+            = new Html(new Head(new Title(PageTitle.element),
+                                new StyleSheetLink("../page/CSS.class"),
+                                new StyleSheetLink(cssFile),
+                                new FaviconLink("text/png","../page/favicon.png")), 
+                       new Body(null,"id='main'",
+                                new Div(null, "id='container'",
+                                        new Iframe(null, "id='header'      allowtransparency='true' src='../page/Header.class'"),
+                                        new Iframe(null, "id='announces'   allowtransparency='true' src='../page/Announces.html'"),
+                                        new Iframe(null, "id='loginlogout' allowtransparency='true' src='../page/LoginLogout.class'"),
+                                        new Iframe(null, "id='navigation'  allowtransparency='true' src='../page/Navigation.html'"),
+                                        new Div   (null, "id='main'",      mainDivElement),
                                         new Iframe(null, "id='footer'      allowtransparency='true' src='../page/Footer.html'")))).compile() ;
     }
 

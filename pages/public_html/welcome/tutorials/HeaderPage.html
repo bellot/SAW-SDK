@@ -1,7 +1,7 @@
 <html>
   <head>
     <title>SAW SDK 1.0</title>
-    <!-- Changed by: Patrick Bellot, 31-Jul-2011 -->
+    <!-- Changed by: Patrick Bellot, 29-Aug-2011 -->
     <link rel='stylesheet' type='text/css' media='screen' href='../Style.css' />
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
   </head>
@@ -28,6 +28,7 @@
                     &lt;h2&gt; <i>Header Line 1</i> &lt;/h2&gt;
                     &lt;h1&gt; <i>Header Line 2</i> &lt;/h1&gt;
                     &lt;h2&gt; <i>Header Line 3</i> &lt;/h2&gt;
+                    &lt;h2&gt; <i>Conference dates - Conference place</i> &lt;/h2&gt;
                 &lt;/td&gt;
             &lt;/tr&gt;
         &lt;/table&gt;
@@ -56,6 +57,36 @@ PageTexts.entity.addUpdatableFriend(this) ;
             <a href='javadoc/org/saw/sessions/SessionBinzWithUpdatableMemoryCache.html' target='_blank'>SessionBinzWithUpdatableMemoryCache</a>.
             This method will renew the cache.
         </p>
+
+	<p>
+	  <b>Note.</b>
+	  This page uses other Entity Binz and Dynamic XML Elements:
+	</p>
+
+	<p>
+	  <ul>
+	    <li>
+	      The <code>org.site.conf.ConfDates</code> Entity Binz holding
+	      the various dates concerning the conference. It is associated
+	      with the <code>org.site.conf.ConfFromTo</code> XML element producing the
+	      humanly readable date of the conference.
+	    </li>
+	    <li>
+	      The <code>org.site.conf.ConfInfo</code> Entity Binz holding
+	      information concerning the conference. It is associated
+	      with the <code>org.site.conf.ConfPlace</code> XML element producing the
+	      the conference place.
+	    </li>
+	  </ul>
+	</p>
+
+	<p>
+	  The codes of these Entity Binz and their initializations as the codes of
+	  Dynamic XML Elements can be seen in the package <code>org.site.conf</code>
+	  in teh distribution.
+	  The coding scheme is the same as for the <code>PageTexts</code> Entity Binz
+	  and its associated Dynamic XML Elements.
+	</p>
         
         <p>
             <b>Producing the page.</b>
@@ -65,11 +96,12 @@ PageTexts.entity.addUpdatableFriend(this) ;
         
 <pre>
 new Html(new Head(new Title(PageTitle.element),
-                  ew StyleSheetLink("../styles/CSS.class")),
+                  new StyleSheetLink("../styles/CSS.class")),
          new Body(null,"id='header'",
                   new Table(new Tr(new Td(new H2(HeaderLine1.element),
                                           new H1(HeaderLine2.element),
-                                          new H2(HeaderLine3.element))))))
+                                          new H2(HeaderLine3.element),
+					  new H3(ConfFromTo.element, new CDATA(" &amp;mdash; "), ConfPlace.element))))))
 </pre>
         
         <p>
