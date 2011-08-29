@@ -1,0 +1,42 @@
+<html>
+  <head>
+    <title>SAW SDK 1.0</title>
+    <!-- Changed by: Patrick Bellot, 31-Jul-2011 -->
+    <link rel='stylesheet' type='text/css' media='screen' href='../Style.css' />
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+  </head>
+  <body class='page'>
+    <iframe class='header_menu' src='Header.html'></iframe>
+
+    <h1>Collecting JavaScript</h1>
+
+    <p>
+      As satted in
+      <a href='CSSCollector.html' target='_top'>Collecting CSS</a>,
+      a wellknown tip to avoid slowing the Web page delivery and rendering is
+      to avoid too much external links such as external CSS or JavaScript files.
+      If a Web application has many CSS files, the programemrs have to collect
+      them into a single file. But a single file is hard to maintain. 
+    </p>
+
+    <p>
+      <b>The solution.</b>
+      SAW proposes a Session Binz able to collect several distinct JavaScript files and
+      to deliver them as if it was a single JavaScript file. There exist two versions
+      of this JavaScript Collector Session Binz. The first version,
+      <a href='javadoc/org/saw/sessions/JsMultiMemorySessionBinz.html' target='_blank'>JsMultiMemorySessionBinz</a>, 
+      caches the resulting JavaScript in memory for a quick delivery. And the second version,
+      <a href='javadoc/org/saw/sessions/JsMultiFileSessionBinz.html' target='_blank'>JsMultiFileSessionBinz</a>
+      uses a disk file for caching.
+    </p>
+
+    <p>
+      <b>Usage.</b>
+      The usage of JavaScript Collector Session Binz is exactly the same
+      as that of the CSS Collector Session Binz described in
+      <a href='CSSCollector.html' target='_top'>Collecting CSS</a>.
+    </p>
+
+  </body>
+</html>
+

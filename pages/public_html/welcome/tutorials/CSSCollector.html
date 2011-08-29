@@ -1,0 +1,74 @@
+<html>
+  <head>
+    <title>SAW SDK 1.0</title>
+    <!-- Changed by: Patrick Bellot, 31-Jul-2011 -->
+    <link rel='stylesheet' type='text/css' media='screen' href='../Style.css' />
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+  </head>
+  <body class='page'>
+    <iframe class='header_menu' src='Header.html'></iframe>
+
+    <h1>Collecting CSS</h1>
+
+    <p>
+      A wellknown tip to avoid slowing the Web page delivery and rendering is
+      to avoid too much external links such as external CSS or JavaScript files.
+      If a Web application has many CSS files, the programemrs have to collect
+      them into a single file. But a single CSS file is hard to maintain. 
+    </p>
+
+    <p>
+      <b>The solution.</b>
+      SAW proposes a Session Binz able to collect several distinct CSS files and
+      to deliver them as if it was a single CSS file. There exist two versions
+      of this CSS Collector Session Binz. The first version,
+      <a href='javadoc/org/saw/sessions/CssMultiMemorySessionBinz.html' target='_blank'>CssMultiMemorySessionBinz</a>, 
+      caches the resulting CSS in memory for a quick delivery. And the second version,
+      <a href='javadoc/org/saw/sessions/CssMultiFileSessionBinz.html' target='_blank'>CssMultiFileSessionBinz</a>
+      uses a disk file for caching.
+    </p>
+
+    <p>
+      <b>Example.</b>
+      We use 
+      <a href='javadoc/org/saw/sessions/CssMultiMemorySessionBinz.html' target='_blank'>CssMultiMemorySessionBinz</a>,
+      using 
+      <a href='javadoc/org/saw/sessions/CssMultiFileSessionBinz.html' target='_blank'>CssMultiFileSessionBinz</a>
+      is exactly the same.
+      The class <code>CSS</code> inherits
+      <a href='javadoc/org/saw/sessions/CssMultiMemorySessionBinz.html' target='_blank'>CssMultiMemorySessionBinz</a>.
+      The first argument of the constructor of
+      <a href='javadoc/org/saw/sessions/CssMultiMemorySessionBinz.html' target='_blank'>CssMultiMemorySessionBinz</a>
+      is a boolean specifying is the resulting CSS must be compacted or not. The the other arguments are the
+      names of the CSS files to compact. Note that the names of the CSS files are 
+      <u>relative</u> to the <code>CSS</code> class position in the file system. For instance,
+      the <code>CSS</code> class is in directory <code>public_html/conference/page</code> as stated
+      by the <code>package</code> declaration. The four first CSS files are in the same directory
+      meanwhile the three last CSS files are in sibling directory.
+    </p>
+
+<pre>
+package conference.page ;
+
+import org.saw.sessions.* ;
+
+public final class CSS extends CssMultiMemorySessionBinz
+{
+    public CSS()
+        throws Exception
+    {
+        super(true,
+              "Reset.css",
+              "Position.css",
+              "Header.css",
+              "Main.css",
+              "../announces/Announces.css",
+              "../navigation/Navigation.css",
+              "../footer/Footer.css") ;
+    }
+}
+</pre>
+
+  </body>
+</html>
+
