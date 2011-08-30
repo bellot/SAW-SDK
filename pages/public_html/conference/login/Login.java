@@ -17,10 +17,7 @@ public class Login extends SessionBinz
 {
 
     private final byte[] SSLLogin 
-        = (Transaction.HTTPS_WEB_SITE
-           + '/'
-           + (this.getClass().getPackage().getName().replace('.','/'))
-           + "/SSLLogin.class").getBytes() ;
+        = (Transaction.HTTPS_WEB_SITE + "/conference/login/SSLLogin.class").getBytes() ;
 
     public final void handle(Transaction transaction)
         throws Exception
@@ -35,14 +32,6 @@ public class Login extends SessionBinz
             sessionEnvironment.setUser(null) ;
         }
 
-        SessionVariables sessionVariables = sessionEnvironment.getSessionVariables() ;
-
-        if (transaction.isSSL()) {
-            sessionVariables.put("isSSL","") ;
-        } else {
-            sessionVariables.remove("isSSL") ;
-        }
-            
         transaction.sendHttpRedirection(SSLLogin) ;
     }
 
