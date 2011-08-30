@@ -73,7 +73,7 @@ public abstract class EntityBinzWithId
 	} catch (Exception e) {
 	    try { in.close() ; } catch(Exception e2) {} ;
 	    try { 
-		Logs.log(Logs.SERVER_ERROR,"Cannot load entity binz \"" + fileName + "\"",e) ;
+		Logs.log(Logs.SERVER_ERROR_CAT, "Cannot load entity binz \"" + fileName + "\"",e) ;
 	    } catch(Exception e2) {
 		e2.printStackTrace() ;
 	    } ;
@@ -83,7 +83,7 @@ public abstract class EntityBinzWithId
 	    return (EntityBinz)(theClass.newInstance()) ;
 	} catch (Exception e) {
 	    try { 
-		Logs.log(Logs.SERVER_ERROR,"Cannot create entity binz \"" + fileName + "\"",e) ;
+		Logs.log(Logs.SERVER_ERROR_CAT, "Cannot create entity binz \"" + fileName + "\"",e) ;
 	    } catch(Exception e2) {
 		e2.printStackTrace() ;
 	    } ;
@@ -108,7 +108,7 @@ public abstract class EntityBinzWithId
 	} catch (Exception e) {
 	    try { out.close() ; } catch (Exception e2) {} ;
 	    try { 
-		Logs.log(Logs.SERVER_ERROR,"Cannot save entity binz \"" + workspaceFileName + "\"",e) ;
+		Logs.log(Logs.SERVER_ERROR_CAT, "Cannot save entity binz \"" + workspaceFileName + "\"",e) ;
 	    } catch(Exception e2) {
 		e2.printStackTrace() ;
 	    } ;

@@ -87,22 +87,22 @@ public class SessionBinzLoader
                         } 
 
                     } else {
-                        Logs.log(Logs.SERVER_ERROR,"Session binz source file with unknown mime type",
+                        Logs.log(Logs.SERVER_ERROR_CAT,"Session binz source file with unknown mime type",
                                  Logs.FILE_TAG,requestPath) ;
                     }
 		
                 } else {
-                    Logs.log(Logs.SERVER_ERROR,"Session binz source file without suffix",
+                    Logs.log(Logs.SERVER_ERROR_CAT,"Session binz source file without suffix",
                              Logs.FILE_TAG,requestPath) ;
                 }
 
             } else {
-                Logs.log(Logs.SERVER_ERROR,"Session binz source file does not exist",
+                Logs.log(Logs.SERVER_ERROR_CAT,"Session binz source file does not exist",
                          Logs.FILE_TAG,requestPath) ;
             } 
 
         } else {
-            Logs.log(Logs.SECURITY_WARNING,"Session binz not under public_html",
+            Logs.log(Logs.SECURITY_WARNING_CAT,"Session binz not under public_html",
                      Logs.FILE_TAG,requestPath) ;
         }
 
@@ -169,7 +169,7 @@ public class SessionBinzLoader
 	case SessionBinz.DDL_TYPE:
 	    return null ;
 	default:
-            Logs.log(Logs.SERVER_ERROR,"Session binz source file with unprocessed session type: " + sessionType,
+            Logs.log(Logs.SERVER_ERROR_CAT,"Session binz source file with unprocessed session type: " + sessionType,
                      Logs.FILE_TAG,requestPath) ;
 	    return null ;
 	}
@@ -186,7 +186,7 @@ public class SessionBinzLoader
 	    tmpUrls = new URL[]{url} ;
 	} catch (Exception e) {
 	    try {
-		Logs.log(Logs.SERVER_ERROR, "Cannot initialize SessionBinzLoader.urls", e) ;
+		Logs.log(Logs.SERVER_ERROR_CAT, "Cannot initialize SessionBinzLoader.urls", e) ;
 	    } catch (Exception e2) {}
 	}
 	urls = tmpUrls ;
@@ -204,7 +204,7 @@ public class SessionBinzLoader
 
 	} catch (Throwable e) {
 	    try {
-		Logs.log(Logs.SERVER_ERROR, "Cannot load session binz \"" + requestPath + "\"", e) ;
+		Logs.log(Logs.SERVER_ERROR_CAT, "Cannot load session binz \"" + requestPath + "\"", e) ;
 	    } catch (Exception e2) {}
 	}
 

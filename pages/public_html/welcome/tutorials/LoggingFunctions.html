@@ -1,0 +1,89 @@
+<html>
+  <head>
+    <title>SAW SDK 1.0</title>
+    <!-- Changed by: Patrick Bellot, 31-Jul-2011 -->
+    <link rel='stylesheet' type='text/css' media='screen' href='../Style.css' />
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+  </head>
+  <body class='page'>
+    <iframe class='header_menu' src='Header.html'></iframe>
+
+    <h1>The logging functions</h1>
+
+    <p>
+      SAW provides a logging mechanism accessible through the class
+      <a href='javadoc/org/saw/util/logs/Logs.html' target='_blank'>org.saw.util.logs.Logs</a>.
+    </p>
+
+    <p>
+      <b>The log file.</b>
+      The log file is <code>pages/SAW.log</code>. 
+      The programmer does not have to open or close it.
+      This is automatically done.
+      When the log file reaches a given size, namely
+      <code>Parameters.MAX_LOG_SIZE</code>, it is saved
+      and a new log file is open.
+    </p>
+    
+    <p>
+      <b>Log categories.</b>
+      Each entry in the log file has at least a category and a message.
+      Log entries categories are defined as static contant byte arrays
+      in the class
+      <a href='javadoc/org/saw/util/logs/Logs.html' target='_blank'>org.saw.util.logs.Logs</a>.
+      They are all the constants which names end with <code>_CAT</code>.
+      For instance:
+    </p>
+
+    <ul>
+      <li>
+	<code>Logs.SERVER_ACCESS_CAT</code> used for logging page access&nbsp;;
+      </li>
+      <li>
+	<code>Logs.SERVER_LOG_CAT</code> used for logging main server operations&nbsp;;
+      </li>
+      <li>
+	<code>Logs.SERVER_ERROR_CAT</code> used for server errors&nbsp;;
+      </li>
+      <li>
+	<code>Logs.SERVER_WARNING_CAT</code> used for logging warningss&nbsp;;
+      </li>
+      <li>
+	<code>Logs.SERVER_DEBUG_CAT</code> used for debugging&nbsp;;
+      </li>
+      <li>
+	<code>Logs.SECURITY_WARNING_CAT</code> used for logging security concerns&nbsp;;
+      </li>
+      <li>
+	<code>Logs.USER_LIFE_CAT</code> used for logging user's events.
+      </li>
+    </ul>
+
+    <p>
+      Consult the class 
+      <a href='javadoc/org/saw/util/logs/Logs.html' target='_blank'>org.saw.util.logs.Logs</a>
+      for a full list.
+    </p>
+
+    <p>
+      <b>Example.</b>
+      Each call to a log function must include first the log category and a message.
+      For instance:
+    </p>
+
+<pre>
+      <code>Logs.log(Logs.SERVER_LOG_CAT,"Server starts") ;</code>
+</pre>
+
+    <p>
+      Other parameters are allowed, see below.
+    </p>
+
+    <p>
+      <b>Log messages parameters.</b>
+
+    </p>
+
+  </body>
+</html>
+

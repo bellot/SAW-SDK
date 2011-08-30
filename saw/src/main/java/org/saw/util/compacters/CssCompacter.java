@@ -44,7 +44,7 @@ public final class CssCompacter
 	    try { in.close()  ; } catch(Exception e2) {} ;
 	    try { out.close() ; } catch(Exception e2) {} ;
 	    
-	    Logs.log(Logs.SERVER_ERROR,"Failed to compact \"" + inputFilename + "\"",e) ;
+	    Logs.log(Logs.SERVER_ERROR_CAT, "Failed to compact \"" + inputFilename + "\"", e) ;
 	    throw new InternalErrorException(e.getMessage()) ;
 	} 
     }

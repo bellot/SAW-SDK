@@ -69,22 +69,22 @@ public class SSLLoginCheck extends WebTechPage
                     transaction.sendHttpRedirection(HTTP_LOGIN_SUCCESS) ;
                 }
 
-                Logs.log(Logs.USER_LIFE,  "Login.",
-                         Logs.USERID_TAG,  Integer.toString(user.userId)) ;
+                Logs.log(Logs.USER_LIFE_CAT,  "Login.",
+                         Logs.USERID_TAG,     Integer.toString(user.userId)) ;
 
                 return ;
 
             } else {
 
-                Logs.log(Logs.SECURITY_WARNING,"Wrong password.",
-                         Logs.USERID_TAG,      Integer.toString(user.userId)) ;
+                Logs.log(Logs.SECURITY_WARNING_CAT, "Wrong password.",
+                         Logs.USERID_TAG,           Integer.toString(user.userId)) ;
 
             }
 
         } else {
 
-            Logs.log(Logs.SECURITY_WARNING,"Wrong login name.",
-                     Logs.EMAIL_TAG,       loginName) ;
+            Logs.log(Logs.SECURITY_WARNING_CAT, "Wrong login name.",
+                     Logs.EMAIL_TAG,            loginName) ;
 
         }
 

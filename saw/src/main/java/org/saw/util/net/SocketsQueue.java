@@ -71,7 +71,7 @@ public final class SocketsQueue
 
 	} catch (Exception e) {
 	    try {
-		Logs.log(Logs.SERVER_ERROR, queueName + " sockets queue pop error", e) ;
+		Logs.log(Logs.SERVER_ERROR_CAT, queueName + " sockets queue pop error", e) ;
 	    } catch (Exception e2) {}
 	}
 
@@ -100,7 +100,7 @@ public final class SocketsQueue
 
 	} catch (Exception e) {
 	    try {
-		Logs.log(Logs.SERVER_ERROR,queueName + " sockets queue push error",e) ;
+		Logs.log(Logs.SERVER_ERROR_CAT, queueName + " sockets queue push error",e) ;
 	    } catch (Exception e2) {}
 	}
     }

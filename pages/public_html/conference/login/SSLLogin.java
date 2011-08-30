@@ -37,8 +37,8 @@ public class SSLLogin extends WebTechPageWithUpdatableMemoryCache
 
         if (sessionEnvironment.getUser() != null) {
 
-            Logs.log(Logs.SECURITY_WARNING,"User tries to log while logged.",
-                     Logs.USERID_TAG,      Integer.toString(sessionEnvironment.getUser().userId)) ;
+            Logs.log(Logs.SECURITY_WARNING_CAT, "User tries to log while logged.",
+                     Logs.USERID_TAG,           Integer.toString(sessionEnvironment.getUser().userId)) ;
 
             sessionEnvironment.setUser(null) ;
         }

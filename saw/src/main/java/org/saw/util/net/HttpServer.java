@@ -70,7 +70,7 @@ public final class HttpServer extends Thread
 
 	    } catch (Exception e) {
 		try {
-		    Logs.log(Logs.SERVER_ERROR, serverName + ": http socket accept error", e) ;
+		    Logs.log(Logs.SERVER_ERROR_CAT, serverName + ": http socket accept error", e) ;
 		}  catch (Exception e2) {}
 	    }
 
