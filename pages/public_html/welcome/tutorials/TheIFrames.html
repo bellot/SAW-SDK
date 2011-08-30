@@ -1,0 +1,124 @@
+<html>
+  <head>
+    <title>SAW SDK 1.0</title>
+    <!-- Changed by: Patrick Bellot, 31-Jul-2011 -->
+    <link rel='stylesheet' type='text/css' media='screen' href='../Style.css' />
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+  </head>
+  <body class='page'>
+    <iframe class='header_menu' src='Header.html'></iframe>
+
+    <h1>The iframes</h1>
+
+    <p>
+      As we have seen in 
+      <a href='MainPageDesign.html' target='_top'>Main page design</a>,
+      there exist five iframes surrounding the <code>main</code> div
+      on the application page template that can be seen
+      <a href='../../conference/page/TestPage.class' target='_blank'>here</a>:
+    </p>
+
+    <ul>
+      <li>
+	The <code>header</code> iframe corresponds to the page header. 
+	Its content is produced by a Session Binz already described in
+	<a href='HeaderPage.html' target='_top'>HeaderPage.html</a>
+	tutorial. As it si produced with a far expire date, it will
+	be loaded once and will not be reloaded when going to other pages.
+      </li>
+      <li>
+	The <code>loginlogout</code> iframe corresponds to the left menu zone
+	with two red menu item <i>Login</i> and <i>Create account</i>.
+	Its content is produced by a Session Binz described below.
+      </li>
+      <li>
+	The <code>navigation</code> iframe, under the <code>loginlogout</code> iframe, 
+	corresponds to the left menu zone
+	with the black menu items and the GSTF image under them. 
+	It is a simple HTML page delivered with a far expire date so that
+	it will be loaded once.
+      </li>
+      <li>
+	The <code>announces</code> iframe corresponds to the right columns
+	with logos, Singapore images, awards announcement.
+	It is also a simple HTML page delivered with a far expire date so that
+	it will be loaded once.
+      </li>
+      <li>
+	The <code>footer</code> iframe corresponds to the band at the bottom
+	of the page.
+	It is also a simple HTML page delivered with a far expire date so that
+	it will be loaded once.
+      </li>
+    </ul>
+
+    <p>
+      Each these iframe contents uses a dedicated CSS file. And all the
+      CSS Files are collected in the global CSS as explained in
+      <a href='CSSCollector.html' target='_top'>CSS Collections</a>.
+    </p>
+
+    <p>
+      <b>The Login/Logout Session Binz.</b>
+      The Login/Logout Session Binz produces the content of the <code>loginlogout</code> iframe:
+    </p>
+
+    <ul>
+      <li>
+	If the client is not logged, it must display the menu items 
+	<i>Login</i> and <i>Create account</i>.
+      </li>
+      <li>
+	If the client is logged, it must display the menu items 
+	<i>Logout</i> and <i>Consol</i>.
+      </li>
+    </ul>
+
+    <p>
+      The code of this Session Binz can be seen
+      <a href='../../conference/page/LoginLogout.java' target='_blank'>here</a>.
+      For sake of efficiency, we adopt the following strategy:
+    </p>
+
+    <ol>
+      <li>
+	First, in the constructor, we prepare four arrays
+	of bytes ready to be output: the clear and
+	the zipped versions of the two possible outputs. 
+      </li>
+      <li>
+	In the handle method, we first check if the client is logged
+	by testing
+	<br>
+	<code>transaction.getSessionEnvironment().getUser()</code>
+	<br>
+	It is <code>null</code> if and only if the client is not logged.
+      </li>
+      <li>
+	In each branch, we check if the client software accepts zipped content
+	by testing
+	<br>
+	<code>transaction.getGzipOk()</code>
+      </li>
+      <li>
+	Then we send the appropriate HTTP Response header and we output
+	the appropriate array of bytes.
+      </li>
+    </ol>
+
+    <p>
+      As can be seen in the code 
+      <a href='../../conference/page/LoginLogout.java' target='_blank'>here</a>,
+      all HTTP Response headers are <i>No&nbsp;Expire</i> headers. 
+      That means that the expire date is set far in the future.
+      That looks wrong since the output of the Session Binz varies.
+      The explaination is that we will force a reload of the
+      <code>loginlogout</code> frame using JavaScript each time the
+      status&nbsp;(logged or unlogged) is modified. This way, the
+      content of the <code>loginlogout</code> frame will be reloaded
+      only when necessary.
+    </p>
+
+  </body>
+</html>
+
