@@ -1,0 +1,77 @@
+<html>
+  <head>
+    <title>SAW SDK 1.0</title>
+    <!-- Changed by: Patrick Bellot, 31-Jul-2011 -->
+    <link rel='stylesheet' type='text/css' media='screen' href='../Style.css' />
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+  </head>
+  <body class='page'>
+    <iframe class='header_menu' src='Header.html'></iframe>
+
+    <h1>Caching main page</h1>
+
+    <p>
+      If we consider the design of the main page described in
+      <a href='MainPageDesign.html' target='_top'>Main page design</a>,
+      we can see that the page structure does not use Transaction
+      variables or Session environment. Thus, if, for a given page, the content of the
+      <code>main</code> div does not use Transaction
+      variables or Session environment, then this page can be cached.
+      That is why we propose two alternative classes for
+      implementing the main page:
+    </p>
+
+    <ul>
+      <li>
+	<code>WebTechPageWithUpdatableMemoryCache</code> which caches the page content in memory&nbsp;;
+	it has two constructors:
+<pre>
+    public WebTechPageWithUpdatableMemoryCache(ElementInterface mainDivElement) 
+        throws Exception ;
+    public WebTechPageWithUpdatableMemoryCache(String cssFile, ElementInterface mainDivElement) 
+        throws Exception ;
+</pre>
+      </li>
+      <li>
+	<code>WebTechPageWithUpdatableFileCache</code> which caches the page content in a disk file.
+<pre>
+    public WebTechPageWithUpdatableFileCache(ElementInterface mainDivElement) 
+        throws Exception ;
+    public WebTechPageWithUpdatableFileCache(String cssFile, ElementInterface mainDivElement) 
+        throws Exception ;
+</pre>
+      </li>
+    </ul>
+
+    <p>
+      <b>Usage.</b>
+      These two classes are to be used like the <code>WebTechPage</code> as explained in
+      <a href='MainPageDesign.html' target='_top'>Main page design</a>.
+    </p>
+
+    <p>
+      <b>Example.</b>
+      If the <code>main</code> div contains only a "Hello world&nbsp;!" inside
+      a <code>H1</code> tag, then the page can be cached because it does 
+      not use Transaction
+      variables or Session environment.
+    </p>
+
+    <ul>
+      <li>
+	The code of this Session Binz with memory caching can be seen
+	<a href='/conference/page/TestPageWithUpdatableMemoryCache.java' target='_blank'>here</a>
+	and the resulting page can be seen 
+	<a href='/conference/page/TestPageWithUpdatableMemoryCache.class' target='_blank'>here</a>.
+      </li>
+      <li>
+	The code of this Session Binz with file caching can be seen
+	<a href='/conference/page/TestPageWithUpdatableFileCache.java' target='_blank'>here</a>
+	and the resulting page can be seen 
+	<a href='/conference/page/TestPageWithUpdatableFileCache.class' target='_blank'>here</a>.
+      </li>
+    </ul>
+
+  </body>
+</html>
+
