@@ -12,7 +12,7 @@ import org.site.conference.web.* ;
 
 /** @author  Patrick Bellot, &copy; 2010 and later. */
 
-public class LoginSuccess extends WebTechPageWithUpdatableMemoryCache
+public class LoginSuccess extends WebTechPage
 {
     public LoginSuccess()
         throws Exception
