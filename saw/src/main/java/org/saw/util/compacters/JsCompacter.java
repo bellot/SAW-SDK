@@ -45,7 +45,7 @@ public final class JsCompacter
 	    try { in.close()  ; } catch(Exception e2) {} ;
 	    try { out.close() ; } catch(Exception e2) {} ;
 	    
-	    Logs.log(Logs.SERVER_ERROR,"Failed to compact \"" + inputFilename + "\"",e) ;
+	    Logs.log(Logs.SERVER_ERROR_CAT,"Failed to compact \"" + inputFilename + "\"",e) ;
 	    throw new InternalErrorException(e.getMessage()) ;
 	} 
     }
@@ -68,9 +68,9 @@ public final class JsCompacter
 	{
 	    try {
 		if (line < 0) {
-		    Logs.log(Logs.SERVER_WARNING, message);
+		    Logs.log(Logs.SERVER_WARNING_CAT, message);
 		} else {
-		    Logs.log(Logs.SERVER_WARNING, line + ':' + lineOffset + ':' + message);
+		    Logs.log(Logs.SERVER_WARNING_CAT, line + ':' + lineOffset + ':' + message);
 		}
 	    } catch (Exception e) {}
 	}
@@ -79,9 +79,9 @@ public final class JsCompacter
 	{
 	    try {
 		if (line < 0) {
-		    Logs.log(Logs.SERVER_ERROR, message);
+		    Logs.log(Logs.SERVER_ERROR_CAT, message);
 		} else {
-		    Logs.log(Logs.SERVER_ERROR, line + ':' + lineOffset + ':' + message);
+		    Logs.log(Logs.SERVER_ERROR_CAT, line + ':' + lineOffset + ':' + message);
 		}
 	    } catch (Exception e) {}
 	}

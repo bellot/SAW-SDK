@@ -50,13 +50,13 @@ public final class BackupManager extends Thread
 		backup() ;
 		System.gc() ;	
 		try {
-		    Logs.log(Logs.SERVER_ERROR,"Backup manager done.") ;
+		    Logs.log(Logs.SERVER_ERROR_CAT, "Backup manager done.") ;
 		} catch (Exception e2) {
 		    e2.printStackTrace() ;
 		}
 	    } catch (Exception e) {
 		try {
-		    Logs.log(Logs.SERVER_ERROR,"Backup manager failed.",e) ;
+		    Logs.log(Logs.SERVER_ERROR_CAT, "Backup manager failed.",e) ;
 		} catch (Exception e2) {
 		    e.printStackTrace() ;
 		}

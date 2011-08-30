@@ -21,19 +21,19 @@ import org.saw.util.files.* ;
 public final class Logs
 {
     /** Log category. */
-    static public final byte[] SERVER_DEBUG      = "#LOGB\n0\n".getBytes() ;
+    static public final byte[] SERVER_DEBUG_CAT      = "#LOGB\n0\n".getBytes() ;
     /** Log category. */
-    static public final byte[] SERVER_WARNING    = "#LOGB\n1\n".getBytes() ;
+    static public final byte[] SERVER_WARNING_CAT    = "#LOGB\n1\n".getBytes() ;
     /** Log category. */
-    static public final byte[] SERVER_ERROR      = "#LOGB\n2\n".getBytes() ;
+    static public final byte[] SERVER_ERROR_CAT      = "#LOGB\n2\n".getBytes() ;
     /** Log category. */
-    static public final byte[] SERVER_LOG        = "#LOGB\n3\n".getBytes() ;
+    static public final byte[] SERVER_LOG_CAT        = "#LOGB\n3\n".getBytes() ;
     /** Log category. */
-    static public final byte[] SERVER_ACCESS     = "#LOGB\n4\n".getBytes() ;
+    static public final byte[] SERVER_ACCESS_CAT     = "#LOGB\n4\n".getBytes() ;
     /** Log category. */
-    static public final byte[] SECURITY_WARNING  = "#LOGB\n5\n".getBytes() ;
+    static public final byte[] SECURITY_WARNING_CAT  = "#LOGB\n5\n".getBytes() ;
     /** Log category. */
-    static public final byte[] USER_LIFE         = "#LOGB\n6\n".getBytes() ;
+    static public final byte[] USER_LIFE_CAT         = "#LOGB\n6\n".getBytes() ;
 
 
     /** Parameters tags, value can be one-line string. */

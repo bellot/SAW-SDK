@@ -20,7 +20,7 @@ public class Main
 	Logs.open("SAW.log") ;
 	new LogsArchiver().start() ;
 
-	Logs.log(Logs.SERVER_LOG,"Server starts") ;
+	Logs.log(Logs.SERVER_LOG_CAT, "Server starts") ;
 
 	try {
 
@@ -58,11 +58,11 @@ public class Main
 
 	} catch (Exception e) {
 
-	    Logs.log(Logs.SERVER_ERROR,"Server main thread error",e) ;
+	    Logs.log(Logs.SERVER_ERROR_CAT, "Server main thread error", e) ;
 
 	}
 
-	Logs.log(Logs.SERVER_LOG,"Server stops") ;
+	Logs.log(Logs.SERVER_LOG_CAT,"Server stops") ;
 	Logs.close() ;
 
 	System.exit(0) ;

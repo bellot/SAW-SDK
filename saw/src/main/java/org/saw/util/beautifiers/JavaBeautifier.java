@@ -31,7 +31,7 @@ public final class JavaBeautifier
                            "UTF-8",
                            false);
 	} catch (Exception e) {
-	    Logs.log(Logs.SERVER_ERROR,"Failed to beautify \"" + inputFilename + "\"",e) ;
+	    Logs.log(Logs.SERVER_ERROR_CAT, "Failed to beautify \"" + inputFilename + "\"",e) ;
 	    throw new InternalErrorException(e.getMessage()) ;
 	} 
     }

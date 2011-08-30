@@ -28,14 +28,14 @@ public class Logout extends WebTechPage
         SessionEnvironment sessionEnvironment = transaction.getSessionEnvironment() ;
 
         if (sessionEnvironment.getUser() == null)
-            Logs.log(Logs.SECURITY_WARNING,"User tries to logout while lnot ogged.") ;
+            Logs.log(Logs.SECURITY_WARNING_CAT, "User tries to logout while not logged.") ;
            
         sessionEnvironment.setUser(null) ;
 
         super.handle(transaction) ;
 
-        Logs.log(Logs.USER_LIFE,  "Logout.",
-                 Logs.USERID_TAG,  Integer.toString(sessionEnvironment.getUser().userId)) ;
+        Logs.log(Logs.USER_LIFE_CAT, "Logout.",
+                 Logs.USERID_TAG,    Integer.toString(sessionEnvironment.getUser().userId)) ;
     }
 }
 
