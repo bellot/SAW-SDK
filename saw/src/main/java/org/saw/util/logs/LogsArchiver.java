@@ -19,7 +19,7 @@ public class LogsArchiver extends Thread
 		
 	    } catch (Exception e) {
 		try {
-		    Logs.log(Logs.SERVER_ERROR,"Logs archiver failed",e) ;
+		    Logs.log(Logs.SERVER_ERROR_CAT, "Logs archiver failed",e) ;
 		} catch (Exception e2) {}
 	    }
 	}

@@ -21,7 +21,7 @@ public class SessionEnvironmentsCleaner extends Thread
 		
 	    } catch (Exception e) {
 		try {
-		    Logs.log(Logs.SERVER_ERROR,"Session cleanup failed",e) ;
+		    Logs.log(Logs.SERVER_ERROR_CAT, "Session cleanup failed", e) ;
 		} catch (Exception e2) {}
 	    }
 	}

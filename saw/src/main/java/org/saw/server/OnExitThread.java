@@ -12,7 +12,7 @@ public class OnExitThread extends Thread
     public void run()
     {
 	try {
-	    Logs.log(Logs.SERVER_LOG,"Server on exit procedure start") ;
+	    Logs.log(Logs.SERVER_LOG_CAT,"Server on exit procedure start") ;
 	} catch (Exception elog) {
 	    System.out.println("Server on exit procedure start") ;
 	}
@@ -21,13 +21,13 @@ public class OnExitThread extends Thread
 	    OnExit.onExit() ;
 
 	    try {
-		Logs.log(Logs.SERVER_LOG,"Server on exit procedure done") ;
+		Logs.log(Logs.SERVER_LOG_CAT,"Server on exit procedure done") ;
 	    } catch (Exception elog) {
 		System.out.println("Server on exit procedure done") ;
 	    }
 	} catch (Exception e) {
 	    try {
-		Logs.log(Logs.SERVER_ERROR,"Server on exit procedure error",e) ;
+		Logs.log(Logs.SERVER_ERROR_CAT,"Server on exit procedure error",e) ;
 	    } catch (Exception elog) {
 		System.out.println("Server on exit procedure error") ;
 	    }

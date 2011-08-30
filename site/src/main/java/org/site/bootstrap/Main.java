@@ -22,7 +22,7 @@ public class Main
 	Logs.open("SAW.log") ;
 	new LogsArchiver().start() ;
 	
-	Logs.log(Logs.SERVER_LOG,"BootStrap starts") ;
+	Logs.log(Logs.SERVER_LOG_CAT,"BootStrap starts") ;
 
 	try {
 
@@ -34,11 +34,11 @@ public class Main
 
 	} catch (Exception e) {
 
-	    Logs.log(Logs.SERVER_ERROR,"BootStrap error",e) ;
+	    Logs.log(Logs.SERVER_ERROR_CAT,"BootStrap error",e) ;
 
 	}
 
-	Logs.log(Logs.SERVER_LOG,"BooStrap stops") ;
+	Logs.log(Logs.SERVER_LOG_CAT,"BooStrap stops") ;
 	Logs.close() ;
 
 	System.exit(0) ;
