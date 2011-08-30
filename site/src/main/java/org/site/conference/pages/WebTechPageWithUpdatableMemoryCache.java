@@ -47,6 +47,8 @@ public abstract class WebTechPageWithUpdatableMemoryCache extends SessionBinzWit
                                         new Iframe(null, "id='navigation'  allowtransparency='true' src='../page/Navigation.html'"),
                                         new Div   (null, "id='main'",      mainDivElement),
                                         new Iframe(null, "id='footer'      allowtransparency='true' src='../page/Footer.html'")))).compile() ;
+
+        PageTexts .entity.addUpdatableFriend(this) ; // Because of title
     }
 
     public final void writeContent(TransactionOutput transactionnOutput)
