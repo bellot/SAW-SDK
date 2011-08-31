@@ -405,10 +405,10 @@ public final class Transaction extends TransactionOutput
 
 		    // Log access
 
-		    Logs.log(Logs.SERVER_ACCESS_CAT, "Page access",
-			     Logs.IP_TAG,            ip,
-			     Logs.SESSIONID_TAG,     Integer.toString(sessionId),
-			     Logs.REQUESTPATH_TAG,   requestPath) ;
+		    Logs.log(Logs.SERVER_ACCESS_CAT,  "Page access",
+			     Logs.IP_TAG,             ip,
+			     Logs.SESSION_ID_TAG,     Integer.toString(sessionId),
+			     Logs.REQUEST_PATH_TAG,   requestPath) ;
 
 		    // Decondig POST content
 
@@ -642,10 +642,10 @@ public final class Transaction extends TransactionOutput
 
 			replyNotFound() ;
 
-			Logs.log(Logs.SERVER_WARNING_CAT, "Page not found",
-				 Logs.IP_TAG,             ip,
-				 Logs.SESSIONID_TAG,      Integer.toString(sessionId),
-				 Logs.REQUESTPATH_TAG,    requestPath) ;
+			Logs.log(Logs.SERVER_WARNING_CAT,  "Page not found",
+				 Logs.IP_TAG,              ip,
+				 Logs.SESSION_ID_TAG,      Integer.toString(sessionId),
+				 Logs.REQUEST_PATH_TAG,    requestPath) ;
 
 			break ;
 		    }
@@ -710,30 +710,30 @@ public final class Transaction extends TransactionOutput
     {
         if (sessionEnvironment == null || sessionEnvironment.getUser() == null) {
             if (requestPath == null) {
-                Logs.log(Logs.SERVER_ERROR_CAT,  error,
-                         Logs.IP_TAG,            ip,
-                         Logs.SESSIONID_TAG,     Integer.toString(sessionId),
+                Logs.log(Logs.SERVER_ERROR_CAT, error,
+                         Logs.IP_TAG,           ip,
+                         Logs.SESSION_ID_TAG,   Integer.toString(sessionId),
                          e) ;
             } else {
-                Logs.log(Logs.SERVER_ERROR_CAT,    error,
-                         Logs.IP_TAG,              ip,
-                         Logs.SESSIONID_TAG,       Integer.toString(sessionId),
-                         Logs.REQUESTPATH_TAG,     requestPath,
+                Logs.log(Logs.SERVER_ERROR_CAT, error,
+                         Logs.IP_TAG,           ip,
+                         Logs.SESSION_ID_TAG,   Integer.toString(sessionId),
+                         Logs.REQUEST_PATH_TAG, requestPath,
                          e) ;
             }
         } else {
             if (requestPath == null) {
-                Logs.log(Logs.SERVER_ERROR_CAT,  error,
-                         Logs.IP_TAG,            ip,
-                         Logs.SESSIONID_TAG,     Integer.toString(sessionId),
-                         Logs.USERID_TAG,        Integer.toString(sessionEnvironment.getUser().userId),
+                Logs.log(Logs.SERVER_ERROR_CAT, error,
+                         Logs.IP_TAG,           ip,
+                         Logs.SESSION_ID_TAG,   Integer.toString(sessionId),
+                         Logs.USER_ID_TAG,      Integer.toString(sessionEnvironment.getUser().userId),
                          e) ;
             } else {
-                Logs.log(Logs.SERVER_ERROR_CAT,    error,
-                         Logs.IP_TAG,              ip,
-                         Logs.SESSIONID_TAG,       Integer.toString(sessionId),
-                         Logs.REQUESTPATH_TAG,     requestPath,
-                         Logs.USERID_TAG,          Integer.toString(sessionEnvironment.getUser().userId),
+                Logs.log(Logs.SERVER_ERROR_CAT, error,
+                         Logs.IP_TAG,           ip,
+                         Logs.SESSION_ID_TAG,   Integer.toString(sessionId),
+                         Logs.REQUEST_PATH_TAG, requestPath,
+                         Logs.USER_ID_TAG,      Integer.toString(sessionEnvironment.getUser().userId),
                          e) ;
             }
         }
@@ -827,8 +827,8 @@ public final class Transaction extends TransactionOutput
 
             Logs.log(Logs.SERVER_WARNING_CAT, "Page not found",
                      Logs.IP_TAG,             ip,
-                     Logs.SESSIONID_TAG,      Integer.toString(sessionId),
-                     Logs.REQUESTPATH_TAG,    requestPath) ;
+                     Logs.SESSION_ID_TAG,     Integer.toString(sessionId),
+                     Logs.REQUEST_PATH_TAG,   requestPath) ;
             
             return ;
         }

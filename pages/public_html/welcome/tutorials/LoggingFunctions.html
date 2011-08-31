@@ -30,7 +30,7 @@
       Each entry in the log file has at least a category and a message.
       Log entries categories are defined as static contant byte arrays
       in the class
-      <a href='javadoc/org/saw/util/logs/Logs.html' target='_blank'>org.saw.util.logs.Logs</a>.
+      <a href='javadoc/org/saw/util/logs/Logs.html' target='_blank'>Logs</a>.
       They are all the constants which names end with <code>_CAT</code>.
       For instance:
     </p>
@@ -61,7 +61,7 @@
 
     <p>
       Consult the class 
-      <a href='javadoc/org/saw/util/logs/Logs.html' target='_blank'>org.saw.util.logs.Logs</a>
+      <a href='javadoc/org/saw/util/logs/Logs.html' target='_blank'>Logs</a>
       for a full list.
     </p>
 
@@ -72,7 +72,7 @@
     </p>
 
 <pre>
-      <code>Logs.log(Logs.SERVER_LOG_CAT,"Server starts") ;</code>
+Logs.log(Logs.SERVER_LOG_CAT, "Server starts") ;
 </pre>
 
     <p>
@@ -81,7 +81,115 @@
 
     <p>
       <b>Log messages parameters.</b>
+      After the log category and the log message, one can add several parameters.
+      Each parameter is made of two arguments:
+    </p>
 
+    <ul>
+      <li>
+	<i>The parameter tag.</i> It is one of the constants of the class
+	<a href='javadoc/org/saw/util/logs/Logs.html' target='_blank'>Logs</a>
+	which names end with <code>_TAG</code>. This tag is an information
+	about the parameter value.
+      </li>
+      <li>
+	<i>The parameter value.</i> A string in accordance with the
+	parameter tag.
+      </li>
+    </ul>
+
+    <p>
+      <b>Note.</b>
+      The current implementation of the
+      <a href='javadoc/org/saw/util/logs/Logs.html' target='_blank'>Logs</a>
+      class allows up to four parameters but this can be easily extended if
+      necessary.
+    </p>
+
+    <p>
+      Examples of parameter tags:
+    </p>
+
+    <ul>
+      <li>
+	<code>Logs.EMAIL_TAG</code>: meaning that the parameter value is an email address&nbsp;;
+      </li>
+      <li>
+	<code>Logs.IP_TAG</code>: meaning that the parameter value is a IP address&nbsp;;
+      </li>
+      <li>
+	<code>Logs.REQUEST_PATH_TAG</code>: meaning that the parameter value is a request path&nbsp;(mainly used by the Transaction object)&nbsp;;
+      </li>
+      <li>
+	<code>Logs.USER_ID_TAG</code>: meaning that the parameter value is a user identifier&nbsp;;
+      </li>
+      <li>
+	<code>Logs.SESSION_ID_TAG</code>: meaning that the parameter value is a session identifier&nbsp;(available in the Session Environment, mainly used by the Transaction object)&nbsp;;
+      </li>
+      <li>
+	<code>Logs.ANY_TAG</code>: meaning that the parameter value is a one line string.
+      </li>
+    </ul>
+
+    <p>
+      Consult the class 
+      <a href='javadoc/org/saw/util/logs/Logs.html' target='_blank'>Logs</a>
+      for a full list.
+    </p>
+
+    <p>
+      <b>Example.</b>
+    </p>
+
+<pre>
+Logs.log(Logs.USER_LIFE_CAT, "Successfull login",
+         Logs.USER_ID_TAG,   Integer.toString(sessionEnvironment.getUser().userId)) ;
+</pre>
+
+    <p>
+       Note that the user identifier of type <code>int</code> has been converted to <code>String</code>
+       because the parameter value is required to be a <code>String</code>.
+    </p>
+
+    <p>
+      <b>Example of a log entry.</b>
+      The following is an example of a log entry.
+      Green text is added comments.
+    </p>
+
+<pre>
+#LOGB                            <span class='green'>// beginning of the log entry</span>
+4                                <span class='green'>// log entry category (Logs.SERVER_ACCESS_CAT)</span>
+1314770687134                    <span class='green'>// log entry time in millis</span>
+Page access                      <span class='green'>// log entry message</span>
+#IPA                             <span class='green'>// ip address tag (Logs.IP_TAG)</span>
+127.0.0.1                        <span class='green'>// ip address value</span>
+#SID                             <span class='green'>// session id tag (Logs.SESSION_ID_TAG)</span>
+589237365                        <span class='green'>// session id value</span>
+#RQP                             <span class='green'>// request path tag (Logs.REQUEST_PATH_TAG)</span>
+/conference/page/LoginLogout.css <span class='green'>// value of the request path</span>
+#LOGE                            <span class='green'>// end of the log entry</span>
+</pre>
+
+    <p>
+      <b>Logging exceptions.</b>
+      The last parameter of a call to the log function maybe a Java exception.
+      In this case the stack trace is logged.
+    </p>
+
+    <p>
+      <b>Example.</b> The following call is extracted done by the Transaction object in case of error.
+    </p>
+
+<pre>
+Logs.log(Logs.SERVER_ERROR_CAT, "Transaction error",
+         Logs.IP_TAG,           ip,
+         Logs.SESSION_ID_TAG,   Integer.toString(sessionId),
+         Logs.REQUEST_PATH_TAG, requestPath,
+         e) ;
+</pre>
+
+    <p>
     </p>
 
   </body>
