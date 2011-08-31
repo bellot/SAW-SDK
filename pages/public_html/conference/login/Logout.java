@@ -35,7 +35,7 @@ public class Logout extends WebTechPage
         super.handle(transaction) ;
 
         Logs.log(Logs.USER_LIFE_CAT, "Logout.",
-                 Logs.USERID_TAG,    Integer.toString(sessionEnvironment.getUser().userId)) ;
+                 Logs.USER_ID_TAG,   Integer.toString(sessionEnvironment.getUser().userId)) ;
     }
 }
 

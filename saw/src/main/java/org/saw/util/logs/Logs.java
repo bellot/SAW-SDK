@@ -41,19 +41,15 @@ public final class Logs
     /** Parameters tags, value is an IP address. */
     static public final byte[] IP_TAG = "#IPA\n".getBytes() ;
     /** Parameters tags, value is a user id. */
-    static public final byte[] USERID_TAG = "#UID\n".getBytes() ;
+    static public final byte[] USER_ID_TAG = "#UID\n".getBytes() ;
     /** Parameters tags, value is a request path. */
-    static public final byte[] REQUESTPATH_TAG = "#RQP\n".getBytes() ;
+    static public final byte[] REQUEST_PATH_TAG = "#RQP\n".getBytes() ;
     /** Parameters tags, value is a file name. */
     static public final byte[] FILE_TAG = "#FIL\n".getBytes() ;
     /** Parameters tags, value is a email name. */
     static public final byte[] EMAIL_TAG = "#EMA\n".getBytes() ;
     /** Parameters tags, value is a session id. */
-    static public final byte[] SESSIONID_TAG = "#SID\n".getBytes() ;
-    /** Parameters tags, value is a country id. */
-    static public final byte[] COUNTRYID_TAG = "#CID\n".getBytes() ;
-    /** Parameters tags, value is a status code. */
-    static public final byte[] STATUS_TAG = "#STA\n".getBytes() ;
+    static public final byte[] SESSION_ID_TAG = "#SID\n".getBytes() ;
 
     /** Lock to protect logStream operations. */
     private static final Object lock = new Object() ;

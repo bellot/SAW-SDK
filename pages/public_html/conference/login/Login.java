@@ -27,7 +27,7 @@ public class Login extends SessionBinz
         if (sessionEnvironment.getUser() != null) {
 
             Logs.log(Logs.SECURITY_WARNING_CAT, "User tries to login while logged.",
-                     Logs.USERID_TAG,           Integer.toString(sessionEnvironment.getUser().userId)) ;
+                     Logs.USER_ID_TAG,          Integer.toString(sessionEnvironment.getUser().userId)) ;
 
             sessionEnvironment.setUser(null) ;
         }
