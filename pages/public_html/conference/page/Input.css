@@ -1,0 +1,41 @@
+#main td.form_text { 
+  text-align:right;
+  vertical-align:middle;
+  padding:0.2em 0.7em 0.2em 0.2em; 
+  font-size:12px;
+  color:#303030;
+  font-family:sans-serif;
+}
+
+#main td.form_input { 
+  text-align:left;
+  vertical-align:middle;
+  padding:0.2em 0.7em 0.2em 0.2em; 
+  font-size:12px;
+  color:#303030;
+  font-family:sans-serif;
+}
+
+#main input.checkbox_input{
+  color:#303030;
+}
+
+#main input.select_input{
+  color:#303030;
+}
+
+#main input.text_input { 
+  color:#303030;
+}
+
+#main input.button_input { 
+  font-weight:bold;
+  color:#FFFFFF;
+  background:url('../page/ButtonBackground.jpg');
+}
+
+#main input.submit_input { 
+  font-weight:bold;
+  color:#FFFFFF;
+  background:url('../page/ButtonBackground.jpg');
+}

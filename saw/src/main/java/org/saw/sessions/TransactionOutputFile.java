@@ -30,6 +30,7 @@ public class TransactionOutputFile extends TransactionOutput
     public final void endOutput()
 	throws Exception
     {
+        out.flush() ;
 	out.close() ;
     }
 

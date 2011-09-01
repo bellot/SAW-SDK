@@ -3,6 +3,7 @@ package org.saw.elements ;
 import java.io.* ;
 
 import org.saw.transaction.* ;
+import org.saw.sessions.* ;
 import org.saw.util.updatable.* ;
 
 /** This is a dynamic element which output is cached into a file,
@@ -16,7 +17,7 @@ public abstract class DynamicElementWithFileCache extends DynamicElement
     /** Method to be implemented by concrete cached elements. 
      *  @param out where to write the output, must not be closed.
      */
-    public abstract void updateCache(PrintWriter out)
+    public abstract void updateCache(TransactionOutputFile out)
 	throws Exception ;
 
     /** Name of the file for caching. */
@@ -46,9 +47,10 @@ public abstract class DynamicElementWithFileCache extends DynamicElement
 
 	    if (needsUpdate) {
 
-		PrintWriter out = new PrintWriter(new FileOutputStream(fileName),false) ;
+		TransactionOutputFile out = new TransactionOutputFile(fileName) ;
+                out.beginOutput() ;
 		updateCache(out) ;
-		out.close() ;
+                out.endOutput() ;
 
 		needsUpdate = false ;
 	    }

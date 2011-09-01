@@ -5,6 +5,11 @@ package org.saw.elements ;
 public class Table extends XmlElement
 {
 
+    public Table(String className, String attr, ElementInterface... elements)
+    {
+	super("table",className,attr,elements) ;
+    }
+
     public Table(String className, ElementInterface... elements)
     {
 	super("table",className,null,elements) ;
@@ -12,7 +17,7 @@ public class Table extends XmlElement
 
     public Table(ElementInterface... elements)
     {
-	this(null,elements) ;
+	super("table",null,null,elements) ;
     }
 
 }

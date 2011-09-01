@@ -153,10 +153,10 @@ public final class Transaction extends TransactionOutput
 		return ct_read ;
 
 	    if (ct_read == -1)
-		throw new BadRequestException("HTTP Unexpected end of transaction") ;
+		throw new BadRequestException(Logs.SERVER_LOG_CAT,"HTTP Unexpected end of transaction") ;
 
 	    if (--loop_count == 0)
-		throw new BadRequestException("HTTP Session Timeout") ;
+		throw new BadRequestException(Logs.SERVER_LOG_CAT,"HTTP Session Timeout") ;
 
 	    try {
 		Thread.sleep(25) ;
@@ -245,24 +245,28 @@ public final class Transaction extends TransactionOutput
 			    requestType = PUT_REQUEST ;
 			    break ;
 			default:
-			    throw new BadRequestException("Unsupported request method: " + new String(header_line,0,header_line_eol)) ;
+			    throw new BadRequestException(Logs.SERVER_WARNING_CAT,
+                                                          "Unsupported request method: " + new String(header_line,0,header_line_eol)) ;
 			}
 			break ;
 		    default:
-			throw new BadRequestException("Unsupported request method: " + new String(header_line,0,header_line_eol)) ;
+			throw new BadRequestException(Logs.SERVER_WARNING_CAT,
+                                                      "Unsupported request method: " + new String(header_line,0,header_line_eol)) ;
 		    }
 
 		    // header_line[header_line_cur..header_line_end[ = /path HTTP/1.1 or path?x=y&... HTTP/1.x
 
 		    if (header_line[header_line_cur] != '/')
-			throw new BadRequestException("Malformed request path: " + new String(header_line,0,header_line_eol)) ;
+			throw new BadRequestException(Logs.SERVER_WARNING_CAT,
+                                                      "Malformed request path: " + new String(header_line,0,header_line_eol)) ;
 
 		    // Search for the space before HTTP/1.x
 
 		    int header_line_spc = BytesArray.strchr((byte)' ',header_line,header_line_cur+1,header_line_end) ;
 
 		    if (header_line_spc == -1)
-			throw new BadRequestException("No space after request path: " + new String(header_line,0,header_line_eol)) ;
+			throw new BadRequestException(Logs.SERVER_WARNING_CAT,
+                                                      "No space after request path: " + new String(header_line,0,header_line_eol)) ;
 
 		    // Search for ? if any
 
@@ -287,7 +291,8 @@ public final class Transaction extends TransactionOutput
 			    int header_line_equ = BytesArray.strchr((byte)'=',header_line,header_line_cur,header_line_spc) ;
 
 			    if (header_line_equ == -1)
-				throw new BadRequestException("Malformed GET variables: " + new String(header_line,0,header_line_eol)) ;
+				throw new BadRequestException(Logs.SERVER_WARNING_CAT,
+                                                              "Malformed GET variables: " + new String(header_line,0,header_line_eol)) ;
 
 			    int header_line_amp = BytesArray.strchr((byte)'&',header_line,header_line_equ,header_line_spc) ;
 
@@ -429,7 +434,7 @@ public final class Transaction extends TransactionOutput
 			int to_read = inLength - post_content_end ;
 			
 			if (httpInput.read(post_content,post_content_end,to_read) != to_read)
-			    throw new BadRequestException("Cannot read post content") ;
+			    throw new BadRequestException(Logs.SERVER_WARNING_CAT,"Cannot read post content") ;
 
 			post_content_end = inLength ;
 
@@ -458,7 +463,8 @@ public final class Transaction extends TransactionOutput
 			    int post_content_eol = BytesArray.strchr((byte)'\n',post_content,0,post_content_end) ;
 
 			    if (post_content_eol == -1)
-				throw new BadRequestException("Cannot find end of boundary in multipart POST") ;
+				throw new BadRequestException(Logs.SERVER_WARNING_CAT,
+                                                              "Cannot find end of boundary in multipart POST") ;
 
 			    int    boundary_len = post_content_eol ;
 			    byte[] boundary     = Arrays.copyOfRange(post_content,0,boundary_len) ;
@@ -498,12 +504,14 @@ public final class Transaction extends TransactionOutput
 
 				    mark1 = BytesArray.strchr((byte)'"',post_content,post_content_cur,post_content_bnd) ;
 				    if (mark1 < 0)
-					throw new BadRequestException("Cannot find quote (1) in multipart POST") ;
+					throw new BadRequestException(Logs.SERVER_WARNING_CAT,
+                                                                      "Cannot find quote (1) in multipart POST") ;
 				    mark1++ ;
 
 				    mark2 = BytesArray.strchr((byte)'"',post_content,mark1,post_content_bnd) ;
 				    if (mark2 < 0)
-					throw new BadRequestException("Cannot find quote (2) in multipart POST") ;
+					throw new BadRequestException(Logs.SERVER_WARNING_CAT,
+                                                                      "Cannot find quote (2) in multipart POST") ;
 
                     // Name of the uploaded file
 				    // String name = new String(post_content,mark1,mark2-mark1) ;
@@ -512,11 +520,13 @@ public final class Transaction extends TransactionOutput
 				    
 				    post_content_eol = BytesArray.strchr((byte)'\n',post_content,mark2+1,post_content_bnd) ;
 				    if (post_content_eol < 0)
-					throw new BadRequestException("Cannot find EOL (1) in multipart POST") ;
+					throw new BadRequestException(Logs.SERVER_WARNING_CAT,
+                                                                      "Cannot find EOL (1) in multipart POST") ;
 				    mark1 = post_content_eol + ( 1 + 14) ;
 				    post_content_eol = BytesArray.strchr((byte)'\n',post_content,mark1+1,post_content_bnd) ;
 				    if (post_content_eol < 0)
-					throw new BadRequestException("Cannot find EOL (2) in multipart POST") ;
+					throw new BadRequestException(Logs.SERVER_WARNING_CAT,
+                                                                      "Cannot find EOL (2) in multipart POST") ;
 				    mark2 = post_content_eol - 1 ; // POURQUOI -1
 
 				    this.file_mime = new String(post_content,mark1,mark2-mark1) ;
@@ -525,7 +535,8 @@ public final class Transaction extends TransactionOutput
 
 				    post_content_eol = BytesArray.strchr((byte)'\n',post_content,post_content_eol+1,post_content_bnd) ;
 				    if (post_content_eol < 0)
-					throw new BadRequestException("Cannot find EOL (3) in multipart POST") ;
+					throw new BadRequestException(Logs.SERVER_WARNING_CAT,
+                                                                      "Cannot find EOL (3) in multipart POST") ;
 				    mark1 = post_content_eol + 1 ;
 
 				    this.file_content = Arrays.copyOfRange(post_content,mark1,post_content_bnd) ;
@@ -541,11 +552,13 @@ public final class Transaction extends TransactionOutput
 
 				    mark1 = BytesArray.strchr((byte)'"',post_content,post_content_cur,post_content_bnd) ;
 				    if (mark1 < 0)
-					throw new BadRequestException("Cannot find quote (3) in multipart POST") ;
+					throw new BadRequestException(Logs.SERVER_WARNING_CAT,
+                                                                      "Cannot find quote (3) in multipart POST") ;
 				    mark1++ ;
 				    mark2 = BytesArray.strchr((byte)'"',post_content,mark1,post_content_bnd) ;
 				    if (mark1 < 0)
-					throw new BadRequestException("Cannot find quote (4) in multipart POST") ;
+					throw new BadRequestException(Logs.SERVER_WARNING_CAT,
+                                                                      "Cannot find quote (4) in multipart POST") ;
 
 				    String var = new String(post_content,mark1,mark2-mark1) ;
 
@@ -553,14 +566,17 @@ public final class Transaction extends TransactionOutput
 
 				    post_content_eol = BytesArray.strchr((byte)'\n',post_content,mark2+1,post_content_bnd) ;
 				    if (post_content_eol < 0)
-					throw new BadRequestException("Cannot find EOL (4) in multipart POST") ;
+					throw new BadRequestException(Logs.SERVER_WARNING_CAT,
+                                                                      "Cannot find EOL (4) in multipart POST") ;
 				    post_content_eol = BytesArray.strchr((byte)'\n',post_content,post_content_eol,post_content_bnd) ;
 				    if (post_content_eol < 0)
-					throw new BadRequestException("Cannot find EOL (5) in multipart POST") ;
+					throw new BadRequestException(Logs.SERVER_WARNING_CAT,
+                                                                      "Cannot find EOL (5) in multipart POST") ;
 				    mark1 = post_content_eol + 1 ;
 				    mark2 = BytesArray.strchr((byte)'\n',post_content,mark1,post_content_bnd) ;
 				    if (mark2 < 0)
-					throw new BadRequestException("Cannot find EOL (6) in multipart POST") ;
+					throw new BadRequestException(Logs.SERVER_WARNING_CAT,
+                                                                      "Cannot find EOL (6) in multipart POST") ;
 
 				    String val = new String(post_content,mark1,mark2-mark1) ;
 
@@ -592,7 +608,8 @@ public final class Transaction extends TransactionOutput
 				int post_content_equ = BytesArray.strchr((byte)'=',post_content,post_content_cur,post_content_end) ;
 
 				if (post_content_equ == -1)
-				    throw new BadRequestException("Malformed POST variables: " + new String(post_content,0,post_content_end)) ;
+				    throw new BadRequestException(Logs.SERVER_WARNING_CAT,
+                                                                  "Malformed POST variables: " + new String(post_content,0,post_content_end)) ;
 
 				int post_content_amp = BytesArray.strchr((byte)'&',post_content,post_content_equ,post_content_end) ;
 
@@ -660,27 +677,27 @@ public final class Transaction extends TransactionOutput
 
 		try {
 		    replyBadRequest() ;
-		    logError("Bad request",e) ;
+		    logError(e.getLogCategory(),"Bad request",e) ;
 		} catch (Exception e2) {}
 
 	    } catch (ServiceUnavailableException e) {
 
 		try {
 		    replyServiceUnavailable() ;
-		    logError("Service unavailable",e) ;
+		    logError(Logs.SERVER_ERROR_CAT,"Service unavailable",e) ;
 		} catch (Exception e2) {}
 
 	    } catch (PostTooBigException e) {
 
 		try {
 		    replyPostTooBig() ;
-		    logError("Post too big",e) ;
+		    logError(Logs.SERVER_LOG_CAT,"Post too big",e) ;
 		} catch (Exception e2) {}
 
 	    } catch (TransactionMustExitException e) {
 
 		try {
-		    logError("Must exit",e) ;
+		    logError(Logs.SERVER_LOG_CAT,"Must exit",e) ;
 		    // Exit run() method, terminates thread
 		    return ; 
 		} catch (Exception e2) {} 
@@ -689,14 +706,14 @@ public final class Transaction extends TransactionOutput
 
 		try {
 		    replyInternalError() ;
-		    logError("Internal error",e) ;
+		    logError(Logs.SERVER_ERROR_CAT,"Internal error",e) ;
 		} catch (Exception e2) {} 
 
 	    } catch (Exception e) {
 
 		try {
 		    replyInternalError() ;
-		    logError("Internal error",e) ;
+		    logError(Logs.SERVER_ERROR_CAT,"Internal error",e) ;
 		} catch (Exception e2) {} 
 
 	    }
@@ -705,17 +722,17 @@ public final class Transaction extends TransactionOutput
 	
     }
 
-    private final void logError(String error, Exception e)
+    private final void logError(byte[] logCategory, String error, Exception e)
 	throws Exception
     {
         if (sessionEnvironment == null || sessionEnvironment.getUser() == null) {
             if (requestPath == null) {
-                Logs.log(Logs.SERVER_ERROR_CAT, error,
-                         Logs.IP_TAG,           ip,
-                         Logs.SESSION_ID_TAG,   Integer.toString(sessionId),
+                Logs.log(logCategory,         error,
+                         Logs.IP_TAG,         ip,
+                         Logs.SESSION_ID_TAG, Integer.toString(sessionId),
                          e) ;
             } else {
-                Logs.log(Logs.SERVER_ERROR_CAT, error,
+                Logs.log(logCategory,           error,
                          Logs.IP_TAG,           ip,
                          Logs.SESSION_ID_TAG,   Integer.toString(sessionId),
                          Logs.REQUEST_PATH_TAG, requestPath,
@@ -723,13 +740,13 @@ public final class Transaction extends TransactionOutput
             }
         } else {
             if (requestPath == null) {
-                Logs.log(Logs.SERVER_ERROR_CAT, error,
-                         Logs.IP_TAG,           ip,
-                         Logs.SESSION_ID_TAG,   Integer.toString(sessionId),
-                         Logs.USER_ID_TAG,      Integer.toString(sessionEnvironment.getUser().userId),
+                Logs.log(logCategory,         error,
+                         Logs.IP_TAG,         ip,
+                         Logs.SESSION_ID_TAG, Integer.toString(sessionId),
+                         Logs.USER_ID_TAG,    Integer.toString(sessionEnvironment.getUser().userId),
                          e) ;
             } else {
-                Logs.log(Logs.SERVER_ERROR_CAT, error,
+                Logs.log(logCategory,           error,
                          Logs.IP_TAG,           ip,
                          Logs.SESSION_ID_TAG,   Integer.toString(sessionId),
                          Logs.REQUEST_PATH_TAG, requestPath,
