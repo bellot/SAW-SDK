@@ -5,6 +5,11 @@ package org.saw.elements ;
 public class Td extends XmlElement
 {
 
+    public Td(String className, String attr, ElementInterface... elements)
+    {
+	super("td",className,attr,elements) ;
+    }
+
     public Td(String className, ElementInterface... elements)
     {
 	super("td",className,null,elements) ;

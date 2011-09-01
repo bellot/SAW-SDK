@@ -27,18 +27,9 @@ public class SSLLoginCheck extends WebTechPage
                             new Form(null,"method='POST' action='javascript: history.go(-1);' style='margin:15px;'",
                                      new P("center",
                                            new Submit("submit_input","loginButton","Back","style='width:70px;'"))))) ;
-
-        String path = '/' + (this.getClass().getPackage().getName().replace('.','/')) ; 
-
-       
-        HTTP_LOGIN_SUCCESS  = (Transaction.HTTP_WEB_SITE  + path + "/LoginSuccess.class").getBytes() ;
-        HTTPS_LOGIN_SUCCESS = (Transaction.HTTPS_WEB_SITE + path + "/LoginSuccess.class").getBytes() ;
-
     }
 
-    private final byte[] HTTP_LOGIN_SUCCESS  ;
-    private final byte[] HTTPS_LOGIN_SUCCESS ;
-
+    private final byte[] HTTP_LOGIN_SUCCESS = (Transaction.HTTP_WEB_SITE  +"/conference/login//LoginSuccess.class").getBytes() ;
 
     public void handle(Transaction transaction)
         throws Exception
@@ -48,8 +39,8 @@ public class SSLLoginCheck extends WebTechPage
         String loginName = transactionVariables.get("loginName") ;
         String password  = transactionVariables.get("password") ;
 
-        if (loginName == null || password == null)
-            throw new BadRequestException("Try to access login check without Transaction variables.") ;
+        if (loginName == null || password == null) 
+            throw new BadRequestException(Logs.SECURITY_WARNING_CAT,"Try to access login check without Transaction variables.") ;
 
         User user = UsersCatalog.entity.getByLoginName(loginName) ;
 
@@ -62,12 +53,7 @@ public class SSLLoginCheck extends WebTechPage
 
                 SessionVariables sessionVariables = sessionEnvironment.getSessionVariables() ;
 
-                if (sessionVariables.isSet("isSSL")) {
-                    sessionVariables.remove("isSSL") ;
-                    transaction.sendHttpRedirection(HTTPS_LOGIN_SUCCESS) ;
-                } else {
-                    transaction.sendHttpRedirection(HTTP_LOGIN_SUCCESS) ;
-                }
+                transaction.sendHttpRedirection(HTTP_LOGIN_SUCCESS) ;
 
                 Logs.log(Logs.USER_LIFE_CAT, "Login.",
                          Logs.USER_ID_TAG,   Integer.toString(user.userId)) ;
