@@ -103,22 +103,6 @@ div#main {
   padding:7px 7px 0 7px;
 }
 
-#main input.select_input{
-  color:#303030;
-}
-
-#main input.text_input { 
-  color:#303030;
-}
-
-#main input.button_input { 
-  font-weight:bold;
-  color:#FFFFFF;
-  background:url('../page/ButtonBackground.jpg');
-}
-
-#main input.submit_input { 
-  font-weight:bold;
-  color:#FFFFFF;
-  background:url('../page/ButtonBackground.jpg');
+smaller80 { 
+  font-size:80%;
 }

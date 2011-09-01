@@ -13,6 +13,7 @@ public final class CSS extends CssMultiMemorySessionBinz
               "Header.css",
               "Announces.css",
               "Main.css",
+              "Input.css",
               "Navigation.css",
               "Footer.css") ;
     }

@@ -3,6 +3,7 @@ package org.saw.users ;
 import java.io.* ;
 
 import org.saw.exceptions.* ;
+import org.saw.util.logs.* ;
 
 /** @author  Patrick Bellot, &copy; 2009 and later. */
 
@@ -65,22 +66,22 @@ public final class User
         return ((this.privileges & privileges) != 0) ;
     }
 
-    /** Checking privileges: return <code>true</code> or raises a <code>BadRequestException</code> exception. */
+    /** Checking privileges: return or raises a <code>BadRequestException</code> exception. */
 
-    public final void checkPrivileges(int privileges)
-        throws BadRequestException
+    private final void checkPrivileges(int privileges)
+        throws Exception
     {
         if ((this.privileges & privileges) == 0)
-            throw new BadRequestException("Not enough privileges") ;
+            throw new BadRequestException(Logs.SECURITY_WARNING_CAT,"Not enough privileges") ;
     }
 
-    /** Checking privileges: return <code>true</code> or raises a <code>BadRequestException</code> exception. */
+    /** Checking privileges: return or raises a <code>BadRequestException</code> exception. */
 
     public final static void checkPrivileges(User user, int privileges)
-        throws BadRequestException
+        throws Exception
     {
         if (user == null)
-            throw new BadRequestException("Logged user required") ;
+            throw new BadRequestException(Logs.SECURITY_WARNING_CAT, "Logged user required") ;
         
         user.checkPrivileges(privileges) ;
     }
