@@ -29,7 +29,7 @@ public class SSLLoginCheck extends WebTechPage
                                            new Submit("submit_input","loginButton","Back","style='width:70px;'"))))) ;
     }
 
-    private final byte[] HTTP_LOGIN_SUCCESS = (Transaction.HTTP_WEB_SITE  +"/conference/login//LoginSuccess.class").getBytes() ;
+    private final byte[] HTTP_LOGIN_SUCCESS = (Transaction.HTTP_WEB_SITE  +"/conference/login/LoginSuccess.class").getBytes() ;
 
     public void handle(Transaction transaction)
         throws Exception

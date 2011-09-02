@@ -1,0 +1,21 @@
+table.console { 
+  border-collapse:collapse;
+  border: 1px #303030 solid ;
+  margin:3px;
+  width:114px;
+}
+
+th.console { 
+  padding:3px;
+  font-size:12px;
+  text-align:center;
+  border: 1px #303030 solid ;
+  background:#000099;
+  color:#FFFFFF;
+}
+
+td.console { 
+  padding:2px;
+  font-size:12px;
+  text-align:center;
+}

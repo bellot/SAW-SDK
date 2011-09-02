@@ -81,6 +81,10 @@ div#main {
   padding:0 0 0.5em 2.4em;
 }
 
+#main td { 
+  font-size:12px;
+}
+
 #main td.left { 
   text-align:left;
 }
@@ -105,4 +109,8 @@ div#main {
 
 smaller80 { 
   font-size:80%;
+}
+
+.red { 
+  color:#800000;
 }

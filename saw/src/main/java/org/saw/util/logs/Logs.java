@@ -20,6 +20,12 @@ import org.saw.util.files.* ;
 
 public final class Logs
 {
+    /** Log entry beginning tag. */
+    static public final byte[] TAG_LOGB = "#LOGB".getBytes() ;
+
+    /** Log entry end tag. */
+    static public final byte[] TAG_LOGE = "#LOGE".getBytes() ;
+
     /** Log category. */
     static public final byte[] SERVER_DEBUG_CAT      = "#LOGB\n0\n".getBytes() ;
     /** Log category. */
@@ -130,8 +136,11 @@ public final class Logs
 	logStream.println(message) ;
     }
 
-    /** Log entry end tag. */
-    private static final byte[] LOGE = "#LOGE\n".getBytes() ;
+    /** Log entry beginning tag with eol char. */
+    static public final byte[] LOGB = "#LOGB\n".getBytes() ;
+
+    /** Log entry end tag with eol char. */
+    static public final byte[] LOGE = "#LOGE\n".getBytes() ;
 
     /** End of a log entry. */
 
@@ -143,10 +152,10 @@ public final class Logs
     }
 
     /** Exception entry begin tag. */
-    private static final byte[] EXCB = "#EXCB\n".getBytes() ;
+    public static final byte[] EXCB = "#EXCB\n".getBytes() ;
 
     /** Exception entry end tag. */
-    private static final byte[] EXCE = "#EXCE\n".getBytes() ;
+    public static final byte[] EXCE = "#EXCE\n".getBytes() ;
 
     /** Logging an exception. */
 
