@@ -13,4 +13,8 @@ public class InputSetValue extends Container
               new CDATA("\";")) ;
     }
 
+    public InputSetValue(String name, String value)
+    {
+        this(name,new CDATA(value)) ;
+    }
 }
