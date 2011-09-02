@@ -13,7 +13,7 @@ public class ConfInfoBootStrap
     {
         ConfInfo.entity.set("Web Technologies & Internet Applications",
                             "WebTech 2012",
-                            "Hotel Fort Canning, Singapore",
+                            "Bali, Indonesia",
                             "bellot@telecom-paristech.fr") ;
     }
 }
