@@ -92,7 +92,7 @@ public final class TransactionVariables extends ObjObjHashTable<String,String>
 
     public final long getMillisFromJMAAAA(String var) 
     {
-	return DatesUtils.millisFromJMAAAA(get(var)) ;
+	return DatesUtils.millisFromJMAAAA(get(var),0,0,0) ;
     }
 
     /** Assumes that the variable value is a reg exp,

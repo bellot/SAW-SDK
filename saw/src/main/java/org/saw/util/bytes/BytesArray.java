@@ -9,6 +9,22 @@ public final class BytesArray
     /** To hide the constructor in java doc. */
     private BytesArray() {}
 
+    /** <code>streq(arr1,arr2) = (strcmp(arr1,arr2) == 0) ; man strcmp</code> */
+
+    static public final boolean streq(byte[] arr1, byte[] arr2)
+    {
+	int len = arr1.length ;
+
+        if (len != arr2.length)
+            return false ;
+
+        for (int i = 0 ; i < len ; i++)
+            if (arr1[i] != arr2[i])
+                return false ;
+
+        return true ;
+    }
+
     /** <code>man stroi</code> */
 
     static public final int strtoi(byte[] arr, int beg, int end)

@@ -29,7 +29,7 @@ public class FilterLogs extends WebTechPage
                                                       new Td("form_input", new DatePicker("logs_from"))),
                                                new Tr(new Td("form_text",  new CDATA("To:")),
                                                       new Td("form_input", new DatePicker("logs_to"))),
-                                               new Tr(new Td("form_text",  new CheckBox("checkbox_input","server_access","X",true)),
+                                               new Tr(new Td("form_text",  new CheckBox("checkbox_input","server_access","X",false)),
                                                       new Td("form_input", new CDATA("Server access logs"))),
                                                new Tr(new Td("form_text",  new CheckBox("checkbox_input","server_log","X",true)),
                                                       new Td("form_input", new CDATA("Server logging logs"))),
@@ -42,12 +42,19 @@ public class FilterLogs extends WebTechPage
                                                new Tr(new Td("form_text",  new CheckBox("checkbox_input","security_warning","X",true)),
                                                       new Td("form_input", new CDATA("Security warning logs"))),
                                                new Tr(new Td("form_text",  new CheckBox("checkbox_input","user_life","X",true)),
-                                                      new Td("form_input", new CDATA("User life logs")))
+                                                      new Td("form_input", new CDATA("User life logs"))),
+                                               new Tr(new Td("form_text",  new CDATA("Session id:")),
+                                                      new Td("form_input", new TextField("text_input","session_id","99px"),
+                                                             new CDATA("&nbsp;<i>(value)</i>"))),
+                                               new Tr(new Td("form_text",  new CDATA("User id:")),
+                                                      new Td("form_input", new TextField("text_input","user_id","99px"),
+                                                             new CDATA("&nbsp;<i>(value)</i>")))
                                                ),
                                      new P("center",
-                                           new Submit("submit_input","filterLogs","Filterlogs","style='width:70px;'")),
-                                     new JavaScript(new InputSetValue("logs_from", new JMAAAAOneWeekAgo()),
-                                                    new InputSetValue("logs_to",   new JMAAAANow()))
+                                           new Submit("submit_input","filterLogs","Filter logs","style='width:90px;'")),
+                                     new JavaScript(new InputSetValue("logs_from",  new JMAAAAOneWeekAgo()),
+                                                    new InputSetValue("logs_to",    new JMAAAANow()))
+                                     
                                      )
                             )
               ) ;

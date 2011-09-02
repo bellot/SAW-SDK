@@ -124,21 +124,23 @@ public class DatesUtils
 
     /** Returns a millis date from  a J/M/AAAA string. */
 
-    public static final long millisFromJMAAAA(String jmaaaaDate)
+    public static final long millisFromJMAAAA(String jmaaaaDate,int hourOfDay, int minutes, int seconds)
     {
-	return millisFromJMAAAA(jmaaaaDate.split("/")) ;
+	return millisFromJMAAAA(jmaaaaDate.split("/"),hourOfDay,minutes,seconds) ;
     }
 
     /** Returns a millis date from  a J/M/AAAA array of strings. */
 
-    public static final long millisFromJMAAAA(String[] jmaaaaDate)
+    public static final long millisFromJMAAAA(String[] jmaaaaDate, int hourOfDay, int minutes, int seconds)
     {
 	synchronized (calendar1) {
 
 	    calendar1.set(Integer.parseInt(jmaaaaDate[2]),
 			  Integer.parseInt(jmaaaaDate[1])-1,
 			  Integer.parseInt(jmaaaaDate[0]),
-			  0,0,0) ;
+			  hourOfDay,
+                          minutes,
+                          seconds) ;
 
 	    return calendar1.getTimeInMillis() ;
 	}

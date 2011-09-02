@@ -1,0 +1,40 @@
+td.logshdr { 
+  font-weight:bold;
+  border-top:7px #FFFFFF solid;
+  padding:2px 0 2px 0;
+}
+
+td.logs0 { 
+  color:#202020;
+  background:#000000;
+}
+
+td.logs1 { 
+  color:#FFFFFF;
+  background:#BE200C;
+}
+
+td.logs2 { 
+  color:#FFFFFF;
+  background:#700000;
+}
+
+td.logs3 { 
+  color:#FFFFFF;
+  background:#000070;
+}
+
+td.logs4 { 
+  color:#303030;
+  background:#F2DD3D;
+}
+
+td.logs5 { 
+  color:#FFFFFF;
+  background:#B00000;
+}
+
+td.logs6 { 
+  color:#FFFFFF;
+  background:#00A000;
+}
