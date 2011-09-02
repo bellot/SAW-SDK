@@ -8,9 +8,10 @@ table.console {
 th.console { 
   padding:3px;
   font-size:12px;
+  font-weight:bold;
   text-align:center;
   border: 1px #303030 solid ;
-  background:#000099;
+  background:url('../page/ButtonBackground.jpg');
   color:#FFFFFF;
 }
 

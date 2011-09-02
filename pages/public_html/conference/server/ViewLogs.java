@@ -63,7 +63,7 @@ public class ViewLogs extends WebTechPage
             int            founds = 0 ;
             String         msg ;
 
-            transactionOutput.write("<table style='border-collapse:collapse;'>") ;
+            transactionOutput.write("<table class='logs'>") ;
 
             try {
                 log = new BufferedReader(new FileReader("SAW.log")) ;
@@ -133,8 +133,7 @@ public class ViewLogs extends WebTechPage
                                     exception = "<span class='red'>" ;
                                     while (true) {
                                         String str = log.readLine() ; if (str == null) { ok = false ; break ; }
-                                        str += "\n" ;
-                                        if (BytesArray.streq(str.getBytes(),Logs.EXCE))
+                                        if (BytesArray.streq((str + "\n").getBytes(),Logs.EXCE))
                                             break ;
                                         exception += str + "<br>" ;
                                     }
@@ -228,10 +227,10 @@ public class ViewLogs extends WebTechPage
             throws Exception
         {
             transactionOutput.write("<tr>") ;
-            transactionOutput.write(  "<td>") ;
+            transactionOutput.write(  "<td class='logdata'>") ;
             transactionOutput.write(    name) ;
             transactionOutput.write(  "</td>") ;
-            transactionOutput.write(  "<td>") ;
+            transactionOutput.write(  "<td class='logdata'>") ;
             transactionOutput.write(    value) ;
             transactionOutput.write(  "</td>") ;
             transactionOutput.write("</tr>") ;
