@@ -15,13 +15,4 @@ public class CheckBox extends Input
 	      + ((checked)?" checked":"")) ;
     }  
 
-    public CheckBox(String className, String name, String value)
-    {
-	super(className,
-	      "type='checkbox'" 
-	      + " name='" + name + "'"
-	      + " id='" + name + "'"
-	      + " value='" + value +"'") ;
-    }  
-
 }
