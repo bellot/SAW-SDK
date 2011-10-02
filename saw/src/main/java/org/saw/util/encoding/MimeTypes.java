@@ -38,6 +38,7 @@ public final class MimeTypes
 	    mimeTypes.put("xlsx",  "application/excel") ;
 	    mimeTypes.put("java",  "text/java") ;
             mimeTypes.put("ddl",   "file/doawload") ;
+            mimeTypes.put("txt",   "text/plain") ;
     }
 
     /** Returns mime type from file suffix or <code>null</code> if not recognized. 
