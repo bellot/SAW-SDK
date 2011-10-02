@@ -37,6 +37,7 @@ public final class MimeTypes
 	    mimeTypes.put("xls",   "application/excel") ;
 	    mimeTypes.put("xlsx",  "application/excel") ;
 	    mimeTypes.put("java",  "text/java") ;
+	    mimeTypes.put("javanc","text/java") ;
             mimeTypes.put("ddl",   "file/doawload") ;
             mimeTypes.put("txt",   "text/plain") ;
     }
