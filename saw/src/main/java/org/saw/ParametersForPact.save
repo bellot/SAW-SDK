@@ -22,13 +22,13 @@ public final class Parameters
     public static final int HTTP_SERVER_PORT = 8080 ;
 	
     /** Port to listen to HTTPS request, 0 if no listening. */
-    public static final int HTTPS_SERVER_PORT = 0 ;
+    public static final int HTTPS_SERVER_PORT = 8081 ;
 
     /** External port to listen to HTTP request when proxied, 0 if no listening. */
     public static final int EXT_HTTP_SERVER_PORT = 8080 ;
 	
     /** External port to listen to HTTPS request when proxied, 0 if no listening. */
-    public static final int EXT_HTTPS_SERVER_PORT = 0 ;
+    public static final int EXT_HTTPS_SERVER_PORT = 8081 ;
 
     /** The global encoding of the Web application. */
     public static final String ENCODING = "UTF-8" ;
